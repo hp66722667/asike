@@ -1,0 +1,138 @@
+﻿{if $isfirst == 0}
+<script type="text/javascript">
+    $(".btn-attention").click(function(){
+                
+                var attenbtn = $(this);
+                var attentionuserid = $(this).attr('data-personid');
+                $.post("{:url('User/attentionPerson')}",{attentionuserid:attentionuserid},function(data){
+                    if(data){
+                        $(attenbtn).text('取消关注');
+                    }else{
+                        $(attenbtn).text('关注TA');
+                    }
+
+
+               },'json');
+            });
+</script>
+<div class="List" id="Profile-following">
+
+
+
+    <div class="List-header">
+        <h4 class="List-headerText">
+            <div class="SubTabs"> 
+                <a class="SubTabs-item is-active" href="">
+                {if $isfans == 0} 
+                    {if $userid == $personid}
+                    我的关注
+                    {elseif $gender == 1}
+                    他的关注
+                    {else}
+                    她的关注
+                    {/if}
+                {else}
+                    {if $userid == $personid}
+                    我的粉丝
+                    {elseif $gender == 1}
+                    他的粉丝
+                    {else}
+                    她的粉丝
+                    {/if}
+                {/if}
+                </a> 
+            </div>
+        </h4>
+        <div class="List-headerOptions"> </div>
+    </div>
+
+
+
+</div>
+{/if}
+
+ {if $attenPersonList == null}
+    <div class="EmptyState">
+        <div class="EmptyState-inner"> <svg xmlns="http://www.w3.org/2000/svg" width="150" height="120" viewBox="0 0 150 120" class="EmptyState-image">
+            <title> </title>
+            <g>
+                <g fill="none" fill-rule="evenodd">
+                    <path fill="#EBEEF5" fill-rule="nonzero" d="M44 31.005v55.99A3.003 3.003 0 0 0 47.003 90h53.994A3.005 3.005 0 0 0 104 86.995v-55.99A3.003 3.003 0 0 0 100.997 28H47.003A3.005 3.005 0 0 0 44 31.005zm-3 0A6.005 6.005 0 0 1 47.003 25h53.994A6.003 6.003 0 0 1 107 31.005v55.99A6.005 6.005 0 0 1 100.997 93H47.003A6.003 6.003 0 0 1 41 86.995v-55.99z"/>
+                    <path fill="#F7F8FA" d="M59 50a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm12-9.5c0-.828.68-1.5 1.496-1.5h9.008c.826 0 1.496.666 1.496 1.5 0 .828-.68 1.5-1.496 1.5h-9.008A1.495 1.495 0 0 1 71 40.5zm0 7c0-.828.667-1.5 1.5-1.5h21c.828 0 1.5.666 1.5 1.5 0 .828-.667 1.5-1.5 1.5h-21c-.828 0-1.5-.666-1.5-1.5zM59 73a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm12-9.5c0-.828.68-1.5 1.496-1.5h9.008c.826 0 1.496.666 1.496 1.5 0 .828-.68 1.5-1.496 1.5h-9.008A1.495 1.495 0 0 1 71 63.5zm0 7c0-.828.667-1.5 1.5-1.5h21c.828 0 1.5.666 1.5 1.5 0 .828-.667 1.5-1.5 1.5h-21c-.828 0-1.5-.666-1.5-1.5z"/>
+                </g>
+            </g>
+            </svg>还没有关注的用户</div>
+    </div>
+    {else}
+
+
+
+
+
+
+
+    <div>
+
+
+    {foreach $attenPersonList as $attenpenson}
+
+        <div class="List-item">
+            <div class="ContentItem" >
+                <div class="ContentItem-main">
+                    <div class="ContentItem-image"> <span class="UserLink UserItem-avatar">
+                        <div class="Popover">
+                            <div id="Popover-57462-98497-toggle" > <a class="UserLink-link" " target="_blank" href="{:url('User/userCenter',array('personid'=>$attenpenson['attentionuser']['userid']))}"> <img class="Avatar Avatar--large UserLink-avatar" width="60" height="60" src="{$attenpenson['attentionuserinfo']['photo']}"  alt="{$attenpenson['attentionuser']['nickname']}"> </a> </div>
+                            <!-- react-empty: 8444 --> 
+                        </div>
+                        </span> </div>
+                    <div class="ContentItem-head">
+                        <h2 class="ContentItem-title">
+                            <div class="UserItem-title"> <span class="UserLink UserItem-name">
+                                <div class="Popover">
+                                    <div id="Popover-57462-51347-toggle" > <a class="UserLink-link"  target="_blank" href="{:url('User/userCenter',array('personid'=>$attenpenson['attentionuser']['userid']))}">{$attenpenson['attentionuser']['nickname']}</a> </div>
+                                    <!-- react-empty: 8452 --> 
+                                </div>
+                                </span> 
+                                <!-- react-empty: 8457 --> 
+                            </div>
+                        </h2>
+                        <div class="ContentItem-meta">
+                            <div>
+                                <div> 
+                                    <span>{$attenpenson['attentionuserinfo']['autograph']}</span>
+                                </div>
+                                <div class="ContentItem-status"> <span class="ContentItem-statusItem">{$attenpenson['answernum']} 回答</span> <span class="ContentItem-statusItem">{$attenpenson['questionnum']} 提问</span> <span class="ContentItem-statusItem">{$attenpenson['attentionnum']} 关注者</span> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ContentItem-extra">
+                    
+                    {if $attenpenson['isatten'] == 0 && $userid != $attenpenson['attentionuser']['userid']}
+                        <button data-personid="{$attenpenson['attentionuser']['userid']}" class="btn-attention Button FollowButton Button--primary Button--blue" type="button">
+                        关注TA  
+                        </button>
+                    {elseif $attenpenson['isatten'] == 1 && $userid != $attenpenson['attentionuser']['userid']}
+                        <button data-personid="{$attenpenson['attentionuser']['userid']}" class="btn-attention Button FollowButton Button--primary Button--blue" type="button">
+                        取消关注 
+                        </button>
+                    {/if}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        {/foreach}
+    </div>
+    {/if}
+
+
+
+
+
+

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {block name='title'}
+            <title>Title</title>
+        {/block}
+    </head>
+    <body>
+        {extend name="public/base" /}
+        {block name='main'}
+            <section class="rt_wrap content mCustomScrollbar">
+                <div class="rt_content">
+                    <div class="page_title">
+                        <h2 class="fl">权限编辑 -- {$permname}</h2>
+                        <!--<a href="adjust_funding.html" class="fr top_rt_btn money_icon">资金管理</a>-->
+                        <a href="{:url('Admin/permList')}" type="button" class="top_rt_btn link_icon add_icon"
+                           style="margin-left: 20px;cursor: pointer;float: right">返回</a>
+                    </div>
+                    <form id="formPerm" method="post" action="{:url('Admin/upFperm')}">
+                        <ul class="ulColumn2">
+                            <li>
+                                <span class="item_name" style="width:120px;">
+                                    权限名称：
+                                </span>
+                                <input type="text" name="permname" class="textbox textbox_225" value="{$permname}"/>
+                                <input type="hidden" name="permissionid" value="{$permid}">
+                            </li>
+                            <li>
+                                <span style="margin-left: 50px;" >父级权限：</span>
+                                <select class="permSelect" name="perFmname" style="min-width: 130px;">
+                                    <option value="">权限名称</option>
+                                    {if !empty($permission)}
+                                        {foreach $permission as $perm}
+                                            <option value="{$perm['permissionid']}">{$perm['permname']}</option>
+                                        {/foreach}
+                                    {/if}
+                                </select>
+                                <span style="display: inline-block;">&emsp;如果不选则当前权限层级不变
+                                </span>
+                            </li>
+                            <li>
+                                <span class="item_name" style="width:120px;"></span>
+                                <input id="upPerm" type="submit" class="link_btn" value="完成"/>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </section>
+        <section class="pop_bg">
+            <div class="pop_cont" style="width: 200px; margin-top: 120px">
+                <!--title-->
+                <h3>礼貌地提示您</h3>
+                <!--content-->
+
+                    <div class="pop_cont_input" style="padding-left: 45px">
+                        <ul>
+                            <li>
+                                <span id="tipsText"></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                <!--以pop_cont_text分界-->
+                <div class="pop_cont_text">
+
+                </div>
+                <!--bottom:operate->button-->
+                <div class="btm_btn">
+                    <input type="button" value="我知道了" class="input_btn trueBtn"/>
+                    <!--<input type="button" value="取消" class="input_btn falseBtn"/>-->
+                </div>
+            </div>
+        </section>
+            <!--<script>
+                $('#upPerm').click(function () {
+                    /*tips();*/
+                    /*$('#formPerm').submit();*/
+                    $.post("{:url('Admin/upFperm')}",{},function (data) {
+                        if (data.code){
+                            tips(data.info);
+                        }
+                    },'json')
+                });
+                function tips(tiptext) {
+                    $(document).ready(function () {
+                        /*$('input[name=adminid]').attr('value',adName);*/
+                        $('#tipsText').text(tiptext);
+                        $(".pop_bg").fadeIn();
+
+                        $(".trueBtn").click(function () {
+                            $(".pop_bg").fadeOut();
+
+                        });
+                    });
+                }
+
+            </script>-->
+        {/block}
+    </body>
+</html>

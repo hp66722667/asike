@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {block name='title'}
+            <title>更新敏感词 - __WEB_NAME__</title>
+        {/block}
+    </head>
+    <body>
+        {extend name="public/base"/}
+        {block name='main'}
+            <section class="rt_wrap content mCustomScrollbar">
+                <div class="rt_content">
+                    <div class="page_title">
+                        <h2 class="fl">更新敏感词汇</h2>
+                        <!--<a href="adjust_funding.html" class="fr top_rt_btn money_icon">资金管理</a>-->
+                    </div>
+                    <form id="ftopic" action="{:url('Report/upMgc')}" method="post" enctype="multipart/form-data">
+                        <ul class="ulColumn2">
+                            <li>
+                                <div style="width: 200px;height: 50px">
+                                    <span class="item_name" style="width:180px;">
+                                        本网站已经屏蔽的关键词：<br /><br />（每个敏感词用“|”隔开）
+                                    </span>
+                                </div>
+                                <textarea class="textarea" name="mgc" style="width: 800px; height: 200px">{$mgctext['mgctext']}
+                                </textarea>
+                            </li>
+                            <li>
+                                <span class="item_name" style="width:120px;"></span>
+                                <input id="topadd" type="submit" class="link_btn" value="更新"/>
+                            </li>
+                        </ul>
+                    </form>
+
+                </div>
+            </section>
+        {/block}
+    </body>
+</html>

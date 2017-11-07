@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {block name='title'}
+            <title>添加管理员 - __WEB_NAME__</title>
+            <style>
+                .errorTips{
+                    display: none;
+                }
+            </style>
+        {/block}
+    </head>
+    <body>
+        {extend name="public/base"/}
+
+        {block name='main'}
+            <section class="rt_wrap content mCustomScrollbar">
+                <div class="rt_content">
+                    <div class="page_title">
+                        <h2 class="fl">添加管理员</h2>
+                        <!--<a href="adjust_funding.html" class="fr top_rt_btn money_icon">资金管理</a>-->
+                    </div>
+                    <form id="fadmin" action="{:url('Admin/insertAdmin')}" method="post" enctype="multipart/form-data">
+                        <ul class="ulColumn2">
+                            <li>
+                                <span class="item_name" style="width:120px;">
+                                    <span style="color: red">*</span>
+                                    用户名：
+                                </span>
+                                <input type="text" name="adname" class="textbox textbox_225" placeholder="填写用户名"/>
+                                <span class="errorTips"></span>
+                            </li>
+                            <!--<li>-->
+                                <!--<span class="item_name" style="width:120px;">-->
+                                    <!--<span style="color: red">*</span>-->
+                                    <!--初始密码：-->
+                                <!--</span>-->
+                                <!--<input type="password" name="topicname" class="textbox textbox_225" placeholder="填写话题名称"/>-->
+                                <!--<span class="errorTips"></span>-->
+                            <!--</li>-->
+                            <li>
+                                <span class="item_name" style="width:120px;">
+                                    <span style="color: red">*</span>
+                                    邮箱：
+                                </span>
+                                <input type="text" name="ademail" class="textbox textbox_225" placeholder="填写邮箱账号"/>
+                                <span class="errorTips"></span>
+                            </li>
+
+                            <li>
+                            <span class="item_name" style="width:120px;">
+                                <span style="color: red">*</span>
+                                选择角色：
+                            </span>
+                                <select id="select" class="select" name="adrole" style=" width: 180px; height: 45px">
+                                    <option>选择角色</option>
+                                    {if !empty($roles)}
+                                        {foreach $roles as $rolesInfo}
+                                            <option value="{$rolesInfo['roleid']}">{$rolesInfo['rolename']}</option>
+                                        {/foreach}
+                                    {/if}
+                                </select>
+                            </li>
+                            <li>
+                                <span class="item_name" style="width:120px;"></span>
+                                <input id="insertad" type="button" class="link_btn" value="确认添加"/>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </section>
+            <script>
+                var isadname = false;
+                var isademail = false;
+                var adrole = false;
+                $('input[name=adname]').blur(function () {
+                    if($(this).val() == ''){
+                        Toast('用户名不能为空', 1000);
+                        return false;
+                    }
+
+                    if($(this).val().length<2 || $(this).val().length>12){
+                        $('.errorTips:eq(0)').text('请输入2~12位字符的用户名！').css({'display':'inline-block','color':'red'});
+                    }else {
+                        $.post("{:url('Admin/isInList')}", {adname:$('input[name=adname]').val()},function (data) {
+                            if (data.code){
+                                $('.errorTips:eq(0)').text(data.info).css({'display':'inline-block','color':'red'});
+                                isadname = false;
+                                return false;
+                            }else {
+                                $('.errorTips:eq(0)').text(data.info).css({'display':'inline-block','color':'green'});
+                                isadname = true;
+                            }
+                        },'json')
+                    }
+                });
+
+                $('input[name=ademail]').blur(function () {
+                    if ($(this).val() == ''){
+                        Toast('邮箱不能为空', 1000);
+                        return false;
+                    }else {
+                        $.post("{:url('Admin/verEmail')}",{ademail:$('input[name=ademail]').val()},function (data) {
+                            if (data.code){
+                                $('.errorTips:eq(1)').text(data.info).css({'display':'inline-block','color':'green'});
+                                isademail = true;
+                            }else {
+                                $('.errorTips:eq(1)').text(data.info).css({'display':'inline-block','color':'red'});
+                                isademail = false;
+                                return false;
+                            }
+                        },'json');
+                    }
+                });
+                $('#select').blur(function () {
+                    if ($(this).val() == '选择角色'){
+                        Toast('角色不能为空', 1000);
+                        return false;
+                    }else {
+                        adrole = true;
+                    }
+                });
+                $('#insertad').click(function () {
+                    if (isadname && isademail && adrole){
+                        $('#fadmin').submit();
+                    }else {
+                        Toast('你输入的信息不完整',1000);
+                        return false;
+                    }
+                });
+
+                function Toast(msg, duration) {
+                    duration = isNaN(duration) ? 3000 : duration;
+                    var m = document.createElement('div');
+                    m.innerHTML = msg;
+                    m.style.cssText = "width: 50%;min-width: 150px;opacity: 0.7;height: 50px;color: rgb(255, 255, 255);line-height: 50px;text-align: center;border-radius: 5px;position: fixed;top: 40%;left: 20%;z-index: 999999;background: rgb(100, 100, 100);font-size: 22px;";
+                    document.body.appendChild(m);
+                    setTimeout(function () {
+                        var d = 0.5;
+                        m.style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';
+                        m.style.opacity = '0';
+                        setTimeout(function () {
+                            document.body.removeChild(m)
+                        }, d * 1000);
+                    }, duration);
+                }
+            </script>
+        {/block}
+    </body>
+</html>

@@ -1,0 +1,396 @@
+﻿<!doctype html>
+<html lang="zh" data-hairline="true" data-reactroot="" data-reactid="1" data-react-checksum="634905359">
+{block name='title'}
+        <title data-react-helmet="true" data-reactid="4">个人信息 - 阿思客</title>
+        <link href="__CSS__/main.app.9451b13dec960e2dd27b_1.css" rel="stylesheet" data-reactid="17"/>
+    {/block}
+
+<body class="Entry-body" data-reactid="18">
+{extend name="public/header"/}
+<div id="root" data-reactid="19">
+    <div data-zop-userToken="{&quot;urlToken&quot;:&quot;hua-yu-phy&quot;}">
+{block name='main'}
+        <main role="main" class="App-main">
+            <div class="ProfileEdit">
+                <div class="Card">
+                    <div class="ProfileHeader-header">
+                        <div class="UserCoverEditor">
+                            <div class="UserCoverGuide">
+                                <div class="UserCoverGuide-inner">
+                                    <div class="UserCoverGuide-buttonContainer">
+                                        <button class="Button DynamicColorButton" type="button"> <svg viewBox="0 0 20 16" class="Icon Icon--camera Icon--left" style="height:16px;width:14px;" width="14" height="16" aria-hidden="true">
+                                        <title> </title>
+                                        <g>
+                                            <path d="M18.094 2H15s-1-2-2-2H7C6 0 5 2 5 2H2C0 2 0 3.967 0 3.967V14c0 2 2.036 2 2.036 2H17c3 0 3-1.983 3-1.983V4c0-2-1.906-2-1.906-2zM10 12c-1.933 0-3.5-1.567-3.5-3.5S8.067 5 10 5s3.5 1.567 3.5 3.5S11.933 12 10 12zm0 1.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm7.5-8c-.552 0-1-.448-1-1s.448-1 1-1 1 .448 1 1-.448 1-1 1z" fill-rule="evenodd" />
+                                        </g>
+                                        </svg>上传封面图片</button>
+                                    </div>
+                                    <div class="UserCoverGuide-dialog">
+                                        <h4 class="UserCoverGuide-dialogHead">上传一张图片，展示在这里</h4>
+                                        <div class="UserCoverGuide-dialogContent">
+                                            <p class="UserCoverGuide-dialogDescription">你可以使用自己的摄影作品、你喜欢的照片，或是任何能展现你特质的图片。</p>
+                                            <a href="https://www.zhihu.com/question/21757507" target="_blank">哪里能找到可免费使用的优质图片？</a> </div>
+                                    </div>
+                                </div>
+                                <ul class="UserCoverGuide-items">
+                                    <li class="UserCoverGuide-item" style="background-image:url(__IMG__/guide-cover-1.4423ce0fcec2132f058c.jpg);"> </li>
+                                    <li class="UserCoverGuide-item" style="background-image:url(__IMG__/guide-cover-2.4c5018526e42872a056b_1.jpg);"> </li>
+                                    <li class="UserCoverGuide-item" style="background-image:url(__IMG__/guide-cover-3.d59ac68c89726deb3a26.jpg);"> </li>
+                                    <li class="UserCoverGuide-item" style="background-image:url(__IMG__/guide-cover-4.5518ba1a1aeb013b4c5c_1.jpg);"> </li>
+                                    <li class="UserCoverGuide-item" style="background-image:url(__IMG__/guide-cover-5.2b2adaebc37bf48bacae.jpg);"> </li>
+                                </ul>
+                            </div>
+                            <div class="UserCover"> </div>
+                            <input type="file" accept="image/png,image/jpeg" style="display:none;"/>
+                        </div>
+                    </div>
+
+                    <div class="ProfileHeader-main">
+                        <div class="UserAvatarEditor ProfileHeader-avatar">
+                            <div class="UserAvatar"> 
+                            	<img id="userphoto" class="Avatar Avatar--large UserAvatar-inner" width="160" height="160" src="{$userinfo['photo']}" srcset="https://pic3.zhimg.com/v2-4b4745998d9e95e677870aa5fc63f7e2_xll.jpg 2x"/> 
+                            	</div>
+                            <div class="Mask UserAvatarEditor-mask">
+                                <div class="Mask-mask Mask-mask--black UserAvatarEditor-maskInner"> </div>
+                                <div class="Mask-content"> <svg viewBox="0 0 20 16" class="Icon UserAvatarEditor-cameraIcon Icon--camera" style="height:27px;width:30px;" width="30" height="27" aria-hidden="true">
+                                    <title> </title>
+                                    <g>
+                                        <path d="M18.094 2H15s-1-2-2-2H7C6 0 5 2 5 2H2C0 2 0 3.967 0 3.967V14c0 2 2.036 2 2.036 2H17c3 0 3-1.983 3-1.983V4c0-2-1.906-2-1.906-2zM10 12c-1.933 0-3.5-1.567-3.5-3.5S8.067 5 10 5s3.5 1.567 3.5 3.5S11.933 12 10 12zm0 1.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm7.5-8c-.552 0-1-.448-1-1s.448-1 1-1 1 .448 1 1-.448 1-1 1z" fill-rule="evenodd" />
+                                    </g>
+                                    </svg>
+                                    <div onclick="upPhoto();" class="UserAvatarEditor-maskInnerText">修改我的头像</div>
+                                </div>
+                            </div>
+                            <form id="form-photo" action="{:url('setPicture')}" method="post" enctype="multipart/form-data">
+                            	<input id="btn-photo" type="file" name="image" accept="image/png,image/jpeg" style="display:none" onchange="subPhoto();" />
+                            </form>
+                        </div>
+                        <div class="ProfileHeader-content">
+                            <div class="ProfileHeader-contentHead">
+                                <h1 class="ProfileHeader-title"> <span class="ProfileHeader-name">{$user['nickname']}</span> </h1>
+                                
+                            </div>
+                            <div class="ProfileEdit-fields">
+                                <form class="Field form-edit" method="post" action="">
+                                    <h3 class="Field-label">性别</h3>
+                                    <div class="Field-content">
+                                        <div> 
+                                        	<span id="span-gender" class="Field-text">
+                                        		{if $userinfo['gender'] == 1}
+                                        		男
+                                        		{elseif $userinfo['gender'] == 0}
+                                        		女
+                                        		{else}
+                                        		未知
+                                        		{/if}
+                                        	</span>
+                                            <button
+                                            class="btn-edit Button ModifyButton Button--link" type="button"> <svg viewBox="0 0 12 12" class="Icon ModifyButton-icon Icon--modify" style="height:16px;width:12px;" width="12" height="16" aria-hidden="true">
+                                            <title> </title>
+                                            <g>
+                                                <path d="M.423 10.32L0 12l1.667-.474 1.55-.44-2.4-2.33-.394 1.564zM10.153.233c-.327-.318-.85-.31-1.17.018l-.793.817 2.49 2.414.792-.814c.318-.328.312-.852-.017-1.17l-1.3-1.263zM3.84 10.536L1.35 8.122l6.265-6.46 2.49 2.414-6.265 6.46z" fill-rule="evenodd"/>
+                                            </g>
+                                            </svg>修改
+                                            </button>
+                                            
+                                        </div>
+                                        <div style="display: none">
+                                        	<input type="radio" name="gender" value="1" {if $userinfo['gender'] == 1} checked="checked" {/if} >男
+                                        	<input type="radio" name="gender" value="0" {if $userinfo['gender'] == 0} checked="checked" {/if}>女
+                                        	<br/>
+                                        	<button onclick="editgender('gender','span-gender')" class="btn-save Button" type="button">保存</button>   <button class="btn-cancle Button" type="button">取消</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form class="Field form-edit" method="post" action="">
+                                    <h3 class="Field-label">一句话介绍</h3>
+                                    <div class="Field-content">
+                                        <div class="div-edit">
+                                        	<span id="span-autograph">{$userinfo['autograph']}</span>
+                                        	
+                                            <button
+                                            class="btn-edit Button ModifyButton Button--link" type="button"> <svg viewBox="0 0 12 12" class="Icon ModifyButton-icon Icon--modify" style="height:16px;width:12px;" width="12" height="16" aria-hidden="true">
+                                            <title> </title>
+                                            <g>
+                                                <path d="M.423 10.32L0 12l1.667-.474 1.55-.44-2.4-2.33-.394 1.564zM10.153.233c-.327-.318-.85-.31-1.17.018l-.793.817 2.49 2.414.792-.814c.318-.328.312-.852-.017-1.17l-1.3-1.263zM3.84 10.536L1.35 8.122l6.265-6.46 2.49 2.414-6.265 6.46z" fill-rule="evenodd"/>
+                                            </g>
+                                            </svg>
+                                            {if $userinfo['autograph'] == ''}
+                                            填写
+                                            {else}
+                                            修改
+                                            {/if}
+                                            </button>
+                                            
+                                        </div>
+                                        <div style="display: none">
+                                        	<input type="text" name="autograph" value="{$userinfo['autograph']}">
+                                        	<br/>
+                                        	<button  onclick="edittext('autograph','span-autograph')" class="btn-save Button" type="button">保存</button>   <button class="btn-cancle Button" type="button">取消</button>
+                                        </div>
+                                        
+                                    </div>
+                                </form>
+                                <form class="Field form-edit" method="post" action="">
+                                    <h3 class="Field-label">居住地</h3>
+                                    <div class="Field-content">
+                                        <div class="AddButton">
+                                        	<span id="span-address">{$userinfo['address']}</span>
+                                            <button class="btn-edit Button Button--link" type="button"> <svg viewBox="0 0 18 18" class="Icon AddButton-icon Icon--add Icon--left" style="height:20px;width:20px;" width="20" height="20" aria-hidden="true">
+                                            <title> </title>
+                                            <g>
+                                                <g fill-rule="evenodd">
+                                                    <path d="M6.035 16.433c-.875-.35-1.678-.848-2.383-1.482-.205-.184-.52-.167-.707.04-.185.204-.167.52.038.705.794.714 1.696 1.274 2.682 1.668.06.023.123.035.185.035.198 0 .386-.12.464-.314.103-.258-.022-.55-.28-.65zM1.097 10.247C1.054 9.975.8 9.79.525 9.83c-.273.043-.46.3-.417.57.154.98.467 1.925.93 2.803.09.17.264.267.443.267.08 0 .16-.02.234-.058.244-.13.338-.432.208-.676-.41-.78-.69-1.618-.825-2.49zM9.106 1c.95.014 1.878.19 2.76.528.058.022.118.033.178.033.2 0 .39-.12.467-.32.1-.258-.03-.547-.287-.646C11.233.214 10.19.014 9.12 0h-.007c-.273 0-.496.22-.5.493-.003.278.218.504.493.508zM3.73 2.83c.108 0 .218-.034.31-.107.693-.55 1.465-.976 2.295-1.27.26-.09.397-.377.305-.637C6.548.556 6.263.42 6.002.51 5.068.84 4.2 1.323 3.42 1.94c-.217.17-.254.485-.083.702.1.124.245.19.393.19zM2.01 4.136c-.236-.144-.544-.07-.688.165-.557.91-.945 1.9-1.15 2.944-.055.27.12.534.392.587.033.008.065.01.098.01.234 0 .443-.164.49-.402.184-.927.528-1.807 1.023-2.614.144-.236.07-.543-.165-.688zM14.927 2.228c-.207-.183-.523-.162-.705.047-.182.208-.16.523.047.706.664.583 1.224 1.265 1.665 2.028.092.16.26.25.433.25.085 0 .17-.02.25-.067.24-.137.32-.443.183-.682-.495-.86-1.125-1.626-1.873-2.28zM17.294 7.07c-.27.047-.454.306-.408.578.076.44.114.896.114 1.35 0 .493-.046.984-.133 1.46-.05.27.13.532.402.582.03.005.06.008.09.008.236 0 .446-.17.49-.41.1-.534.148-1.085.15-1.638 0-.513-.044-1.025-.13-1.52-.045-.273-.303-.457-.576-.41zM16.566 12.91c-.235-.14-.544-.065-.686.174-.452.76-1.02 1.434-1.692 2.005-.21.18-.235.494-.057.704.1.116.24.176.382.176.115 0 .23-.04.324-.12.754-.643 1.395-1.4 1.903-2.254.142-.238.064-.544-.174-.686zM11.766 16.51c-.884.325-1.814.49-2.772.49l-.208-.002c-.283-.02-.505.21-.513.487-.007.275.21.506.487.513L9 18c1.07 0 2.116-.186 3.11-.553.26-.095.393-.383.297-.642-.095-.26-.385-.392-.64-.295zM9.8 8.2V6.3c0-.442-.358-.8-.8-.8-.442 0-.8.358-.8.8v1.9H6.3c-.442 0-.8.358-.8.8 0 .442.358.8.8.8h1.9v1.9c0 .442.358.8.8.8.442 0 .8-.358.8-.8V9.8h1.9c.442 0 .8-.358.8-.8 0-.442-.358-.8-.8-.8H9.8z"/>
+                                                </g>
+                                            </g>
+                                            </svg>
+                                            {if $userinfo['address'] == ''}
+                                            填写
+                                            {else}
+                                            修改
+                                            {/if}
+                                            </button>
+                                        </div>
+                                       	<div style="display: none">
+                                        	<input type="text" name="address" value="{$userinfo['address']}">
+                                        	<br/>
+                                        	<button onclick="edittext('address','span-address')"  class="btn-save Button" type="button">保存</button>   <button class="btn-cancle Button" type="button">取消</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form class="Field form-edit" method="post" action="">
+                                    <h3 class="Field-label">所在行业</h3>
+                                    <div class="Field-content">
+                                        <div> <span id="span-industry" class="Field-text">{$userinfo['industry']}</span>
+                                            <button
+                                            class="btn-edit Button ModifyButton Button--link" type="button"> <svg viewBox="0 0 12 12" class="Icon ModifyButton-icon Icon--modify" style="height:16px;width:12px;" width="12" height="16" aria-hidden="true">
+                                            <title> </title>
+                                            <g>
+                                                <path d="M.423 10.32L0 12l1.667-.474 1.55-.44-2.4-2.33-.394 1.564zM10.153.233c-.327-.318-.85-.31-1.17.018l-.793.817 2.49 2.414.792-.814c.318-.328.312-.852-.017-1.17l-1.3-1.263zM3.84 10.536L1.35 8.122l6.265-6.46 2.49 2.414-6.265 6.46z" fill-rule="evenodd"/>
+                                            </g>
+                                            </svg>
+                                            {if $userinfo['industry'] == ''}
+                                            填写
+                                            {else}
+                                            修改
+                                            {/if}
+                                            </button>
+                                        </div>
+                                        <div style="display: none">
+                                        	<input type="text" name="industry" value="{$userinfo['industry']}">
+                                        	<br/>
+                                        	<button  onclick="edittext('industry','span-industry')"  class="btn-save Button" type="button">保存</button>   <button class="btn-cancle Button" type="button">取消</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form class="Field form-edit" method="post" action="">
+                                    <h3 class="Field-label">职业经历</h3>
+                                    <div class="Field-content">
+                                        <div class="AddButton">
+                                        	<span id="span-company">{$userinfo['company']}</span>
+                                        	<span id="span-position">
+                                        	{if $userinfo['position'] != '' }
+                                        	• 
+                                        	{/if}
+                                        	{$userinfo['position']}
+                                        	</span>
+                                        	
+                                            <button class="btn-edit Button Button--link" type="button"> <svg viewBox="0 0 18 18" class="Icon AddButton-icon Icon--add Icon--left" style="height:20px;width:20px;" width="20" height="20" aria-hidden="true">
+                                            <title> </title>
+                                            <g>
+                                                <g fill-rule="evenodd">
+                                                    <path d="M6.035 16.433c-.875-.35-1.678-.848-2.383-1.482-.205-.184-.52-.167-.707.04-.185.204-.167.52.038.705.794.714 1.696 1.274 2.682 1.668.06.023.123.035.185.035.198 0 .386-.12.464-.314.103-.258-.022-.55-.28-.65zM1.097 10.247C1.054 9.975.8 9.79.525 9.83c-.273.043-.46.3-.417.57.154.98.467 1.925.93 2.803.09.17.264.267.443.267.08 0 .16-.02.234-.058.244-.13.338-.432.208-.676-.41-.78-.69-1.618-.825-2.49zM9.106 1c.95.014 1.878.19 2.76.528.058.022.118.033.178.033.2 0 .39-.12.467-.32.1-.258-.03-.547-.287-.646C11.233.214 10.19.014 9.12 0h-.007c-.273 0-.496.22-.5.493-.003.278.218.504.493.508zM3.73 2.83c.108 0 .218-.034.31-.107.693-.55 1.465-.976 2.295-1.27.26-.09.397-.377.305-.637C6.548.556 6.263.42 6.002.51 5.068.84 4.2 1.323 3.42 1.94c-.217.17-.254.485-.083.702.1.124.245.19.393.19zM2.01 4.136c-.236-.144-.544-.07-.688.165-.557.91-.945 1.9-1.15 2.944-.055.27.12.534.392.587.033.008.065.01.098.01.234 0 .443-.164.49-.402.184-.927.528-1.807 1.023-2.614.144-.236.07-.543-.165-.688zM14.927 2.228c-.207-.183-.523-.162-.705.047-.182.208-.16.523.047.706.664.583 1.224 1.265 1.665 2.028.092.16.26.25.433.25.085 0 .17-.02.25-.067.24-.137.32-.443.183-.682-.495-.86-1.125-1.626-1.873-2.28zM17.294 7.07c-.27.047-.454.306-.408.578.076.44.114.896.114 1.35 0 .493-.046.984-.133 1.46-.05.27.13.532.402.582.03.005.06.008.09.008.236 0 .446-.17.49-.41.1-.534.148-1.085.15-1.638 0-.513-.044-1.025-.13-1.52-.045-.273-.303-.457-.576-.41zM16.566 12.91c-.235-.14-.544-.065-.686.174-.452.76-1.02 1.434-1.692 2.005-.21.18-.235.494-.057.704.1.116.24.176.382.176.115 0 .23-.04.324-.12.754-.643 1.395-1.4 1.903-2.254.142-.238.064-.544-.174-.686zM11.766 16.51c-.884.325-1.814.49-2.772.49l-.208-.002c-.283-.02-.505.21-.513.487-.007.275.21.506.487.513L9 18c1.07 0 2.116-.186 3.11-.553.26-.095.393-.383.297-.642-.095-.26-.385-.392-.64-.295zM9.8 8.2V6.3c0-.442-.358-.8-.8-.8-.442 0-.8.358-.8.8v1.9H6.3c-.442 0-.8.358-.8.8 0 .442.358.8.8.8h1.9v1.9c0 .442.358.8.8.8.442 0 .8-.358.8-.8V9.8h1.9c.442 0 .8-.358.8-.8 0-.442-.358-.8-.8-.8H9.8z"/>
+                                                </g>
+                                            </g>
+                                            </svg>
+                                            {if $userinfo['company'] == ''}
+                                            添加
+                                            {else}
+                                            修改
+                                            {/if}
+                                            </button>
+                                        </div>
+                                        <div style="display: none">
+                                        	<input type="text" name="company" placeholder="公司名称" value="{$userinfo['company']}">
+                                        	<input type="text" name="position" placeholder="职位" value="{$userinfo['position']}">
+                                        	<br/>
+                                        	<button onclick="editinput('company','position','span-company','span-position')" class="btn-save Button" type="button">保存</button>   <button class="btn-cancle Button" type="button">取消</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form class="Field form-edit" method="post" action="">
+                                    <h3 class="Field-label">教育经历</h3>
+                                    <div class="Field-content">
+                                        <div class="AddButton">
+                                            <span id="span-school">{$userinfo['school']}</span>
+                                        	
+                                        	<span id="span-major">
+                                        	{if $userinfo['major'] != '' }
+                                        	• {$userinfo['major']}
+                                        	{/if}
+                                        	</span>
+                                        	
+                                            <button class="btn-edit Button Button--link" type="button"> <svg viewBox="0 0 18 18" class="Icon AddButton-icon Icon--add Icon--left" style="height:20px;width:20px;" width="20" height="20" aria-hidden="true">
+                                            <title> </title>
+                                            <g>
+                                                <g fill-rule="evenodd">
+                                                    <path d="M6.035 16.433c-.875-.35-1.678-.848-2.383-1.482-.205-.184-.52-.167-.707.04-.185.204-.167.52.038.705.794.714 1.696 1.274 2.682 1.668.06.023.123.035.185.035.198 0 .386-.12.464-.314.103-.258-.022-.55-.28-.65zM1.097 10.247C1.054 9.975.8 9.79.525 9.83c-.273.043-.46.3-.417.57.154.98.467 1.925.93 2.803.09.17.264.267.443.267.08 0 .16-.02.234-.058.244-.13.338-.432.208-.676-.41-.78-.69-1.618-.825-2.49zM9.106 1c.95.014 1.878.19 2.76.528.058.022.118.033.178.033.2 0 .39-.12.467-.32.1-.258-.03-.547-.287-.646C11.233.214 10.19.014 9.12 0h-.007c-.273 0-.496.22-.5.493-.003.278.218.504.493.508zM3.73 2.83c.108 0 .218-.034.31-.107.693-.55 1.465-.976 2.295-1.27.26-.09.397-.377.305-.637C6.548.556 6.263.42 6.002.51 5.068.84 4.2 1.323 3.42 1.94c-.217.17-.254.485-.083.702.1.124.245.19.393.19zM2.01 4.136c-.236-.144-.544-.07-.688.165-.557.91-.945 1.9-1.15 2.944-.055.27.12.534.392.587.033.008.065.01.098.01.234 0 .443-.164.49-.402.184-.927.528-1.807 1.023-2.614.144-.236.07-.543-.165-.688zM14.927 2.228c-.207-.183-.523-.162-.705.047-.182.208-.16.523.047.706.664.583 1.224 1.265 1.665 2.028.092.16.26.25.433.25.085 0 .17-.02.25-.067.24-.137.32-.443.183-.682-.495-.86-1.125-1.626-1.873-2.28zM17.294 7.07c-.27.047-.454.306-.408.578.076.44.114.896.114 1.35 0 .493-.046.984-.133 1.46-.05.27.13.532.402.582.03.005.06.008.09.008.236 0 .446-.17.49-.41.1-.534.148-1.085.15-1.638 0-.513-.044-1.025-.13-1.52-.045-.273-.303-.457-.576-.41zM16.566 12.91c-.235-.14-.544-.065-.686.174-.452.76-1.02 1.434-1.692 2.005-.21.18-.235.494-.057.704.1.116.24.176.382.176.115 0 .23-.04.324-.12.754-.643 1.395-1.4 1.903-2.254.142-.238.064-.544-.174-.686zM11.766 16.51c-.884.325-1.814.49-2.772.49l-.208-.002c-.283-.02-.505.21-.513.487-.007.275.21.506.487.513L9 18c1.07 0 2.116-.186 3.11-.553.26-.095.393-.383.297-.642-.095-.26-.385-.392-.64-.295zM9.8 8.2V6.3c0-.442-.358-.8-.8-.8-.442 0-.8.358-.8.8v1.9H6.3c-.442 0-.8.358-.8.8 0 .442.358.8.8.8h1.9v1.9c0 .442.358.8.8.8.442 0 .8-.358.8-.8V9.8h1.9c.442 0 .8-.358.8-.8 0-.442-.358-.8-.8-.8H9.8z"/>
+                                                </g>
+                                            </g>
+                                            </svg>
+                                            {if $userinfo['school'] == ''}
+                                            添加
+                                            {else}
+                                            修改
+                                            {/if}
+                                            </button>
+                                        </div>
+                                        <div style="display: none">
+                                        	<input type="text" name="school" placeholder="学校名称" value="{$userinfo['school']}">
+                                        	<input type="text" name="major" placeholder="专业方向" value="{$userinfo['major']}">
+                                        	<br/>
+                                        	<button onclick="editinput('school','major','span-school','span-major')"  class="btn-save Button" type="button">保存</button>   <button class="btn-cancle Button" type="button">取消</button>
+                                        </div>
+                                        <div class="Field-list"> </div>
+                                    </div>
+                                </form>
+                                <form class="Field form-edit" method="post" action="">
+                                    <h3 class="Field-label">个人简介</h3>
+                                    <div class="Field-content">
+                                        <div class="DescriptionField-content">
+                                        	<span id="span-introduce">{$userinfo['introduce']}</span>
+                                            <button class="btn-edit Button ModifyButton Button--link" type="button"> <svg viewBox="0 0 12 12" class="Icon ModifyButton-icon Icon--modify" style="height:16px;width:12px;" width="12" height="16" aria-hidden="true">
+                                            <title> </title>
+                                            <g>
+                                                <path d="M.423 10.32L0 12l1.667-.474 1.55-.44-2.4-2.33-.394 1.564zM10.153.233c-.327-.318-.85-.31-1.17.018l-.793.817 2.49 2.414.792-.814c.318-.328.312-.852-.017-1.17l-1.3-1.263zM3.84 10.536L1.35 8.122l6.265-6.46 2.49 2.414-6.265 6.46z" fill-rule="evenodd"/>
+                                            </g>
+                                            </svg>
+                                            {if $userinfo['introduce'] == ''}
+                                            填写
+                                            {else}
+                                            修改
+                                            {/if}
+                                            </button>
+                                        </div>
+                                        <div style="display: none">
+                                        	<textarea style="overflow:hidden" name="introduce" >
+                                        		{$userinfo['introduce']}
+                                        	</textarea>
+                                        	<br/>
+                                        	<button onclick="edittext('introduce','span-introduce')" class="btn-save Button" type="button" >保存</button>   <button class="btn-cancle Button" type="button">取消</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<!--<script src="__JS__/vendor.1f389462803af519e7ae_1.js" data-reactid="21">
+</script>--> 
+<script src="__JS__/main.raven.32d56725cb03b403b366_1.js" async data-reactid="22">
+</script> 
+<script src="__JS__/main.app.1d5ce2f79923e42206fc_1.js" data-reactid="23">
+</script> 
+<script data-reactid="24">
+</script>
+</body>
+</html>
+
+<script type="text/javascript" src="__JS__/jquery.form.js"></script>
+
+<script type="text/javascript">
+	function upPhoto(){
+		return $('#btn-photo').click();
+	}
+	$('.btn-edit').click(function(){
+		$(this).parent().css('display','none').siblings().css('display','inline-block');
+	});
+	$('.btn-cancle').click(function(){
+		$(this).parent().css('display','none').siblings().css('display','inline-block');
+	});
+	function edittext(name,spanid){
+		if(name == 'introduce'){
+			var value = $("textarea[name="+name+"]").val();
+		}else{
+			var value = $("input[name="+name+"]").val();
+		}
+		
+		$.post("{:url('user/editInfo')}",{name:name,value:value},function(data){
+			if(data.code){
+				$("#"+spanid+"").text(data.info).parent().css('display','inline-block').siblings().css('display','none');
+				Toast('修改成功',2000);
+			}else{
+				Toast('修改失败',2000);
+			}
+			
+		},'json');
+	}
+	function editgender(name,spanid){
+		var value = $("input[name="+name+"]:checked").val();	
+		$.post("{:url('user/editInfo')}",{name:name,value:value},function(data){
+			if(data.isfail){
+				if(data.info == 1){
+					data.info = '男';
+				}else{
+					data.info = '女';
+				}
+				$("#"+spanid+"").text(data.info).parent().css('display','inline-block').siblings().css('display','none');
+				Toast('修改成功',2000);
+			}else{
+				Toast('修改性别失败',2000);
+			}
+			
+		},'json');
+	}
+	function editinput(name1,name2,spanid1,spanid2){
+		var pvalue = $("input[name="+name1+"]").val();
+		var cvalue = $("input[name="+name2+"]").val();
+		if(pvalue != ''){
+			$.post("{:url('user/editTwoInfo')}",{pname:name1,cname:name2,pvalue:pvalue,cvalue:cvalue},function(data){
+				if(data.code){
+					$("#"+spanid1+"").text(data.pinfo).parent().css('display','inline-block').siblings().css('display','none');
+					$("#"+spanid2+"").text('• '+data.cinfo);
+					Toast('修改成功',2000);
+				}else{
+					Toast('修改失败',2000);
+				}
+				
+			},'json');
+		}else{
+			Toast('该字段不能为空',2000);
+		}		
+	}
+	function subPhoto(){
+		$("#form-photo").ajaxSubmit({
+			url: $("#form-photo").attr('action'), /*设置post提交到的页面*/
+            type: "post", /*设置表单以post方法提交*/
+            dataType: "json", /*设置返回值类型为文本*/
+            success: function (data) {
+            	$('#userphoto').attr('src',data);
+                Toast('修改头像成功',2000);
+            },
+            error: function (error) { alert(error); },
+            
+        });
+	}
+
+
+	function Toast(msg,duration){  
+	    duration=isNaN(duration)?3000:duration;  
+	    var m = document.createElement('div');  
+	    m.innerHTML = msg;  
+	    m.style.cssText="width: 60%;min-width: 130px;opacity: 0.7;height: 110px;color: rgb(0,0,0);line-height: 110px;text-align: center;border-radius: 5px;position: fixed;top: 40%;left: 20%;z-index: 999999;background: rgb(100,105,109);font-size: 30px;font-weight:700";  
+	    document.body.appendChild(m);  
+	    setTimeout(function() {  
+	        var d = 0.5;  
+	        m.style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';  
+	        m.style.opacity = '0';  
+	        setTimeout(function() { document.body.removeChild(m) }, d * 1000);  
+	    }, duration);  
+	}  
+</script>
+{/block}

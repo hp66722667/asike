@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {block name='title'}
+            <title>角色列表 - 阿思客</title>
+            <style>
+                th{
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                #tips{
+                    display: none;
+                }
+                ul{
+                    min-width: 200px;
+                    text-align: center;
+                }
+                li{
+                    display: inline-block;
+                }
+                .pagination{
+                    width: 600px;
+                }
+                span{
+                    display: inline-block;
+                    width: 26px;
+                    height: 26px;
+                    text-align: center;
+                    line-height: 26px;
+                }
+            </style>
+        {/block}
+    </head>
+    <body>
+        {extend name="public/base"/}
+        {block name='main'}
+            <section class="rt_wrap content mCustomScrollbar">
+                <div class="rt_content">
+                    <form action="">
+                        <section class="mtb">
+                            <input type="text" class="textbox textbox_225" name="str" placeholder="输入关键字搜索"/>
+                            <input type="submit" value="查询" class="group_btn"/>
+                        </section>
+                    </form>
+                    <form action="" method="post">
+                        <div class="page_title">
+                            <h2 class="fl">角色列表</h2>
+                            <p style="display: inline-block; height: 35px;line-height: 35px">
+                                &emsp;&emsp;&emsp;共有{$roleNum}条数据
+                            </p>
+
+                            <a id="addNewrole" type="button" class="top_rt_btn link_icon add_icon"
+                               style="margin-left: 20px;cursor: pointer">添加新角色</a>
+
+                        </div>
+                        <table class="table" style="width: 600px">
+                            <tr>
+                                <!--<th style="width: 100px">
+                                    <input id="all" type="checkbox" name="all[]" value="" />
+                                    全选
+                                    <a style="cursor: pointer" onclick="revsec();">反选</a>
+                                </th>-->
+                                <th style="width: 150px">角色ID</th>
+                                <th style="width: 200px;">角色名</th>
+                                <!--<th style="width: 260px">拥有权限</th>-->
+                                <th>编辑角色</th>
+                            </tr>
+                            {foreach $roles as $roleinfo}
+                                <tr>
+                                    <!--<td style="text-align: center">
+                                        <input class="userids" type="checkbox" name="userid[]" value="{$roleinfo['roleid']}">
+                                    </td>-->
+                                    <td class="center">{$roleinfo['roleid']}</td>
+                                    <td class="center">{$roleinfo['rolename']}</td>
+
+                                    <td class="center">
+                                        <a href="{:url('Admin/editRole')}?rid={$roleinfo['roleid']}&rname={$roleinfo['rolename']}" title="编辑角色" class="link_icon">&#101;</a>
+                                        <!--<a id="adel" style="cursor: pointer" onclick="delOne();" title="删除" class="link_icon">&#100;</a>-->
+                                    </td>
+                                </tr>
+                            {/foreach}
+                        </table>
+                    </form>
+                    <!--分页-->
+                    <div style=" width: 600px; margin-top: 10px; margin-left: 0">
+                        <aside class="paging" style="min-width: 200px">
+                            {$page}
+                        </aside>
+                    </div>
+                </div>
+            </section>
+            <script>
+                $(document).ready(function () {
+                    $('#addNewrole').click(function () {
+                        var tcname = false;
+                        $(".pop_bg").fadeIn();
+                        $('input[name=rolename]').blur(function () {
+                            $.post("{url(Admin/isInRolelist')}",{roname:$('input[name=rolename]').val()},function (data) {
+                                if (data.code){
+                                    $('#tips').text(data.info).css({'display':'inline-block','color':'red'});
+                                    tcname = false;
+                                }else{
+                                    $('#tips').text(data.info).css({'color':'green','display':'inline-block'});
+                                    tcname = true;
+                                }
+                            },'json');
+
+
+                        });
+                        //弹出：确认按钮
+                        $(".trueBtn").click(function () {
+                            if ($('input[name=rolename]').val() == ''){
+                                Toast('角色名不能为空！', 1000);
+                                return false;
+                            }
+                            $(".pop_bg").fadeOut();
+                            if (tcname){
+                                $('#formtc').submit();
+                            }
+
+                        });
+                        //弹出：取消或关闭按钮
+                        $(".falseBtn").click(function () {
+
+                            $(".pop_bg").fadeOut();
+                        });
+                    });
+                });
+
+                function Toast(msg, duration) {
+                    duration = isNaN(duration) ? 3000 : duration;
+                    var m = document.createElement('div');
+                    m.innerHTML = msg;
+                    m.style.cssText = "width: 50%;min-width: 150px;opacity: 0.7;height: 50px;" +
+                        "color: rgb(255, 255, 255);line-height: 50px;text-align: center;" +
+                        "border-radius: 5px;position: fixed;top: 40%;left: 20%;z-index: 999999;" +
+                        "background: red;font-size: 22px;";
+                    document.body.appendChild(m);
+                    setTimeout(function () {
+                        var d = 0.5;
+                        m.style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';
+                        m.style.opacity = '0';
+                        setTimeout(function () {
+                            document.body.removeChild(m)
+                        }, d * 1000);
+                    }, duration);
+                }
+            </script>
+            <section class="pop_bg">
+                <div class="pop_cont" style="width: 500px;">
+                    <!--title-->
+                    <h3>添加角色</h3>
+                    <!--content-->
+                    <form id="formtc" action="{:url('Admin/addRole')}" method="post" enctype="multipart/form-data">
+                        <div class="pop_cont_input" style="padding-left: 45px">
+                            <ul>
+                                <li>
+                                    <span style="display: inline">角色名称：</span>
+                                    <input type="text" name="rolename" placeholder="填写角色名称" class="textbox"/>
+                                    <span id="tips"></span>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </form>
+
+                    <!--以pop_cont_text分界-->
+                    <div class="pop_cont_text">
+
+                    </div>
+                    <!--bottom:operate->button-->
+                    <div class="btm_btn">
+                        <input type="button" value="添加" class="input_btn trueBtn"/>
+                        <input type="button" value="取消" class="input_btn falseBtn"/>
+                    </div>
+                </div>
+            </section>
+        {/block}
+    </body>
+</html>

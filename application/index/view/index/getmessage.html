@@ -1,0 +1,75 @@
+{if !empty($agreemessages)}
+{foreach $agreemessages as $agreemessage}
+
+<div  class="zm-noti7-content-item " data-notigroupname="VOTE_THANK" data-type="upvote" data-count="1">获得 1 次赞同：
+    <a onclick="upagreeMessage({$agreemessage['bid']});" class="question_link" href="{:url('Question/quesDetailByQid',array('quesid'=>$agreemessage['question']['quesid']))}" data-id="19013329" data-za-element-name="Title">{$agreemessage['question']['quesname']}
+    </a>来自
+    <span class="author-list">
+        <span class="user-block" >
+            <a data-hovercard="p$t$ningsi-21" href="{:url('User/userCenter',array('personid'=>$agreemessage['agreer']['userid']))}" target="_blank" class="zg-link author-link" title="ningsi">{$agreemessage['agreer']['nickname']}</a>
+        </span>
+    </span>
+</div>
+<script type="text/javascript">
+    function upagreeMessage(bid){
+        $.post("{:url('Index/upagreeMessage')}",{bid:bid},function(data){
+        },'json');
+    }
+</script>
+{/foreach}
+{/if}
+
+
+{if !empty($commentmessages)}
+{foreach $commentmessages as $commentmessage}
+
+<div  class="zm-noti7-content-item " data-notigroupname="VOTE_THANK" data-type="upvote" data-count="1">有人回复了你的评论：
+    <a onclick="upcommentMessage({$commentmessage['commentid']});" class="question_link" href="{:url('Question/quesDetailByQid',array('quesid'=>$commentmessage['question']['quesid']))}" data-id="19013329" data-za-element-name="Title">{$commentmessage['question']['quesname']}
+    </a>来自
+    <span class="author-list">
+        <span class="user-block" >
+            <a data-hovercard="p$t$ningsi-21" href="{:url('User/userCenter',array('personid'=>$commentmessage['senduser']['userid']))}" target="_blank" class="zg-link author-link" title="{$commentmessage['senduser']['nickname']}">{$commentmessage['senduser']['nickname']}</a>
+        </span>
+    </span>
+</div>
+<script type="text/javascript">
+	function upagreeMessage(bid){
+		$.post("{:url('Index/upagreeMessage')}",{bid:bid},function(data){
+		},'json');
+	}
+    function upcommentMessage(cid){
+        $.post("{:url('Index/upcommentMessage')}",{commentid:cid},function(data){
+        },'json');
+    }
+</script>
+{/foreach}
+{/if}
+
+{if !empty($invitemessages)}
+{foreach $invitemessages as $invitemessage}
+
+<div  class="zm-noti7-content-item " data-notigroupname="VOTE_THANK" data-type="upvote" data-count="1">有人邀请你回答问题：
+    <a onclick="upinvitemessage({$invitemessage['bid']});" class="question_link" href="{:url('Question/quesDetailByQid',array('quesid'=>$invitemessage['question']['quesid']))}" data-id="19013329" data-za-element-name="Title">{$invitemessage['question']['quesname']}
+    </a>来自
+    <span class="author-list">
+        <span class="user-block" >
+            <a data-hovercard="p$t$ningsi-21" href="{:url('User/userCenter',array('personid'=>$invitemessage['user']['userid']))}" target="_blank" class="zg-link author-link" title="{$invitemessage['user']['nickname']}">{$invitemessage['user']['nickname']}</a>
+        </span>
+    </span>
+</div>
+<script type="text/javascript">
+    function upagreeMessage(bid){
+        $.post("{:url('Index/upagreeMessage')}",{bid:bid},function(data){
+        },'json');
+    }
+    function upcommentMessage(cid){
+        $.post("{:url('Index/upcommentMessage')}",{commentid:cid},function(data){
+        },'json');
+    }
+    function upinvitemessage(bid){
+        $.post("{:url('Index/upinviteMessage')}",{bid:bid},function(data){
+        },'json');
+    }
+</script>
+{/foreach}
+{/if}

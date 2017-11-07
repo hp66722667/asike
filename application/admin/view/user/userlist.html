@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {block name='title'}
+    <title>后台管理系统</title>
+    <style>
+        td{
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        ul{
+            min-width: 200px;
+            text-align: center;
+        }
+        li{
+            display: inline-block;
+        }
+        span{
+            display: inline-block;
+            width: 26px;
+            height: 26px;
+            text-align: center;
+            line-height: 26px;
+        }
+    </style>
+    {/block}
+</head>
+<body>
+{extend name="public/base" /}
+
+{block name='main'}
+    <section class="rt_wrap content mCustomScrollbar">
+        <div class="rt_content">
+            <form action="{:url('User/userList')}" method="post">
+                <section class="mtb">
+                    <input type="text" class="textbox textbox_225" name="str"/>
+                    <input type="submit" value="查询" class="group_btn"/>
+                </section>
+            </form>
+
+
+            <form id="formdel" action="{:url('User/deleteUser')}" method="post">
+                <div class="page_title">
+                    <h2 class="fl">用户列表</h2>
+                    <!--<input id="manydel" type="button" class="top_rt_btn link_icon"
+                           style="color: red; margin-left: 20px" value="批量删除">-->
+                </div>
+
+                <table class="table">
+                    <tr>
+                        <!--<th style="width: 100px">
+                            <input class="userids" id="all" type="checkbox" name="all[]" value="" />
+                            全选
+                            <a style="cursor: pointer" onclick="revsec();">反选</a>
+                        </th>-->
+                        <th style="width: 100px">用户ID</th>
+                        <th>用户名</th>
+                        <th>用户头像</th>
+                        <th>用户邮箱</th>
+                        <th>联系电话</th>
+
+                        <th>是否锁定</th>
+                        <!--<th>操作</th>-->
+                    </tr>
+                    {foreach $userInfo as $userinfo}
+                        <tr>
+                            <!--<td style="width: 150px">
+                                <input class="userids" type="checkbox" name="userid[]" value="{$userinfo['userid']}">
+                            </td>-->
+                            <td class="center">{$userinfo['userid']}</td>
+                            <td>{$userinfo['nickname']}</td>
+                            <td class="center"><img src="{$userinfo['userphoto']['photo']}" width="50" height="50"/></td>
+                            <td class="center" title="{$userinfo['email']}">{$userinfo['email']}</td>
+                            <td class="center">{$userinfo['phone']}</td>
+
+
+                            {if $userinfo['forbidden']}
+                                <td class="center">
+                                    <a onclick="unlockuser({$userinfo['userid']});"
+                                                      title="点击解锁该用户" class="link_icon">&#89;</a>
+                                </td>
+                                {else}
+                                <td class="center">
+                                    <a onclick="lockuser({$userinfo['userid']});"
+                                                      title="点击锁定该用户" class="link_icon">&#88;</a>
+                                </td>
+                            {/if}
+                            <!--<td class="center">
+                                <a href="http://www.mycodes.net" title="预览" class="link_icon" target="_blank">&#118;</a>
+                                <a href="product_detail.html" title="编辑" class="link_icon">&#101;</a>
+                                <a id="adel" style="cursor: pointer" onclick="delOne({$userinfo['userid']});" title="删除" class="link_icon">&#100;</a>
+                            </td>-->
+                        </tr>
+                    {/foreach}
+                </table>
+            </form>
+            <div style=" min-width: 200px; margin: 10px auto">
+                <aside class="paging" style="min-width: 200px">
+                    {$page}
+                </aside>
+            </div>
+        </div>
+    </section>
+    <script>
+        var oId = document.getElementsByName('userid[]');
+        var oAll = document.getElementsByName('all[]')[0];
+        oAll.onclick = function () {
+            stu = oAll.checked;
+            selStu(stu);
+        };
+        function revsec() {
+            var stu = true;
+            for (var i = 0; i < oId.length; i++){
+                oId[i].checked = !oId[i].checked;
+                if (!oId[i].checked){
+                    stu = false;
+                }
+            }
+            oAll.checked = stu;
+        }
+        function selStu(stu)
+        {
+            for (var i in oId){
+                oId[i].checked = stu;
+            }
+        }
+    </script>
+    <!--弹出框效果-->
+    <script>
+        $(document).ready(function () {
+            $('#manydel').click(function () {
+                $(".pop_bg").fadeIn();
+                //弹出：确认按钮
+                $(".trueBtn").click(function () {
+                    $('#formdel').submit();
+                    $(".pop_bg").fadeOut();
+                });
+                //弹出：取消或关闭按钮
+                $(".falseBtn").click(function () {
+                    //alert("你点击了取消/关闭！");//测试
+                    $(".pop_bg").fadeOut();
+                });
+            })
+        });
+    </script>
+    <section class="pop_bg">
+        <div class="pop_cont" style="width: 300px;margin-top: 120px">
+            <!--title-->
+            <h3 id="tipstitle">出于礼貌地问一下</h3>
+            <!--content-->
+            <div id="tipscont" class="pop_cont_input" style="margin-top: 30px; color: red;">
+                你确认删除吗？
+            </div>
+            <!--以pop_cont_text分界-->
+            <div class="pop_cont_text">
+
+            </div>
+            <!--bottom:operate->button-->
+            <div class="btm_btn">
+                <input type="button" value="确认" class="input_btn trueBtn"/>
+                <input type="button" value="关闭" class="input_btn falseBtn"/>
+            </div>
+        </div>
+    </section>
+    <!--结束：弹出框效果-->
+    <script>
+        function delOne(uid) {
+            $(document).ready(function () {
+                $(".pop_bg").fadeIn();
+
+                $(".trueBtn").click(function () {
+                    $(".pop_bg").fadeOut();
+                    $.post("{:url('User/deleteOne')}",{userid:uid},function (data) {
+                        if (data.code){
+                            $(".pop_bg").fadeIn();
+                            $('.trueBtn').css('display','none');
+                            $('#tipstitle').text('来自阿思客的提示');
+                            $('#tipscont').text(data.info).css('color','green');
+                            $('.falseBtn').click(function () {
+                                setTimeout(window.location.reload(),500);
+                            });
+                        }else {
+                            $(".pop_bg").fadeIn();
+                            $('#tipscont').text(data.info).css('color','red');
+                        }
+                    },'json');
+                });
+                //弹出：取消或关闭按钮
+                $(".falseBtn").click(function () {
+                    $(".pop_bg").fadeOut();
+                });
+            })
+        }
+
+    </script>
+    <script>
+        function lockuser(uid) {
+            $(document).ready(function(){
+                $(".pop_bg").fadeIn();
+                $('#tipscont').text('确定要锁定该用户吗？');
+                $(".trueBtn").click(function () {
+                    $(".pop_bg").fadeOut();
+                    $.post("{:url('User/lockUser')}",{userid:uid},function(data) {
+                        console.log(data.info);
+                        if (data.code){
+                            $(".pop_bg").fadeIn();
+                            $('.trueBtn').css('display','none');
+                            $('#tipstitle').text('来自阿思客的提示');
+                            $('#tipscont').text(data.info).css('color','green');
+                            $('.falseBtn').click(function () {
+                                setTimeout(window.location.reload(),500);
+                            });
+                        }else {
+                            $(".pop_bg").fadeIn();
+                            $('#tipscont').text(data.info).css('color','red');
+                        }
+                    },'json');
+                });
+                //弹出：取消或关闭按钮
+                $(".falseBtn").click(function () {
+                    $(".pop_bg").fadeOut();
+                });
+            })
+        }
+
+        function unlockuser(uid) {
+            $(document).ready(function(){
+                $(".pop_bg").fadeIn();
+                $('#tipscont').text('确定要解除锁定吗？');
+                $(".trueBtn").click(function () {
+                    $(".pop_bg").fadeOut();
+                    $.post("{:url('User/unlockUser')}",{userid:uid},function(data) {
+                        console.log(data.info);
+                        if (data.code){
+                            $(".pop_bg").fadeIn();
+                            $('.trueBtn').css('display','none');
+                            $('#tipstitle').text('来自阿思客的提示');
+                            $('#tipscont').text(data.info).css('color','green');
+                            $('.falseBtn').click(function () {
+                                setTimeout(window.location.reload(),500);
+                            });
+                        }else {
+                            $(".pop_bg").fadeIn();
+                            $('#tipscont').text(data.info).css('color','red');
+                        }
+                    },'json');
+                });
+                //弹出：取消或关闭按钮
+                $(".falseBtn").click(function () {
+                    $(".pop_bg").fadeOut();
+                });
+            })
+        }
+    </script>
+{/block}
+</body>
+</html>

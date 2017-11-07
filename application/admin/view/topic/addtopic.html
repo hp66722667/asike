@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {block name='title'}
+        <title>添加话题 - __WEB_NAME__</title>
+        <style>
+            .errorTips{
+                display: none;
+            }
+        </style>
+    {/block}
+</head>
+<body>
+    {extend name="public/base"/}
+
+    {block name='main'}
+        <section class="rt_wrap content mCustomScrollbar">
+            <div class="rt_content">
+                <div class="page_title">
+                    <h2 class="fl">添加话题</h2>
+                    <!--<a href="adjust_funding.html" class="fr top_rt_btn money_icon">资金管理</a>-->
+                </div>
+                <form id="ftopic" action="{:url('Topic/insertTopic')}" method="post" enctype="multipart/form-data">
+                    <ul class="ulColumn2">
+                        <li>
+                            <span class="item_name" style="width:120px;">
+                                话题logo：
+                            </span>
+                            <label class="uploadImg">
+                                <input type="file" name="image"/>
+                                <span>上传logo</span>
+                            </label>
+                        </li>
+                        <li>
+                        <span class="item_name" style="width:120px;">
+                            <span style="color: red">*</span>
+                            话题名称：
+                        </span>
+                            <input type="text" name="topicname" class="textbox textbox_225" placeholder="填写话题名称"/>
+                            <span class="errorTips"></span>
+                        </li>
+                        <li>
+                        <span class="item_name" style="width:120px;">
+                            <span style="color: red">*</span>
+                            所属类别：
+                        </span>
+                            <select id="select" class="select" name="topicclaass" style="height: 45px">
+                                <option>选择该话题所属类别</option>
+                                {foreach $tpclassInfo as $tpClassInfo}
+                                <option value="{$tpClassInfo['topicclassid']}">{$tpClassInfo['topicclassname']}</option>
+                                {/foreach}
+                            </select>
+                            <span style="font-size: 12px;">&emsp;都不属于？
+                                <a id="addclass" href="javascript:;">新增一个类别</a>
+                            </span>
+                        </li>
+                        <li>
+                            <span class="item_name" style="width:120px;">
+                                话题描述：
+                            </span>
+                                <textarea class="textarea" name="topicdescribe" rows="5">
+
+                            </textarea>
+                        </li>
+                        <li>
+                            <span class="item_name" style="width:120px;"></span>
+                            <input id="topadd" type="button" class="link_btn" value="确认添加"/>
+                        </li>
+                    </ul>
+                </form>
+
+            </div>
+        </section>
+        <!--弹出框效果-->
+        <script>
+            $(document).ready(function () {
+                $('#addclass').click(function () {
+                    var tcname = false;
+                    $(".pop_bg").fadeIn();
+                    $('input[name=tcname]').blur(function () {
+                        $.post("{url('Topic/isInClasslist')}",{tcname:$(this).val()},function (data) {
+                            if (data.code){
+                                alert('cunzai');
+                                $('#tips').text(data.info).css({'display':'inline-block','color':'red'});
+                                tcname = false;
+                            }else if(data.code == 3){
+                                $('#tips').text(data.info).css({'color':'green'});
+                                tcname = true;
+                            }
+                        },'json');
+
+                        if ($(this).val() == ''){
+                           Toast('类别名称不能为空！', 1000);
+                        }else {
+                            return false;
+                        }
+                    });
+                    //弹出：确认按钮
+                    $(".trueBtn").click(function () {
+                        $(".pop_bg").fadeOut();
+                        $('#formtc').submit();
+                    });
+                    //弹出：取消或关闭按钮
+                    $(".falseBtn").click(function () {
+
+                        $(".pop_bg").fadeOut();
+                    });
+                });
+            });
+        </script>
+        <section class="pop_bg">
+            <div class="pop_cont" style="width: 500px;">
+                <!--title-->
+                <h3>添加类别</h3>
+                <!--content-->
+                <form id="formtc" action="{:url('Topic/isInClasslist')}" method="post" enctype="multipart/form-data">
+                    <div class="pop_cont_input" style="padding-left: 45px">
+                        <ul>
+                            <li>
+                                <span>类别名称：</span>
+                                <input type="text" name="tcname" placeholder="填写类别名称" class="textbox"/>
+                                <span id="tips"></span>
+                            </li>
+                            <li>
+                                <span class="ttl">类别描述：</span>
+                                <textarea name="tcdescribe" class="textarea" style="height:50px;width:60%;"></textarea>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+
+                <!--以pop_cont_text分界-->
+                <div class="pop_cont_text">
+
+                </div>
+                <!--bottom:operate->button-->
+                <div class="btm_btn">
+                    <input type="button" value="添加" class="input_btn trueBtn"/>
+                    <input type="button" value="取消" class="input_btn falseBtn"/>
+                </div>
+            </div>
+        </section>
+        <!--结束：弹出框效果-->
+        <script>
+            var tname = false;
+            var tclass = false;
+            $('input[name=topicname]').blur(function () {
+                if($(this).val() == ''){
+                    Toast('话题名称不能为空', 1000);
+                    return false;
+                }else {
+                    $.post("{:url('Topic/isInList')}", {topicname:$('input[name=topicname]').val()},function (data) {
+                        if (data.code){
+                            $('.errorTips:eq(0)').text(data.info).css({'display':'inline-block','color':'red'});
+                            tname = false;
+                            return false;
+                        }else {
+                            $('.errorTips:eq(0)').text(data.info).css({'display':'inline-block','color':'green'});
+                            tname = true;
+
+                        }
+                    },'json')
+                }
+            });
+            $('#select').blur(function () {
+                if ($(this).val() == '选择该话题所属类别'){
+                    Toast('话题类别不能为空', 1000);
+                    return false;
+                }else {
+                    tclass = true;
+                }
+            });
+
+            $('#topadd').click(function () {
+                if (tname && tclass){
+                    $('#ftopic').submit();
+                }else {
+                    Toast('你输入的信息不完整',1000);
+                    return false;
+                }
+            });
+
+            function Toast(msg, duration) {
+                duration = isNaN(duration) ? 3000 : duration;
+                var m = document.createElement('div');
+                m.innerHTML = msg;
+                m.style.cssText = "width: 50%;min-width: 150px;opacity: 0.7;height: 50px;color: rgb(255, 255, 255);line-height: 50px;text-align: center;border-radius: 5px;position: fixed;top: 40%;left: 20%;z-index: 999999;background: rgb(100, 100, 100);font-size: 22px;";
+                document.body.appendChild(m);
+                setTimeout(function () {
+                    var d = 0.5;
+                    m.style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';
+                    m.style.opacity = '0';
+                    setTimeout(function () {
+                        document.body.removeChild(m)
+                    }, d * 1000);
+                }, duration);
+            }
+        </script>
+    {/block}
+</body>
+</html>

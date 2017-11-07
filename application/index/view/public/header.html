@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head data-reactid="2">
+        {block name='title'}
+
+        {/block}
+        {block name='head'}
+        <meta charset="utf-8" data-reactid="3"/>
+        <meta name="renderer" content="webkit" data-reactid="6"/>
+        <meta name="force-rendering" content="webkit" data-reactid="7"/>
+        <meta name="google-site-verification" content="FTeR0c8arOPKh8c5DYh_9uu98_zJbaWw53J-Sch9MTg" data-reactid="9"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" type="__IMG__/x-icon" href="https://static.zhihu.com/static/favicon.ico" data-reactid="10"/>
+        <link rel="dns-prefetch" href="//static.zhimg.com" data-reactid="11"/>
+        <link rel="dns-prefetch" href="//pic1.zhimg.com" data-reactid="12"/>
+        <link rel="dns-prefetch" href="//pic2.zhimg.com" data-reactid="13"/>
+        <link rel="dns-prefetch" href="//pic3.zhimg.com" data-reactid="14"/>
+        <link rel="dns-prefetch" href="//pic4.zhimg.com" data-reactid="15"/>
+        <link href="__BOOT__/css/bootstrap.min.css" rel="stylesheet">
+        <link href="__CSS__/main.app.4da95bc6e856c5d9b65d.css" rel="stylesheet" data-reactid="16"/>
+        <script src="__BOOT__/js/bootstrap.min.js"></script>
+
+        <link href="__CSS__/base/jquery-ui-1.10.4.custom.css" rel="stylesheet">
+        <script src="__JS__/jquery-1.10.2.js"></script>
+        <script src="__JS__/jquery-ui-1.10.4.custom.js"></script>
+            <script type="text/javascript" src="__EDITOR__/ueditor.config.js"></script>
+    <script type="text/javascript" src="__EDITOR__/ueditor.all.js"></script>
+        <style type="text/css">
+        .ui-autocomplete{
+            display:block;
+            z-index:10000000;
+            }
+        </style>
+        <script type="text/javascript">
+        $(function() {
+            $( "#autocomplete" ).autocomplete({
+                source: "{:url('Question/getQuesListByStr')}"
+            });  
+
+            $( "#quesname" ).autocomplete({
+                source: "{:url('Question/getQuesListByStr')}"
+            }); 
+
+            $( "#topicname" ).autocomplete({
+                source: "{:url('Topic/getTopicListByStr')}"
+            });
+
+
+            // Hover states on the static widgets
+            $( "#dialog-link, #icons li" ).hover(
+                function() {
+                    $( this ).addClass( "ui-state-hover" );
+                },
+                function() {
+                    $( this ).removeClass( "ui-state-hover" );
+                }
+            );
+            $('#btn-search').click(function(){
+                $('#form-search').submit();
+            });
+
+            setInterval(function(){
+                        $.post("{:url('Index/checkMessage')}",{},function(data){
+
+                                if(data.privmessnum.count != 0){
+
+                                    $("#div-privemessnum").css('visibility','visible').text(data.privmessnum.count);
+                                }else{
+                                    $("#div-privemessnum").css('visibility','hidden');
+
+                                }
+
+                        },'json');
+                    },5000);
+
+                
+                });
+
+        
+
+        
+
+        </script>
+
+        {/block}
+    </head>
+    <title>Title</title>
+
+<body>
+    {block name='header'}
+        <div>
+            <header role="banner" class="Sticky AppHeader" data-za-module="TopNavBar">
+                <div class="AppHeader-inner"> <a href="/" aria-label="知乎" style="color:#0f88eb;font-size: 32px;text-decoration: none;"> 阿思客 </a>
+                    <nav role="navigation" class="AppHeader-nav"> <a class="AppHeader-navItem" href="{:url('Index/index')}">首页</a> <a class="AppHeader-navItem" href="{:url('Index/explore')}">发现</a> <a class="AppHeader-navItem" href="{:url('Topic/topicguang')}">话题</a> </nav>
+                    <div class="SearchBar" role="search">
+                        <div class="SearchBar-toolWrapper">
+                            <form id="form-search" class="SearchBar-tool" action="{:url('Index/search')}" method="post">
+                                <div>
+                                    <div class="Popover">
+                                        <div class="SearchBar-input Input-wrapper Input-wrapper--grey">
+                                            <input name="str" type="text" maxlength="100" value="" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="null--1" id="autocomplete" aria-haspopup="true" aria-owns="null-content" class="Input" placeholder="搜索你感兴趣的内容…"/>
+                                            <div class="Input-after">
+                                                <button id="btn-search" class="Button SearchBar-searchIcon Button--primary" aria-label="搜索" type="button"> <svg viewBox="0 0 16 16" class="Icon Icon--search" style="height:16px;width:16px;" width="16" height="16" aria-hidden="true">
+                                                    <title> </title>
+                                                    <g>
+                                                        <path d="M12.054 10.864c.887-1.14 1.42-2.57 1.42-4.127C13.474 3.017 10.457 0 6.737 0S0 3.016 0 6.737c0 3.72 3.016 6.737 6.737 6.737 1.556 0 2.985-.533 4.127-1.42l3.103 3.104c.765.46 1.705-.37 1.19-1.19l-3.103-3.104zm-5.317.925c-2.786 0-5.053-2.267-5.053-5.053S3.95 1.684 6.737 1.684 11.79 3.95 11.79 6.737 9.522 11.79 6.736 11.79z"/>
+                                                    </g>
+                                                </svg> </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <button id="tiwen" class="Button QuestionAskButton SearchBar-askButton
+                          Button--primary Button--blue" type="button">
+                            提问
+                        </button>
+
+                    </div>
+
+
+                    {if $userid == 0}
+                    <a href="{:url('Index/login')}" style="margin-left: 100px"><button class="Button" type="button">点击登录</button></a>
+
+                    {else}
+                    <div class="AppHeader-userInfo">
+                        
+                        <div id="div-privemessnum" style="visibility: hidden;display:block;background:#f00;border-radius:50%;bottom:10px;left:30px;position:relative;width: 16px;height: 16px;color:white;text-align: center;line-height: 16px">
+                        </div>
+                        <a href="{:url('Index/inbox')}">
+                        <button  class="Button Messages-icon AppHeader-messages Button--plain" type="button"> <svg viewBox="0 0 20 20" class="Icon Icon--message" style="height:20px;width:20px;" width="20" height="20" aria-hidden="true">
+                            <title> </title>
+                            <g>
+                                <path d="M9 0C3.394 0 0 4.13 0 8c0 1.654.522 3.763 2.014 5.566.314.292.518.82.454 1.17-.165 1.488-.842 1.905-.842 1.905-.328.332.105.67.588.582 1.112-.2 2.07-.58 3.526-1.122.4-.202.464-.147.78-.078C11.524 17.764 18 14 18 8c0-3.665-3.43-8-9-8z"/>
+                                <path d="M19.14 9.628c.758.988.86 2.01.86 3.15 0 1.195-.62 3.11-1.368 3.938-.21.23-.354.467-.308.722.12 1.073.614 1.5.614 1.5.237.24-.188.563-.537.5-.802-.145-1.494-.42-2.545-.81-.29-.146-.336-.106-.563-.057-2.043.712-4.398.476-6.083-.926 5.964-.524 8.726-3.03 9.93-8.016z"/>
+
+                            </g>
+                        </svg>
+                        
+
+                        </button>
+
+                        </a>
+
+                        <div class="AppHeader-profile">
+                            <button class="Button AppHeader-profileEntry Button--plain" type="button"><a href="{:url('User/userCenter',array('personid'=>$user['userid']))}" > <img class="Avatar AppHeader-profileAvatar" width="30" height="30" src="{$userinfo['photo']}" srcset="https://pic3.zhimg.com/v2-4b4745998d9e95e677870aa5fc63f7e2_im.jpg 2x"/> </a></button>
+                        </div>
+                        <a href="{:url('Index/logout')}" style="margin-left: 10px"><button class="Button" type="button">退出登录</button></a>
+                    </div>
+
+                    {/if}
+
+
+
+
+                </div>
+            </header>
+        </div>
+        <div class="Modal-wrapper" style="display: none">
+            <div class="Modal-backdrop" data-name="hidden"></div>
+            <div class="Modal Modal--large QuestionAsk-Modal">
+                <div class="Modal-inner ">
+                    <div class="modal-content">
+                        <div class="modal-header" style="text-align: center;border-style: none;">
+                            <button name="hidden" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h3 class="modal-title" id="myModalLabel">&ensp;写下你的问题</h3>
+                            <div class="modal-subtitle" style="color: #8590a6;text-align: center;">描述精确的问题更易得到解答</div>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="post">
+                                <div class="form-group">
+                                    <textarea id="quesname" class="form-control" name="qutitle" placeholder="问题标题"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input id="topicname" type="text" name="qutopic" class="form-control" id="recipient-name" placeholder="所属话题">
+                                    <span id="tips"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipient-name" class="control-label" style="color: #8590a6">&emsp;问题描述（可选）</label>
+                                    <!-- <textarea name="qudes" class="form-control"  rows="5" placeholder="问题背景、条件等信息"></textarea> -->
+                                </div>
+                                <div style="margin:0 auto;">
+                                    <script id="container" name="qudes" type="text/plain" style="width:100%;height:300px;"></script>
+
+                                    <script type="text/javascript">
+                                        var editor = UE.getEditor('container',{
+                                        //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
+
+                                        toolbars:
+                                        [
+                                            
+                                            [   'bold', //加粗
+                                                'italic', //斜体
+                                                'underline', //下划线
+                                                'strikethrough', //删除线
+                                                'blockquote', //引用
+                                                'pasteplain', //纯文本粘贴模式
+                                                'selectall', //全选
+                                                'horizontal', //分隔线
+                                                'insertcode', //代码语言
+                                                'fontfamily', //字体
+                                                'fontsize', //字号
+                                                'paragraph', //段落格式
+                                            ],
+                                            [
+                                                'simpleupload', //单图上传
+                                                'insertimage', //多图上传
+                                                'link', //超链接
+                                                'unlink', //取消链接
+                                                'emotion', //表情
+                                                'spechars', //特殊字符
+                                                'justifyleft', //居左对齐
+                                                'justifyright', //居右对齐
+                                                'justifycenter', //居中对齐
+                                                'justifyjustify', //两端对齐
+                                                'forecolor', //字体颜色
+                                                'backcolor', //背景色
+                                                'insertorderedlist', //有序列表
+                                                'insertunorderedlist', //无序列表
+                                                'imagecenter', //居中
+                                                'lineheight', //行间距
+                                                'scrawl', //涂鸦
+                                                'insertvideo',
+                                            ]
+                                        ],
+                                        //focus时自动清空初始化时的内容
+                                        autoClearinitialContent:true,
+                                        //关闭字数统计
+                                        wordCount:false,
+                                        //关闭elementPath
+                                        elementPathEnabled:false,
+                                        //默认的编辑区域高度
+                                        initialFrameHeight:300
+                                        //更多其他参数，请参考ueditor.config.js中的配置项
+                                    });
+                                       /* editor.addListener("contentChange",function(){  
+                                           var content=editor.getContent();
+
+                                           console.log(content);
+
+                              
+                                       }) */ 
+
+
+                                        
+                                    </script>
+                                </div>
+                                
+
+                                <div class="modal-footer">
+                                    <button name="hidden" type="button" class="btn btn-default" data-dismiss="modal">取消提问</button>
+                                    <button id="btn-tj" type="button" name="subque" class="btn btn-primary ">提交问题</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="__JS__/vendor.1f389462803af519e7ae_2.js" data-reactid="20">
+        </script>
+        <script src="__JS__/main.raven.e0145ff45c6cc7d6fdb4.js" async="" data-reactid="21">
+        </script>
+        <script src="__JS__/main.app.efe373d17d7b01f47b7b.js" data-reactid="22">
+        </script>
+        <script data-reactid="23">
+        </script>
+    <script>
+        //模态框的显示与隐藏
+        $('#tiwen').click(hiddenOrShow);
+
+        $('button[name=hidden]').click(hiddenOrShow);
+
+        $('div[data-name=hidden]').click(hiddenOrShow);
+
+        function hiddenOrShow() {
+            $('.Modal-wrapper').fadeToggle('slow');
+        }
+
+        $("#btn-tj").click(function(){
+            var qutitle = $('#quesname').val();
+            var qutopic = $('#topicname').val();
+            var qudes = $('#container').val();
+            $.post("{:url('Question/addQuestion')}",{qutitle:qutitle,qutopic:qutopic,qudes:qudes},function(data){
+                    if(data.code == 0){
+                        console.log(data.info);                       
+                    }else if(data.code == 1){
+                        console.log(data.info);
+                    }else if(data.code == 3){
+                        var quesid = JSON.parse(data.quesid);
+                        //console.log(quesid);
+                        window.location.href="{:url('Question/quesDetailByQid')}?quesid="+quesid;
+                    }else{
+                        console.log('提问失败');
+                    }
+
+                },'json');
+       });
+
+
+        
+    </script>
+    {/block}
+
+    {block name='main'}
+
+    {/block}
+</body>
+</html>

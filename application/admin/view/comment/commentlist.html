@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {block name='title'}
+            <title>评论管理</title>
+            <style>
+                ul{
+                    min-width: 200px;
+                    text-align: center;
+                }
+                li{
+                    display: inline-block;
+                }
+                span{
+                    display: inline-block;
+                    width: 26px;
+                    height: 26px;
+                    text-align: center;
+                    line-height: 26px;
+                }
+                td{
+                    width: 200px;
+                    height: 15px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+            </style>
+        {/block}
+    </head>
+    <body>
+        {extend name="public/base"/}
+        {block name='main'}
+            <section class="rt_wrap content mCustomScrollbar">
+                <div class="rt_content">
+                    <form action="{:url('Comment/commentList')}" method="post">
+                        <section class="mtb">
+                            <select class="select">
+                                <option>查询条件</option>
+                                <option>待付款</option>
+                                <option>待发货</option>
+                                <option>待评价</option>
+                            </select>
+
+                            <input type="text" class="textbox textbox_225" name="str" placeholder="输入关键字搜索"/>
+                            <input type="submit" value="查询" class="group_btn"/>
+                        </section>
+                    </form>
+                    <form action="{:url('Answer/deleteAnswer')}" method="post">
+                        <div class="page_title">
+                            <h2 class="fl">评论列表</h2>
+                            <!--<input id="manydel" type="button" class="top_rt_btn link_icon"
+                                   style="color: red; margin-left: 20px" value="批量删除">-->
+                        </div>
+                        <table class="table">
+                            <tr>
+                                <!--<th style="width: 100px">
+                                    <input id="all" type="checkbox" name="all[]" value="" />
+                                    全选
+                                    <a style="cursor: pointer" onclick="revsec();">反选</a>
+                                </th>-->
+                                <th style="width: 150px">评论所属问题</th>
+                                <th style="width: 150px; min-height: 100px">评论回答</th>
+                                <th style="width: 80px">被评论人</th>
+                                <th style="width: 80px">评论人</th>
+                                <th>评论内容</th>
+                                <th>评论时间</th>
+                                <th>操作</th>
+                            </tr>
+                            {if !empty($commInfo)}
+                                {foreach $commInfo as $comminfo}
+                                    <tr style="height: 120px">
+                                       <!-- <td class="center" style="width: 150px">
+                                            <input class="commids" type="checkbox" name="commid[]" value="{$comminfo['commentid']}">
+                                        </td>-->
+                                        <td class="center" title="{$comminfo['comToQuAnUser']['commtoques']}">
+                                            {$comminfo['comToQuAnUser']['commtoques']}
+                                        </td>
+                                        <td class="center" title="{$comminfo['comToQuAnUser']['commtoansw']}">
+                                            {$comminfo['comToQuAnUser']['commtoansw']}
+                                        </td>
+                                        <td class="center">
+                                            {$comminfo['comToQuAnUser']['comtname']}
+                                        </td>
+                                        <td class="center">
+                                            {$comminfo['comToQuAnUser']['comsname']}
+                                        <td class="center" title="{$comminfo['commentcontent']}">
+                                            {$comminfo['commentcontent']}
+                                        </td>
+                                        <td class="center">{$comminfo['create_time']}</td>
+                                        <td class="center">
+                                            <a href="#" title="查看订单" class="link_icon" target="_blank">&#118;</a>
+                                            <a id="adel" onclick="deleOne()" style="cursor: pointer" title="删除" class="link_icon">&#100;</a>
+                                        </td>
+                                    </tr>
+                                {/foreach}
+                            {/if}
+                        </table>
+                    </form>
+                    <div style=" min-width: 200px; margin: 10px auto">
+                        <aside class="paging" style="min-width: 200px">
+                            {$page}
+                        </aside>
+                    </div>
+                </div>
+            </section>
+        {/block}
+    </body>
+</html>

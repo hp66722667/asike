@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {block name='title'}
+            <title>编辑角色 - 阿思客</title>
+            <style>
+                .sonperm{
+                    display: block;
+                    width: 200px;
+                    margin-left: 80px;
+
+                }
+            </style>
+        {/block}
+    </head>
+    <body>
+        {extend name="public/base" /}
+        {block name='main'}
+            <!--<div id='pop-div' style="width: 350px;min-height:200px; background-color: #f7f7f7; text-align: center" class="pop-box" >
+                <div id='buttonPanel' style="text-align: right" style="text-align:right">
+                    <div style="text-align: left;float: left" >更改所属父级权限</div>
+                    <input type="button" value="X" id="btn1" onclick="hideDiv('pop-div');" />
+                </div>
+                <div class="pop-box-body">
+
+                    <form>
+                        父级权限：
+                        <select class="permSelect" name="perFmname" style="width: 120px;">
+                            <option value="">权限名称</option>
+                            {if !empty($permission)}
+                            {foreach $permission as $perm}
+                            <option value="{$perm['permissionid']}">{$perm['permname']}</option>
+                            {/foreach}
+                            {/if}
+                        </select><br /><br />
+                        <input id="nickname" type="text" name="nickname" value="sad"><br/>
+
+                        <button class="Button" onclick="hideDiv('pop-div');">
+                            取消
+                        </button>
+                        <button  class="btn-invite Button">
+                            确定
+                        </button>
+                    </form>
+                </div>
+            </div>-->
+            <section class="rt_wrap content mCustomScrollbar">
+                <div class="rt_content">
+                    <div class="page_title">
+                        <h2 class="fl">角色编辑 -- {$rolename}</h2>
+                        <!--<a href="adjust_funding.html" class="fr top_rt_btn money_icon">资金管理</a>-->
+                        <a href="{:url('Admin/roleList')}" type="button" class="top_rt_btn link_icon add_icon"
+                           style="margin-left: 20px;float: right">返回角色列表</a>
+                    </div>
+                    <form id="ftopic" action="{:url('Admin/upRoleInfo')}" method="post" enctype="multipart/form-data">
+                        <ul class="ulColumn2">
+                            <li>
+                            <span class="item_name" style="width:120px;">
+                                角色名称：
+                            </span>
+                                <input type="text" name="rolename" class="textbox textbox_225" value="{$rolename}"/>
+                                <input type="hidden" name="roleid" value="{$roleid}"/>
+
+                            </li>
+                            <li>
+
+                            </li>
+                            <li>
+                                <span class="item_name" style="width:120px;">
+                                    权限分配：
+                                </span>
+
+                                {if !empty($permInfo)}
+                                    {foreach $permInfo as $perinfo}
+                                        <dl style="width: 500px; display: block">
+                                            {if $perinfo['title_prefix'] == ''}
+                                                <dt class="per" style="display: block;width: 200px;
+                                                        margin-left: 150px;margin-bottom: 10px;text-align: left">
+                                                    {$perinfo['title_display']}
+                                                    {if in_array($perinfo['permissionid'],$perms)}
+                                                        <input type="checkbox" checked name="permid[]" value="{$perinfo['permissionid']}">
+                                                        {else}
+                                                        <input type="checkbox" name="permid[]" value="{$perinfo['permissionid']}">
+                                                    {/if}
+                                                </dt>
+                                                {else}
+                                                <dd style="display:block;width: 200px;margin-left: 150px;margin-bottom: 10px;text-align: left">
+                                                    {$perinfo['title_display']}
+                                                    {if in_array($perinfo['permissionid'],$perms)}
+                                                        <input type="checkbox" checked name="permid[]" value="{$perinfo['permissionid']}">
+                                                    {else}
+                                                        <input type="checkbox" name="permid[]" value="{$perinfo['permissionid']}">
+                                                    {/if}
+
+                                                </dd>
+                                            {/if}
+                                        </dl>
+                                    {/foreach}
+                                {/if}
+                            </li>
+                            <li>
+                                <span class="item_name" style="width:120px;"></span>
+                                <input id="topadd" type="submit" class="link_btn" value="完成"/>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </section>
+            <section class="pop_bg">
+                <div class="pop_cont" style="width: 500px;">
+                    <!--title-->
+                    <h3>添加新的权限</h3>
+                    <!--content-->
+                    <form id="formtc" action="{:url('Admin/addPermission')}" method="post" enctype="multipart/form-data">
+                        <div class="pop_cont_input" style="padding-left: 45px">
+                            <ul>
+                                <li>
+                                    <span>父级权限：</span>
+                                    <select class="permSelect" name="perFmname" style="width: 120px;">
+                                        <option value="">权限名称</option>
+                                        {if !empty($permission)}
+                                            {foreach $permission as $perm}
+                                                <option value="{$perm['permissionid']}">{$perm['permname']}</option>
+                                            {/foreach}
+                                        {/if}
+                                    </select>
+                                    <span style="display: inline-block">如果不选则添加的权限在最外层</span>
+                                </li>
+                                <li>
+                                    <span>权限名称：</span>
+                                    <input type="text" name="permSname" placeholder="填写权限名称" class="textbox"/>
+                                    <span id="tips"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+
+                    <!--以pop_cont_text分界-->
+                    <div class="pop_cont_text">
+
+                    </div>
+                    <!--bottom:operate->button-->
+                    <div class="btm_btn">
+                        <input type="button" value="添加" class="input_btn trueBtn"/>
+                        <input type="button" value="取消" class="input_btn falseBtn"/>
+                    </div>
+                </div>
+            </section>
+            <script>
+                $(function () {
+                    $('.per').click(function () {
+                        //alert(1);
+                        /*$(this).children('dd').slideToggle(500).
+                        siblings().children('dd').slideUp();*/
+                        $(this).parent().siblings('dl').children('dd').slideToggle(500);
+                        //siblings().children('dd').slideUp();
+                        //console.log($(this).siblings('dl').children('dd'));
+                    });
+                });
+            </script>
+        {/block}
+    </body>
+</html>

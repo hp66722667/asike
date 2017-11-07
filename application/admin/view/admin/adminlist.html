@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {block name='title'}
+            <title>管理中心</title>
+            <style>
+                td{
+                    text-align: center;
+                }
+            </style>
+        {/block}
+    </head>
+    <body>
+        {extend name="public/base"/}
+
+        {block name='main'}
+            <section class="rt_wrap content mCustomScrollbar">
+                <div class="rt_content">
+                    <form action="{:url('Admin/adminList')}">
+                        <section class="mtb">
+                            <!--<select class="select">
+                                <option>查询条件</option>
+                                <option>待付款</option>
+                                <option>待发货</option>
+                                <option>待评价</option>
+                            </select>-->
+                            <input type="text" class="textbox textbox_225" name="str" placeholder="输入关键字搜索"/>
+                            <input type="submit" value="查询" class="group_btn"/>
+                        </section>
+                    </form>
+                    <form action="{:url('Question/deleteQuestion')}" method="post">
+                        <div class="page_title">
+                            <h2 class="fl">管理员列表</h2>
+                            <!--<input id="manydel" type="button" class="top_rt_btn link_icon"
+                                   style="color: red; margin-left: 20px" value="批量删除">-->
+
+                        </div>
+
+                        <table class="table">
+                            <tr>
+                                <!--<th style="width: 100px">
+                                    <input id="all" type="checkbox" name="all[]" value="" />
+                                    全选
+                                    <a style="cursor: pointer" onclick="revsec();">反选</a>
+                                </th>-->
+                                <th style="width: 150px">管理员ID</th>
+                                <th style="width: 150px; min-height: 100px">管理员</th>
+                                <th>角色</th>
+                                <th>管理员邮箱</th>
+                                <!--<th>是否锁定</th>-->
+                                <th>更改角色</th>
+                            </tr>
+                            {foreach adminInfo as $adminfo}
+                                <tr>
+                                    <!--<td style="width: 150px">
+                                        <input class="adminids" type="checkbox" name="adminid[]" value="{$adminfo['adminid']}">
+                                    </td>-->
+                                    <td class="center">{$adminfo['adminid']}</td>
+                                    <td class="na">{$adminfo['adname']}</td>
+                                    <td title="{$adminfo['rolename']}">{$adminfo['rolename']}</td>
+                                    <td>
+                                        {$adminfo['ademail']}
+                                    </td>
+                                    <!--{if $adminfo['isadlocked']}
+                                        <td class="center">
+                                            <a onclick="unlockuser({$adminfo['isadlocked']});"
+                                               title="点击解锁该用户" class="link_icon">&#89;</a>
+                                        </td>
+                                    {else}
+                                        <td class="center">
+                                            <a onclick="lockuser({$adminfo['isadlocked']});"
+                                               title="点击锁定该用户" class="link_icon">&#88;</a>
+                                        </td>
+                                    {/if}-->
+                                    <td class="center">
+                                        <a style="cursor: pointer" onclick="upRole({$adminfo['adminid']});" title="更改角色" class="link_icon updateRole">&#101;</a>
+                                    </td>
+                                </tr>
+                            {/foreach}
+                        </table>
+                    </form>
+
+                    <!--分页-->
+                    <div style=" min-width: 200px; margin: 10px auto">
+                        <aside class="paging" style="min-width: 200px">
+                            {$page}
+                        </aside>
+                    </div>
+                </div>
+            </section>
+            <section class="pop_bg">
+                <div class="pop_cont" style="width: 380px;">
+                    <!--title-->
+                    <h3>更改角色</h3>
+                    <!--content-->
+                    <form id="formadRole" action="{:url('Admin/upRole')}" method="post" enctype="multipart/form-data">
+                        <div class="pop_cont_input" style="padding-left: 45px;">
+                            <ul>
+                                <li>
+                                    <span>管&ensp;理&ensp;员：</span>
+                                    <input type="text" name="adminid" class="textbox" value=""/>
+                                </li>
+                                <li>
+                                    <span>角色名称：</span>
+                                    <select class="reoleSelect" name="uprolename" style="width: 120px">
+                                        <option>角色名称</option>
+                                        {if !empty($roles)}
+                                            {foreach $roles as $roleinfo}
+                                                <option value="{$roleinfo['roleid']}">{$roleinfo['rolename']}</option>
+                                            {/foreach}
+                                        {/if}
+                                    </select>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                    <!--以pop_cont_text分界-->
+                    <div class="pop_cont_text">
+
+                    </div>
+                    <!--bottom:operate->button-->
+                    <div class="btm_btn">
+                        <input type="button" value="更改" class="input_btn trueBtn"/>
+                        <input type="button" value="取消" class="input_btn falseBtn"/>
+                    </div>
+                </div>
+            </section>
+            <script>
+                function upRole(adName){
+                    $(document).ready(function (){
+                        $('input[name=adminid]').attr('value',adName);
+                        $(".pop_bg").fadeIn();
+                        //弹出：确认按钮
+                        $(".trueBtn").click(function () {
+                            if ($('.reoleSelect').val() == '角色名称'){
+                                Toast('您还没有选择角色!', 1000);
+                                return false;
+                            }else {
+                                $('#formadRole').submit();
+                                $(".pop_bg").fadeOut();
+                            }
+
+                        });
+                        //弹出：取消或关闭按钮
+                        $(".falseBtn").click(function () {
+                            //alert("你点击了取消/关闭！");//测试
+                            $(".pop_bg").fadeOut();
+                        });
+                    })
+                }
+
+                function Toast(msg, duration) {
+                    duration = isNaN(duration) ? 3000 : duration;
+                    var m = document.createElement('div');
+                    m.innerHTML = msg;
+                    m.style.cssText = "width: 50%;min-width: 150px;opacity: 0.7;height: 50px;color: rgb(255, 255, 255);line-height: 50px;text-align: center;border-radius: 5px;position: fixed;top: 40%;left: 20%;z-index: 999999;background: rgb(100, 100, 100);font-size: 22px;";
+                    document.body.appendChild(m);
+                    setTimeout(function () {
+                        var d = 0.5;
+                        m.style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';
+                        m.style.opacity = '0';
+                        setTimeout(function () {
+                            document.body.removeChild(m)
+                        }, d * 1000);
+                    }, duration);
+                }
+            </script>
+        {/block}
+    </body>
+</html>

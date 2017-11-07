@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {block name='title'}
+            <title>网站管理 - __WEB_NAME__</title>
+            <style>
+                .errorTips{
+                    display: none;
+                }
+            </style>
+        {/block}
+    </head>
+    <body>
+        {extend name="public/base" /}
+        {block name='main'}
+            <section class="rt_wrap content mCustomScrollbar">
+                <form action="{:url('Website/webSite')}" method="post">
+                    <div class="rt_content">
+                        <div class="page_title">
+                            <h2 class="fl">站点信息设置</h2>
+                        </div>
+                        <section>
+                            <ul class="ulColumn2">
+                                <li>
+                                    <span class="item_name" style="width:120px;">网站名称：</span>
+                                    <input type="text" class="textbox textbox_225" name="WEB_NAME" value="__WEB_NAME__"/>
+                                    <span class="errorTips">一般不超过80个字符</span>
+                                </li>
+                                <!--<li>
+                                    <span class="item_name" style="width:120px;">上传logo：</span>
+                                    <label class="uploadImg">
+                                        <input type="file"/>
+                                        <span>上传站点logo</span>
+                                    </label>
+                                </li>-->
+
+                                <li>
+                                    <span class="item_name" style="width:120px;">网站url：</span>
+                                    <input type="text" class="textbox textbox_295" name="WEB_URL" value="__WEB_URL__"/>
+
+                                </li>
+
+                                <li>
+                                    <span class="item_name" style="width:120px;">站点描述：</span>
+                                    <input type="text" class="textbox textbox_295" name="WEB_DES" value="__WEB_DES__"/>
+                                    <span class="errorTips">一般不超过200个字符</span>
+                                </li>
+                                <li>
+                                    <span class="item_name" style="width:120px;">网站关键词：</span>
+                                    <input type="text" class="textbox textbox_295" name="WEB_KEYWORDS" value="__WEB_KEYWORDS__"/>
+                                    <span class="errorTips">一般不超过100个字符</span>
+                                </li>
+                                <li>
+                                    <span class="item_name" style="width:120px;">网站备案号：</span>
+                                    <input type="text" class="textbox textbox_295" name="WEB_ICP" value="__WEB_ICP__"/>
+                                    <span class="errorTips">一般不超过100个字符</span>
+                                </li>
+                                <!--<li>
+                                    <span class="item_name" style="width:120px;">公司地址：</span>
+                                    <select class="select">
+                                        <option>选择省份</option>
+                                    </select>
+                                    <select class="select">
+                                        <option>选择城市</option>
+                                    </select>
+                                    <select class="select">
+                                        <option>选择区/县</option>
+                                    </select>
+                                </li>-->
+                                <li>
+                                    <span class="item_name" style="width:120px;">公司地址：</span>
+                                    <input type="text" class="textbox textbox_295" name="COP_ADDRS" value="__COP_ADDRS__"/>
+                                </li>
+                               <!-- <li>
+                                    <span class="item_name" style="width:120px;">关闭站点：</span>
+                                    <label class="single_selection"><input type="radio" name="name"/>否</label>
+                                    <label class="single_selection"><input type="radio" name="name"/>是</label>
+                                </li>
+                                <li>
+                                    <span class="item_name" style="width:120px;">关闭站点：</span>
+                                    <textarea placeholder="关闭站点原因" class="textarea" style="height:50px;width:640px;"></textarea>
+                                </li>-->
+                                <li>
+                                    <span class="item_name" style="width:120px;"></span>
+                                    <input type="submit" name="save" class="link_btn" value="保存"/>
+                                </li>
+                            </ul>
+                        </section>
+                    </div>
+                </form>
+            </section>
+        {/block}
+
+    </body>
+</html>

@@ -1,0 +1,148 @@
+{if !empty($quesList)}
+{foreach $quesList as $question}
+
+<div class="Card TopstoryItem TopstoryItem--experimentExpand TopstoryItem--experimentButton">
+    <button class="Button TopstoryItem-rightButton Button--plain" data-tooltip="不感兴趣" data-tooltip-position="bottom" type="button"> <svg viewBox="0 0 14 14" class="Icon Icon--remove" style="height:10px;width:10px;" width="10" height="10" aria-hidden="true">
+    <title> </title>
+    <g>
+        <path d="M8.486 7l5.208-5.207c.408-.408.405-1.072-.006-1.483-.413-.413-1.074-.413-1.482-.005L7 5.515 1.793.304C1.385-.103.72-.1.31.31-.103.724-.103 1.385.305 1.793L5.515 7l-5.21 5.207c-.407.408-.404 1.072.007 1.483.413.413 1.074.413 1.482.005L7 8.485l5.207 5.21c.408.407 1.072.404 1.483-.007.413-.413.413-1.074.005-1.482L8.485 7z"/>
+    </g>
+    </svg> </button>
+    <div class="Feed">
+        <div class="Feed-title">
+            <div class="Feed-meta">
+             <span class="Feed-meta-item">来自话题:
+             	<span>
+             		<span> 
+             			<a class="TopicLink" href="{:url('Index/getQuesByTid',array('topicid'=>$question['topic']['topicid']))}">
+	                		<div class="Popover">
+	                    		<div id="null-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="null-content">{$question['topic']['topicname']}
+	                    		</div>
+	                		</div>
+                		</a>
+                	</span>
+                <!-- <span> <a class="TopicLink" href="/topic/19554825">
+                <div class="Popover">
+                    <div id="null-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="null-content">职业发展</div>
+                </div>
+                </a>、</span> <span> <a class="TopicLink" href="/topic/19550517">
+                <div class="Popover">
+                    <div id="null-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="null-content">互联网</div>
+                </div>
+                </a> </span>--> 
+                </span> 
+            </span>  
+        	</div>
+        </div>
+        <div class="ContentItem AnswerItem" data-zop="{&quot;authorName&quot;:&quot;&quot;,&quot;itemId&quot;:246685514,&quot;title&quot;:&quot;{$question['quesname']}？&quot;,&quot;type&quot;:&quot;answer&quot;}" name="246685514" itemprop="answer" itemtype="http://schema.org/Answer" itemscope="">
+            <h2 class="ContentItem-title">
+                <div itemprop="zhihu:question" itemtype="http://schema.org/Question" itemscope="">
+                    <meta itemprop="url" content="https://www.zhihu.com/question/50182582"/>
+                    <meta itemprop="name" content="{$question['quesname']}"/>
+                    <a target="_blank" data-za-detail-view-element_name="Title" href="{:url('Question/quesDetailByQid',array('quesid'=>$question['quesid']))}">{$question['quesname']}</a> </div>
+            </h2>
+            <div class="ContentItem-meta">
+                <div class="AnswerItem-meta">
+                    <div class="AuthorInfo AuthorInfo--plain" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+                        <meta itemprop="name" content=""/>
+                        <meta itemprop="image" content="https://pic4.zhimg.com/50/f9712e1bc573a6f1a9b26adb2950ce6b_s.jpg"/>
+                        <meta itemprop="url" content="https://www.zhihu.com/people/rz3000"/>
+                        <meta itemprop="zhihu:followerCount"/>
+                        <span class="UserLink AuthorInfo-avatarWrapper">
+                        <div class="Popover">
+                            <div id="null-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="null-content"> <a class="UserLink-link" data-za-detail-view-element_name="User" href="{:url('User/userCenter',array('personid'=>$question['user']['userid']))}"> <img class="Avatar AuthorInfo-avatar" width="24" height="24" src="{$question['userinfo']['photo']}" alt="无头像"/> </a> </div>
+                        </div>
+                        </span>
+                        <div class="AuthorInfo-content">
+                            <div class="AuthorInfo-head"> <span class="UserLink AuthorInfo-name">
+                                <div class="Popover">
+                                    <div id="null-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="null-content"> <a class="UserLink-link" data-za-detail-view-element_name="User" href="{:url('User/userCenter',array('personid'=>$question['user']['userid']))}">{$question['user']['nickname']}</a> </div>
+                                </div>
+                                </span> </div>
+                            <div class="AuthorInfo-detail">
+                                <div class="AuthorInfo-badge">
+                                    <div class="RichText AuthorInfo-badgeText">{$question['userinfo']['autograph']}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <meta itemprop="image" content=""/>
+            <meta itemprop="upvoteCount" content="6243"/>
+            <meta itemprop="url" content="https://www.zhihu.com/question/50182582/answer/246685514"/>
+            <meta itemprop="dateCreated" content="2017-10-19T02:18:13.000Z"/>
+            <meta itemprop="dateModified" content="2017-10-19T05:35:41.000Z"/>
+            <meta itemprop="commentCount" content="0"/>
+            <div class="RichContent is-collapsed">
+                <div class="div-content" > 
+                <a style="text-decoration: none" href="{:url('Question/quesDetailByQid',array('quesid'=>$question['quesid']))}">
+                    <div  class="div-quesdescribe RichText CopyrightRichText-richText" itemprop="text" style="max-height: 130px;width: 100%px; overflow: hidden;">
+                    {$question['quesdescribe']}
+                    </div>
+                    <span>...</span>
+                </a>
+                    
+                </div>
+                
+                
+
+
+                <div class="ContentItem-actions"> <span>
+                    <button class="Button VoteButton VoteButton--up" aria-label="赞同" type="button"> <svg viewBox="0 0 20 18" class="Icon VoteButton-upIcon Icon--triangle" style="height:16px;width:9px;" width="9" height="16" aria-hidden="true">
+                    <title> </title>
+                    <g>
+                        <path d="M0 15.243c0-.326.088-.533.236-.896l7.98-13.204C8.57.57 9.086 0 10 0s1.43.57 1.784 1.143l7.98 13.204c.15.363.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H1.955c-1.08 0-1.955-.517-1.955-1.9z"/>
+                    </g>
+                    </svg>{$question['browsenum']}</button>
+                    <button class="Button VoteButton VoteButton--down" aria-label="反对" type="button"> <svg viewBox="0 0 20 18" class="Icon VoteButton-downIcon Icon--triangle" style="height:16px;width:9px;" width="9" height="16" aria-hidden="true">
+                    <title> </title>
+                    <g>
+                        <path d="M0 15.243c0-.326.088-.533.236-.896l7.98-13.204C8.57.57 9.086 0 10 0s1.43.57 1.784 1.143l7.98 13.204c.15.363.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H1.955c-1.08 0-1.955-.517-1.955-1.9z"/>
+                    </g>
+                    </svg> </button>
+                    </span>
+                    <button class="Button ContentItem-action Button--plain" type="button"> <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" class="Icon Icon--comment Icon--left" style="height:16px;width:12px;" width="12" height="16" aria-hidden="true">
+                    <title> </title>
+                    <g>
+                        <path d="M7.24 16.313c-.272-.047-.553.026-.77.2-1.106.813-2.406 1.324-3.77 1.482-.16.017-.313-.06-.394-.197-.082-.136-.077-.308.012-.44.528-.656.906-1.42 1.11-2.237.04-.222-.046-.45-.226-.588C1.212 13.052.027 10.73 0 8.25 0 3.7 4.03 0 9 0s9 3.7 9 8.25-4.373 9.108-10.76 8.063z"/>
+                    </g>
+                    </svg>{$question['answernum']}</button>
+                    
+                    <button class="Button ContentItem-action Button--plain" type="button"> <svg viewBox="0 0 20 20" class="Icon Icon--star Icon--left" style="height:16px;width:13px;" width="13" height="16" aria-hidden="true">
+                    <title> </title>
+                    <g>
+                        <path d="M3.515 17.64l.918-5.355-3.89-3.792c-.926-.902-.64-1.784.64-1.97L6.56 5.74 8.964.87c.572-1.16 1.5-1.16 2.072 0l2.404 4.87 5.377.783c1.28.186 1.566 1.068.64 1.97l-3.89 3.793.918 5.354c.22 1.274-.532 1.82-1.676 1.218L10 16.33l-4.808 2.528c-1.145.602-1.896.056-1.677-1.218z"/>
+                    </g>
+                    </svg>关注{$question['attentionnum']}</button>
+                    
+                    
+
+                    <div class="Popover ContentItem-action">
+                        <button class="Button Button--plain" style="padding:0 1px;" type="button" id="null-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="null-content"> <svg viewBox="0 0 18 4" class="Icon Icon--dots" style="height:16px;width:14px;" width="14" height="16" aria-hidden="true">
+                        <title> </title>
+                        <g>
+                            <g>
+                                <circle cx="2" cy="2" r="2"/>
+                                <circle cx="9" cy="2" r="2"/>
+                                <circle cx="16" cy="2" r="2"/>
+                            </g>
+                        </g>
+                        </svg> </button>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{/foreach}
+{/if}

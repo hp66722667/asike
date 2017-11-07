@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {block name='title'}
+            <title>举报管理 - __WEB_NAME__</title>
+        {/block}
+    </head>
+    <body>
+        {extend name="public/base" /}
+        {block name='main'}
+            <section class="rt_wrap content mCustomScrollbar">
+            <div class="rt_content">
+                <form action="{:url('Report/report')}" method="post">
+                    <section class="mtb">
+                        <!--<select class="select">
+                            <option>查询条件</option>
+                            <option>待付款</option>
+                            <option>待发货</option>
+                            <option>待评价</option>
+                        </select>-->
+
+                        <input type="text" class="textbox textbox_225" name="str" placeholder="输入关键字搜索"/>
+                        <input type="submit" value="查询" class="group_btn"/>
+                    </section>
+                </form>
+                <form action="{:url('Answer/deleteAnswer')}" method="post">
+                    <div class="page_title">
+                        <h2 class="fl">被举报的回答</h2>
+                        <!--<input id="manydel" type="button" class="top_rt_btn link_icon"
+                               style="color: red; margin-left: 20px" value="批量删除">-->
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <!--<th style="width: 100px">
+                                <input id="all" type="checkbox" name="all[]" value="" />
+                                全选
+                                <a style="cursor: pointer" onclick="revsec();">反选</a>
+                            </th>-->
+                            <th style="width: 120px">举报的回答</th>
+                            <th style="width: 100px; min-height: 100px">被举报者</th>
+                            <th style="width: 100px">举报者</th>
+                            <th>回答所属问题</th>
+                            <th>举报原因</th>
+                            <th>举报时间</th>
+                            <th>审核处理</th>
+                        </tr>
+                        {if !empty($answerInfo)}
+                            {foreach $answerInfo as $ansinfo}
+                                <tr>
+                                   <!-- <td style="width: 150px"  class="center">
+                                        <input class="answerids" type="checkbox" name="answerid[]" value="{$ansinfo['answerid']}">
+                                    </td>-->
+                                    <td class="center">{$ansinfo['answercontent']}</td>
+                                    <td class="center">{$ansinfo['ansqueuser']['reportername']}</td>
+                                    <td class="center">{$ansinfo['ansqueuser']['username']}</td>
+                                    <td class="center" title="{$ansinfo['ansqueuser']['quesname']}">
+                                        {$ansinfo['ansqueuser']['quesname']}
+                                    <td class="center">
+                                        {$ansinfo['reason']}
+                                    </td>
+                                    <td class="center">{$ansinfo['update_time']}</td>
+                                    <td class="center">
+                                        <a onclick="hiddenAnsw({$ansinfo['answerid']});" title="点击屏蔽" class="link_icon">&#88;</a>
+                                    </td>
+                                </tr>
+                            {/foreach}
+                        {/if}
+                    </table>
+                </form>
+
+                <div style=" min-width: 200px; margin: 10px auto">
+                    <aside class="paging" style="min-width: 200px">
+                        {$page}
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <section class="pop_bg">
+            <div class="pop_cont" style="width: 300px;margin-top: 120px">
+                <!--title-->
+                <h3 id="tipstitle">出于礼貌地问一下</h3>
+                <!--content-->
+                <div id="tipscont" class="pop_cont_input" style="margin-top: 30px; color: red;">
+                    你确认删除吗？
+                </div>
+                <!--以pop_cont_text分界-->
+                <div class="pop_cont_text">
+
+                </div>
+                <!--bottom:operate->button-->
+                <div class="btm_btn">
+                    <input type="button" value="确认" class="input_btn trueBtn"/>
+                    <input type="button" value="关闭" class="input_btn falseBtn"/>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            function hiddenAnsw(answerid) {
+                $(document).ready(function(){
+                    $(".pop_bg").fadeIn();
+                    $('#tipscont').text('确定要屏蔽吗？');
+                    $(".trueBtn").click(function () {
+                        $(".pop_bg").fadeOut();
+                        $.post("{:url('Report/hiddenAnswer')}",{answid:answerid},function(data) {
+                            console.log(data.info);
+                            if (data.code){
+                                $(".pop_bg").fadeIn();
+                                $('.trueBtn').css('display','none');
+                                $('#tipstitle').text('来自阿思客的提示');
+                                $('#tipscont').text(data.info).css('color','green');
+                                $('.falseBtn').click(function () {
+                                    setTimeout(window.location.reload(),500);
+                                });
+                            }else {
+                                $(".pop_bg").fadeIn();
+                                $('#tipscont').text(data.info).css('color','red');
+                            }
+                        },'json');
+                    });
+                    //弹出：取消或关闭按钮
+                    $(".falseBtn").click(function () {
+                        $(".pop_bg").fadeOut();
+                    });
+                })
+            }
+        </script>
+        {/block}
+    </body>
+</html>

@@ -1,0 +1,877 @@
+﻿<!doctype html>
+<html lang="zh" data-hairline="true" data-reactroot="" data-reactid="1" data-react-checksum="795529391">
+    <head data-reactid="2">
+        {block name='title'}
+            <title data-react-helmet="true" data-reactid="4">{$question['quesname']} - 阿思客</title>
+            <style type="text/css">
+     
+  .pop-box { 
+    /*弹出窗口后，弹出的DIV采用此CSS，保证置于最上层
+     z-index控制Z轴的坐标，数值越大，离用户越近
+    */ 
+    z-index: 9999999; /*这个数值要足够大，才能够显示在最上层*/ 
+    margin-bottom: 3px; 
+    display: none; 
+    position: absolute; 
+    background: white; 
+    border: solid 1px #6e8bde; 
+  } 
+    
+  #bg { 
+    width: 100%; 
+    height: 100%; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    /*弹出窗口后，添加遮罩层，采用此CSS，将该层置于弹出DIV和页面层之间
+     z-index控制Z轴的坐标，数值越大，离用户越近 rgba(72, 74, 68, 0.46)
+    */ 
+    z-index: 1001;  
+    background-color:#CCC;
+    -moz-opacity: 0.7; 
+    opacity: .70; 
+    filter: alpha(opacity = 70); 
+  } 
+      
+  </style>
+   
+  
+        {/block}
+    </head>
+    <body class="Entry-body" data-reactid="18">
+    {extend name="public/header"/}
+    {block name='main'}
+    <script type="text/javascript" src="__EDITOR__/ueditor.config.js"></script>
+    <script type="text/javascript" src="__EDITOR__/ueditor.all.js"></script>
+        <div id="root" data-reactid="19">
+            <div data-zop-userToken="{&quot;urlToken&quot;:&quot;ningsi-21&quot;}">
+                <div class="LoadingBar"> </div>
+                <!--<div>
+                    <header role="banner" class="Sticky AppHeader" data-za-module="TopNavBar">
+                        <div class="AppHeader-inner"> <a href="/" aria-label="阿思客"> <svg viewBox="0 0 200 91" class="Icon Icon&#45;&#45;logo" style="fill:#0f88eb;height:30px;width:64px;" width="64" height="30" aria-hidden="true">
+                            <title> </title>
+                            <g>
+                                <path d="M53.29 80.035l7.32.002 2.41 8.24 13.128-8.24h15.477v-67.98H53.29v67.978zm7.79-60.598h22.756v53.22h-8.73l-8.718 5.473-1.587-5.46-3.72-.012v-53.22zM46.818 43.162h-16.35c.545-8.467.687-16.12.687-22.955h15.987s.615-7.05-2.68-6.97H16.807c1.09-4.1 2.46-8.332 4.1-12.708 0 0-7.523 0-10.085 6.74-1.06 2.78-4.128 13.48-9.592 24.41 1.84-.2 7.927-.37 11.512-6.94.66-1.84.785-2.08 1.605-4.54h9.02c0 3.28-.374 20.9-.526 22.95H6.51c-3.67 0-4.863 7.38-4.863 7.38H22.14C20.765 66.11 13.385 79.24 0 89.62c6.403 1.828 12.784-.29 15.937-3.094 0 0 7.182-6.53 11.12-21.64L43.92 85.18s2.473-8.402-.388-12.496c-2.37-2.788-8.768-10.33-11.496-13.064l-4.57 3.627c1.363-4.368 2.183-8.61 2.46-12.71H49.19s-.027-7.38-2.372-7.38zm128.752-.502c6.51-8.013 14.054-18.302 14.054-18.302s-5.827-4.625-8.556-1.27c-1.874 2.548-11.51 15.063-11.51 15.063l6.012 4.51zm-46.903-18.462c-2.814-2.577-8.096.667-8.096.667s12.35 17.2 12.85 17.953l6.08-4.29s-8.02-11.752-10.83-14.33zM199.99 46.5c-6.18 0-40.908.292-40.953.292v-31.56c1.503 0 3.882-.124 7.14-.376 12.773-.753 21.914-1.25 27.427-1.504 0 0 3.817-8.496-.185-10.45-.96-.37-7.24 1.43-7.24 1.43s-51.63 5.153-72.61 5.64c.5 2.756 2.38 5.336 4.93 6.11 4.16 1.087 7.09.53 15.36.277 7.76-.5 13.65-.76 17.66-.76v31.19h-41.71s.88 6.97 7.97 7.14h33.73v22.16c0 4.364-3.498 6.87-7.65 6.6-4.4.034-8.15-.36-13.027-.566.623 1.24 1.977 4.496 6.035 6.824 3.087 1.502 5.054 2.053 8.13 2.053 9.237 0 14.27-5.4 14.027-14.16V53.93h38.235c3.026 0 2.72-7.432 2.72-7.432z" fill-rule="evenodd"/>
+                            </g>
+                            </svg> </a>
+                            <nav role="navigation" class="AppHeader-nav"> <a class="AppHeader-navItem" href="/">首页</a> <a class="AppHeader-navItem" href="/explore">发现</a> <a class="AppHeader-navItem" href="/topic">话题</a> </nav>
+                            <div class="SearchBar" role="search">
+                                <div class="SearchBar-toolWrapper">
+                                    <form class="SearchBar-tool">
+                                        <div>
+                                            <div class="Popover">
+                                                <div class="SearchBar-input Input-wrapper Input-wrapper&#45;&#45;grey">
+                                                    <input type="text" maxlength="100" value="" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-activedescendant="null&#45;&#45;1" id="null-toggle" aria-haspopup="true" aria-owns="null-content" class="Input" placeholder="搜索你感兴趣的内容…"/>
+                                                    <div class="Input-after">
+                                                        <button class="Button SearchBar-searchIcon Button&#45;&#45;primary" aria-label="搜索" type="button"> <svg viewBox="0 0 16 16" class="Icon Icon&#45;&#45;search" style="height:16px;width:16px;" width="16" height="16" aria-hidden="true">
+                                                        <title> </title>
+                                                        <g>
+                                                            <path d="M12.054 10.864c.887-1.14 1.42-2.57 1.42-4.127C13.474 3.017 10.457 0 6.737 0S0 3.016 0 6.737c0 3.72 3.016 6.737 6.737 6.737 1.556 0 2.985-.533 4.127-1.42l3.103 3.104c.765.46 1.705-.37 1.19-1.19l-3.103-3.104zm-5.317.925c-2.786 0-5.053-2.267-5.053-5.053S3.95 1.684 6.737 1.684 11.79 3.95 11.79 6.737 9.522 11.79 6.736 11.79z"/>
+                                                        </g>
+                                                        </svg> </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <button class="Button QuestionAskButton SearchBar-askButton Button&#45;&#45;primary Button&#45;&#45;blue" type="button">提问</button>
+                            </div>
+                            <div class="AppHeader-userInfo">
+                                <button class="Button PushNotifications-icon AppHeader-notifications Button&#45;&#45;plain" type="button"> <svg viewBox="0 0 20 22" class="Icon Icon&#45;&#45;news" style="height:20px;width:20px;" width="20" height="20" aria-hidden="true">
+                                <title> </title>
+                                <g>
+                                    <path d="M2.502 14.08C3.1 10.64 2 3 8.202 1.62 8.307.697 9.08 0 10 0s1.694.697 1.797 1.62C18 3 16.903 10.64 17.497 14.076c.106 1.102.736 1.855 1.7 2.108.527.142.868.66.793 1.206-.075.546-.542.95-1.09.943H1.1C.55 18.34.084 17.936.01 17.39c-.075-.547.266-1.064.794-1.206.963-.253 1.698-1.137 1.698-2.104zM10 22c-1.417.003-2.602-1.086-2.73-2.51-.004-.062.02-.124.063-.17.043-.045.104-.07.166-.07h5c.063 0 .124.025.167.07.044.046.067.108.063.17-.128 1.424-1.313 2.513-2.73 2.51z" />
+                                </g>
+                                </svg> </button>
+                                <button class="Button Messages-icon AppHeader-messages Button&#45;&#45;plain" type="button"> <svg viewBox="0 0 20 20" class="Icon Icon&#45;&#45;message" style="height:20px;width:20px;" width="20" height="20" aria-hidden="true">
+                                <title> </title>
+                                <g>
+                                    <path d="M9 0C3.394 0 0 4.13 0 8c0 1.654.522 3.763 2.014 5.566.314.292.518.82.454 1.17-.165 1.488-.842 1.905-.842 1.905-.328.332.105.67.588.582 1.112-.2 2.07-.58 3.526-1.122.4-.202.464-.147.78-.078C11.524 17.764 18 14 18 8c0-3.665-3.43-8-9-8z"/>
+                                    <path d="M19.14 9.628c.758.988.86 2.01.86 3.15 0 1.195-.62 3.11-1.368 3.938-.21.23-.354.467-.308.722.12 1.073.614 1.5.614 1.5.237.24-.188.563-.537.5-.802-.145-1.494-.42-2.545-.81-.29-.146-.336-.106-.563-.057-2.043.712-4.398.476-6.083-.926 5.964-.524 8.726-3.03 9.93-8.016z"/>
+                                </g>
+                                </svg> </button>
+                                <div class="AppHeader-profile">
+                                    <button class="Button AppHeader-profileEntry Button&#45;&#45;plain" type="button"> <img class="Avatar AppHeader-profileAvatar" width="30" height="30" src="__PIC__/v2-16c3315bdbcf8bd98dd93a0a9c882001_is.jpg" srcset="https://pic2.zhimg.com/v2-16c3315bdbcf8bd98dd93a0a9c882001_im.jpg 2x"/> </button>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                </div>-->
+                <div id='pop-div' style="width: 350px;height:100px;text-align: center" class="pop-box">
+                    <div id='buttonPanel' style="text-align: right" style="text-align:right">
+                        <input type="button" value="X" id="btn1" onclick="hideDiv('pop-div');" />
+                    </div>
+                    <div class="pop-box-body">
+                        <input id="nickname" type="text" name="nickname" placeholder="用户名"><br/>
+
+                        <button class="Button" onclick="hideDiv('pop-div');">取消</button><button data-quesid="{$question['quesid']}" class="btn-invite Button">确定</button>
+                    </div>
+                    
+                </div>
+  
+
+
+
+
+
+                <main role="main" class="App-main">
+                    <div class="QuestionPage" itemscope="" itemtype="http://schema.org/Question">
+                        <div>
+                            <div class="QuestionHeader">
+                                <div class="QuestionHeader-content">
+                                    <div class="QuestionHeader-main">
+                                        <div class="QuestionHeader-tags">
+                                            <div class="QuestionHeader-topics">
+                                                <div class="Tag QuestionTopic">
+                                                    <span class="Tag-content">
+                                                    <a class="TopicLink" href="{:url('Index/getQuesByTid',array('topicid'=>$topic['topicid']))}">
+                                                    <div class="Popover">
+                                                        <div id="null-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="null-content">{$topic['topicname']}</div>
+                                                    </div>
+                                                    </a> </span> </div>
+                                            </div>
+                                        </div>
+                                        <h1 class="QuestionHeader-title">{$question['quesname']}</h1>
+                                        <div class="QuestionHeader-detail">
+                                            <div id="div-describe"  class="QuestionRichText QuestionRichText--expandable QuestionRichText--collapsed">
+                                                <div> <span class="RichText" itemprop="text">{$question['quesdescribe']}</span>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="QuestionHeader-side">
+                                        <div class="QuestionHeader-follow-status">
+                                            <div class="QuestionFollowStatus">
+                                                <div class="NumberBoard QuestionFollowStatus-counts">
+                                                    <button class="Button NumberBoard-item Button--plain" type="button">
+                                                    <div class="NumberBoard-name">关注者</div>
+                                                    <div class="NumberBoard-value" id="div-attennum">{$question['attentionnum']}</div>
+                                                    </button>
+                                                    <div class="NumberBoard-divider"> </div>
+                                                    <div class="NumberBoard-item">
+                                                        <div class="NumberBoard-name">被浏览</div>
+                                                        <div class="NumberBoard-value" id="div-browsenum">{$question['browsenum']}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="QuestionHeader-footer">
+                                    <div class="QuestionHeader-footer-inner">
+                                        <div class="QuestionHeader-main QuestionHeader-footer-main">
+                                            <div class="QuestionHeaderActions">
+                                                <div class="QuestionHeader-Comment">
+                                                    <button class="Button Button--plain" type="button"> <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" class="Icon Icon--comment Icon--left" style="height:15px;width:20px;" width="20" height="15" aria-hidden="true">
+                                                    <title> </title>
+                                                    <g>
+                                                        <path d="M7.24 16.313c-.272-.047-.553.026-.77.2-1.106.813-2.406 1.324-3.77 1.482-.16.017-.313-.06-.394-.197-.082-.136-.077-.308.012-.44.528-.656.906-1.42 1.11-2.237.04-.222-.046-.45-.226-.588C1.212 13.052.027 10.73 0 8.25 0 3.7 4.03 0 9 0s9 3.7 9 8.25-4.373 9.108-10.76 8.063z"/>
+                                                    </g>
+                                                    </svg>评论</button>
+                                                </div>
+                                                <!-- <div class="Popover ShareMenu">
+                                                    <div class="" id="null-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="null-content">
+                                                        <button class="Button Button--plain" type="button"> <svg viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg" class="Icon Icon--share Icon--left" style="height:16px;width:13px;" width="13" height="16" aria-hidden="true">
+                                                        <title> </title>
+                                                        <g>
+                                                            <path d="M.93 3.89C-.135 4.13-.343 5.56.614 6.098L5.89 9.005l8.168-4.776c.25-.128.477.197.273.388L7.05 10.66l.926 5.953c.18 1.084 1.593 1.376 2.182.456l9.644-15.243c.584-.892-.212-2.03-1.234-1.796L.93 3.89z"/>
+                                                        </g>
+                                                        </svg>分享</button>
+                                                    </div>
+                                                </div> -->
+                                                <div class="Popover ShareMenu ContentItem-action">
+    <div class=" -mob-share-open" id="null-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="null-content">
+        <button class="Button Button--plain" type="button"> <svg viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg" class="Icon Icon--share Icon--left" style="height:16px;width:13px;" width="13" height="16" aria-hidden="true">
+        <title> </title>
+        <g>
+            <path d="M.93 3.89C-.135 4.13-.343 5.56.614 6.098L5.89 9.005l8.168-4.776c.25-.128.477.197.273.388L7.05 10.66l.926 5.953c.18 1.084 1.593 1.376 2.182.456l9.644-15.243c.584-.892-.212-2.03-1.234-1.796L.93 3.89z"/>
+        </g>
+        </svg>分享</button>
+    </div>
+</div>
+
+<div class="-mob-share-ui" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-douban"><p>豆瓣</p></li>
+        <li class="-mob-share-facebook"><p>Facebook</p></li>
+        <li class="-mob-share-twitter"><p>Twitter</p></li>
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=21c140d89a9bf"></script>
+                                                <button onclick="popupDiv('pop-div')" class="Button Button--plain" type="button"> <svg viewBox="0 0 20 20" class="Icon Icon--star Icon--left" style="height:16px;width:13px;" width="13" height="16" aria-hidden="true">
+                                                <title> </title>
+                                                <g>
+                                                    <path d="M3.515 17.64l.918-5.355-3.89-3.792c-.926-.902-.64-1.784.64-1.97L6.56 5.74 8.964.87c.572-1.16 1.5-1.16 2.072 0l2.404 4.87 5.377.783c1.28.186 1.566 1.068.64 1.97l-3.89 3.793.918 5.354c.22 1.274-.532 1.82-1.676 1.218L10 16.33l-4.808 2.528c-1.145.602-1.896.056-1.677-1.218z"/>
+                                                </g>
+                                                </svg>邀请回答</button>
+                                                
+                                                <div class="Popover">
+                                                    <button class="btn-more Button Button--plain" type="button" id="null-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="null-content">查看详细描述</button>
+
+                                                    <button style="display: none;" class="btn-less Button Button--plain" type="button" id="null-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="null-content">收起描述</button>
+                                                </div>
+                                            </div>
+                                            <div class="QuestionHeader-actions"> </div>
+                                        </div>
+                                        <div class="QuestionHeader-side">
+                                            <div class="QuestionButtonGroup">
+                                            {if $isatten == 1}
+                                            <button data-quesid="{$question['quesid']}" class="btn-attention Button Button--primary Button--blue" type="button" style="background-color: #c3ccd9">取消关注</button>
+                                            {else}
+                                                <button data-quesid="{$question['quesid']}" class="btn-attention Button Button--primary Button--blue" type="button">关注问题</button>
+                                            
+
+                                            {/if}
+                                                <a href="#oranges">
+                                                <button class="Button Button--blue" type="button"> <svg viewBox="0 0 12 12" class="Icon Button-icon Icon--modify" style="height:16px;width:14px;" width="14" height="16" aria-hidden="true">
+                                                <title> </title>
+                                                <g>
+                                                    <path d="M.423 10.32L0 12l1.667-.474 1.55-.44-2.4-2.33-.394 1.564zM10.153.233c-.327-.318-.85-.31-1.17.018l-.793.817 2.49 2.414.792-.814c.318-.328.312-.852-.017-1.17l-1.3-1.263zM3.84 10.536L1.35 8.122l6.265-6.46 2.49 2.414-6.265 6.46z" fill-rule="evenodd"/>
+                                                </g>
+                                                </svg>写回答</button></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div class="Sticky"> </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="Question-main">
+                            <div class="Question-mainColumn">
+                                <div>
+                                    <div id="QuestionAnswers-answers" class="QuestionAnswers-answers">
+                                        <div class="Card">
+                                            <div class="List">
+                                                <div class="List-header">
+                                                    <h4 class="List-headerText"> <span>8 个回答</span> </h4>
+                                                    <div class="List-headerOptions">
+                                                        <div class="Popover">
+                                                            <button class="Button Select-button Select-plainButton Button--plain" role="combobox" aria-expanded="false" type="button" id="null-toggle" aria-haspopup="true" aria-owns="null-content">默认排序<svg viewBox="0 0 8 13" class="Icon Select-arrow Icon--select" style="height:16px;width:8px;" width="8" height="16" aria-hidden="true">
+                                                            <title> </title>
+                                                            <g>
+                                                                <path d="M4 11.183L1.284 8.218c-.293-.29-.77-.29-1.064 0-.293.29-.293.76 0 1.052l3.25 3.512c.292.29.768.29 1.062 0L7.78 9.27c.293-.29.293-.76 0-1.052-.295-.29-.77-.29-1.064 0L4 11.182zM4 1.818L1.284 4.782c-.293.29-.77.29-1.064 0-.293-.29-.293-.76 0-1.052L3.47.218c.292-.29.768-.29 1.062 0L7.78 3.73c.293.29.293.76 0 1.052-.295.29-.77.29-1.064 0L4 1.82z"/>
+                                                            </g>
+                                                            </svg> </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div data-zop-feedlist="true">
+
+
+                                                {foreach $answers as $answer}
+                                                {if $answer['anonymity'] == 0}
+                                                    <div class="List-item">
+                                                        <div class="ContentItem AnswerItem" data-za-index="0" data-zop="{&quot;authorName&quot;:&quot;&quot;,&quot;itemId&quot;:246856248,&quot;title&quot;:&quot;上海英语口语培训哪里好？&quot;,&quot;type&quot;:&quot;answer&quot;}" name="246856248" itemprop="acceptedAnswer" itemtype="http://schema.org/Answer" itemscope="">
+                                                            <div class="ContentItem-meta">
+                                                                <div class="AnswerItem-meta AnswerItem-meta--related">
+                                                                    <div class="AuthorInfo" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+                                                                        <meta itemprop="name" content=""/>
+                                                                        <meta itemprop="image" content="https://pic1.zhimg.com/50/da8e974dc_hd.jpg"/>
+                                                                        <meta itemprop="url" content="https://www.zhihu.com/people/gan-huang-en-january"/>
+                                                                        <meta itemprop="zhihu:followerCount" content="0"/>
+                                                                        <span class="UserLink AuthorInfo-avatarWrapper">
+                                                                        <div class="Popover">
+                                                                            <div id="null-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="null-content"> <a class="UserLink-link" data-za-detail-view-element_name="User" href="{:url('User/userCenter',array('personid'=>$answer['user']['userid']))}"> 
+                                                                            <img class="Avatar AuthorInfo-avatar" width="38" height="38" src="{$answer['userinfo']['photo']}" srcset="https://pic1.zhimg.com/50/da8e974dc_l.jpg 2x" alt=""/> </a> </div>
+                                                                        </div>
+                                                                        </span>
+                                                                        <div class="AuthorInfo-content">
+                                                                            <div class="AuthorInfo-head"> <span class="UserLink AuthorInfo-name">
+                                                                                <div class="Popover">
+                                                                                    <div id="null-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="null-content"> <a class="UserLink-link" data-za-detail-view-element_name="User" href="/people/gan-huang-en-january">{$answer['user']['nickname']}</a> </div>
+                                                                                </div>
+                                                                                </span> </div>
+                                                                            <div class="AuthorInfo-detail">
+                                                                                <div class="AuthorInfo-badge">
+                                                                                    <div class="RichText AuthorInfo-badgeText">{$answer['userinfo']['autograph']}</div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="AnswerItem-extraInfo"> <span class="Voters">
+                                                                        <button class="Button Button--plain" type="button">{$answer['commentnum']} 人评论了该回答</button>
+                                                                        </span> </div>
+                                                                </div>
+                                                            </div>
+                                                            <meta itemprop="image" content=""/>
+                                                            <meta itemprop="upvoteCount" content="1"/>
+                                                            <meta itemprop="url" content="https://www.zhihu.com/question/20326626/answer/246856248"/>
+                                                            <meta itemprop="dateCreated" content="2017-10-19T07:43:12.000Z"/>
+                                                            <meta itemprop="dateModified" content="2017-10-19T07:43:12.000Z"/>
+                                                            <meta itemprop="commentCount" content="0"/>
+                                                            <div class="RichContent RichContent--unescapable">
+                                                                <div class="RichContent-inner">
+                                                                    <span class="RichText CopyrightRichText-richText" itemprop="text">
+                                                                    {if $answer['ishidden'] == 0}
+                                                                    {$answer['answercontent']}
+                                                                    {else}
+                                                                    <p style="color:red;font-size: 20px">该回答涉嫌违规,暂时屏蔽</p>
+                                                                    {/if}
+                                                                    </span> 
+                                                                </div>
+                                                                <div>
+                                                                    <div class="ContentItem-time"> <a target="_blank" href="/question/20326626/answer/246856248">发布于 {$answer['create_time']}</a> </div>
+                                                                    <div class="AnswerReward"> </div>
+                                                                </div>
+                                                                <div class="ContentItem-actions RichContent-actions"> 
+                                                                    
+                                                                        <button  value="{$answer['user']['userid']}" class="btn-agree Button VoteButton VoteButton--up" aria-label="赞同" type="button"> 
+                                                                            <svg viewBox="0 0 20 18" class="Icon VoteButton-upIcon Icon--triangle" style="height:16px;width:9px;" width="9" height="16" aria-hidden="true">
+                                                                                <title> </title>
+                                                                                <g>
+                                                                                <path d="M0 15.243c0-.326.088-.533.236-.896l7.98-13.204C8.57.57 9.086 0 10 0s1.43.57 1.784 1.143l7.98 13.204c.15.363.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H1.955c-1.08 0-1.955-.517-1.955-1.9z"/>
+                                                                                </g>
+                                                                            </svg>
+                                                                            <span>{$answer['agreenum']}</span>
+                                                                        </button>
+                                                                    
+                                                                    
+
+
+                                                                    <button data-answerid="{$answer['answerid']}" data-quesid="{$question['quesid']}" class="btn-comment Button ContentItem-action Button--plain" type="button"> <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" class="Icon Icon--comment Icon--left" style="height:16px;width:12px;" width="12" height="16" aria-hidden="true">
+                                                                    <title> </title>
+                                                                    <g>
+                                                                        <path d="M7.24 16.313c-.272-.047-.553.026-.77.2-1.106.813-2.406 1.324-3.77 1.482-.16.017-.313-.06-.394-.197-.082-.136-.077-.308.012-.44.528-.656.906-1.42 1.11-2.237.04-.222-.046-.45-.226-.588C1.212 13.052.027 10.73 0 8.25 0 3.7 4.03 0 9 0s9 3.7 9 8.25-4.373 9.108-10.76 8.063z"/>
+                                                                    </g>
+                                                                    </svg>评论
+                                                                    </button>
+
+
+                                                                    <div class="Popover ShareMenu ContentItem-action">
+                                                                        <div class="" id="null-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="null-content">
+                                                                            <button class="Button Button--plain" type="button"> <svg viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg" class="Icon Icon--share Icon--left" style="height:16px;width:13px;" width="13" height="16" aria-hidden="true">
+                                                                            <title> </title>
+                                                                            <g>
+                                                                                <path d="M.93 3.89C-.135 4.13-.343 5.56.614 6.098L5.89 9.005l8.168-4.776c.25-.128.477.197.273.388L7.05 10.66l.926 5.953c.18 1.084 1.593 1.376 2.182.456l9.644-15.243c.584-.892-.212-2.03-1.234-1.796L.93 3.89z"/>
+                                                                            </g>
+                                                                            </svg>分享</button>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <button class="btn-report Button ContentItem-action Button--plain" type="button"> <svg viewBox="0 0 20 20" class="Icon Icon--star Icon--left" style="height:16px;width:13px;" width="13" height="16" aria-hidden="true">
+                                                                    <title> </title>
+                                                                    <g>
+                                                                        <path d="M16.947 1.13c-.633.135-3.927.638-5.697.384-3.133-.45-4.776-2.54-9.95-.888C.305 1.04.025 1.664.025 2.646L0 18.807c0 .3.1.54.304.718.195.202.438.304.73.304.275 0 .52-.102.73-.304.202-.18.304-.418.304-.718v-6.58c4.533-1.235 8.047.668 8.562.864 2.343.893 5.542.008 6.774-.657.397-.178.596-.474.596-.887V1.964c0-.6-.42-.972-1.053-.835z"/>
+                                                                    </g>
+                                                                    </svg>举报
+                                                                    </button>
+                                                                    
+
+                                                                    <button value="{$answer['answerid']}" isagree="{$answer['isagree']}" class="btn-thank Button ContentItem-action Button--plain"  type="button">
+                                                                     <svg width="14" height="16" viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg" class="Icon Icon--thank Icon--left" style="height:16px;width:14px;" aria-hidden="true">
+                                                                    <title> </title>
+                                                                    <span style="font-size: 20px;
+                                                                    {if $answer['isagree'] == 1}
+                                                                     color:red
+                                                                    {/if}
+                                                                     ">
+                                                                    &hearts;
+                                                                    </span>
+                                                                    </svg>感谢</button>
+                                                                    <div class="Popover ContentItem-action">
+                                                                        <button class="Button Button--plain" style="padding:0 1px;" type="button" id="null-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="null-content"> <svg viewBox="0 0 18 4" class="Icon Icon--dots" style="height:16px;width:14px;" width="14" height="16" aria-hidden="true">
+                                                                        <title> </title>
+                                                                        <g>
+                                                                            <g>
+                                                                                <circle cx="2" cy="2" r="2"/>
+                                                                                <circle cx="9" cy="2" r="2"/>
+                                                                                <circle cx="16" cy="2" r="2"/>
+                                                                            </g>
+                                                                        </g>
+                                                                        </svg> </button>
+                                                                    </div>
+                                                                    <button class="btn-hidden Button ContentItem-action ContentItem-rightButton Button--plain" data-zop-retract-question="true" type="button"> <span class="RichContent-collapsedText">收起</span> <svg viewBox="0 0 10 6" class="Icon ContentItem-arrowIcon is-active Icon--arrow" style="height:16px;width:10px;" width="10" height="16" aria-hidden="true">
+                                                                    <title> </title>
+                                                                    <g>
+                                                                        <path d="M8.716.217L5.002 4 1.285.218C.99-.072.514-.072.22.218c-.294.29-.294.76 0 1.052l4.25 4.512c.292.29.77.29 1.063 0L9.78 1.27c.293-.29.293-.76 0-1.052-.295-.29-.77-.29-1.063 0z"/>
+                                                                    </g>
+                                                                    </svg> </button>
+                                                                </div>
+
+    <div class="div-report" style="display: none">
+            <textarea style="width: 100%;height: 100%" class="text-reason">
+                
+            </textarea>
+            <button class="btn-cancel Button">取消</button> <button data-answerid="{$answer['answerid']}"  class="btn-reason Button">举报</button>
+    </div>
+
+
+                                                        
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    {else}
+
+
+
+                                                    <div class="List-item">
+                                                        <div class="ContentItem AnswerItem" data-za-index="1" data-zop="{&quot;authorName&quot;:&quot;匿名用户&quot;,&quot;itemId&quot;:114549292,&quot;title&quot;:&quot;上海英语口语培训哪里好？&quot;,&quot;type&quot;:&quot;answer&quot;}" name="114549292" itemprop="suggestedAnswer" itemtype="http://schema.org/Answer" itemscope="">
+                                                            <div class="ContentItem-meta">
+                                                                <div class="AnswerItem-meta AnswerItem-meta--related">
+                                                                    <div class="AuthorInfo" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+                                                                        <meta itemprop="name" content="匿名用户"/>
+                                                                        <meta itemprop="image" content="https://pic2.zhimg.com/50/aadd7b895_hd.jpg"/>
+                                                                        <meta itemprop="url" content="https://www.zhihu.com/people/"/>
+                                                                        <meta itemprop="zhihu:followerCount" content="0"/>
+                                                                        <span class="UserLink AuthorInfo-avatarWrapper"> <img class="Avatar AuthorInfo-avatar" width="38" height="38" src="__PIC__/aadd7b895_xs.jpg" srcset="https://pic2.zhimg.com/50/aadd7b895_l.jpg 2x" alt="匿名用户"/> </span>
+                                                                        <div class="AuthorInfo-content">
+                                                                            <div class="AuthorInfo-head"> <span class="UserLink AuthorInfo-name">匿名用户</span> </div>
+                                                                            <div class="AuthorInfo-detail">
+                                                                                <div class="AuthorInfo-badge"> </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="AnswerItem-extraInfo"> <span class="Voters">
+                                                                        <button class="Button Button--plain" type="button">{$answer['commentnum']} 人评论了该回答</button>
+                                                                        </span> </div>
+                                                                </div>
+                                                            </div>
+                                                            <meta itemprop="image" content=""/>
+                                                            <meta itemprop="upvoteCount" content="1"/>
+                                                            <meta itemprop="url" content="https://www.zhihu.com/question/20326626/answer/114549292"/>
+                                                            <meta itemprop="dateCreated" content="2016-08-02T05:59:21.000Z"/>
+                                                            <meta itemprop="dateModified" content="2016-08-02T05:59:21.000Z"/>
+                                                            <meta itemprop="commentCount" content="1"/>
+                                                            <div class="RichContent RichContent--unescapable">
+                                                                <div class="RichContent-inner"> <span class="RichText CopyrightRichText-richText" itemprop="text">
+                                                                   {if $answer['ishidden'] == 0}
+                                                                    {$answer['answercontent']}
+                                                                    {else}
+                                                                    <p style="color:red;font-size: 20px">该回答涉嫌违规,暂时屏蔽</p>
+                                                                    {/if}
+                                                                    </span> </div>
+                                                                <div>
+                                                                    <div class="ContentItem-time"> <a target="_blank" href="">发布于 {$answer['create_time']}</a> </div>
+                                                                    <div class="AnswerReward"> </div>
+                                                                </div>
+                                                                <div class="ContentItem-actions RichContent-actions"> 
+                                                                    
+                                                                        <button  value="{$answer['user']['userid']}" class="btn-agree Button VoteButton VoteButton--up" aria-label="赞同" type="button"> 
+                                                                            <svg viewBox="0 0 20 18" class="Icon VoteButton-upIcon Icon--triangle" style="height:16px;width:9px;" width="9" height="16" aria-hidden="true">
+                                                                                <title> </title>
+                                                                                <g>
+                                                                                <path d="M0 15.243c0-.326.088-.533.236-.896l7.98-13.204C8.57.57 9.086 0 10 0s1.43.57 1.784 1.143l7.98 13.204c.15.363.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H1.955c-1.08 0-1.955-.517-1.955-1.9z"/>
+                                                                                </g>
+                                                                            </svg>
+                                                                            <span>{$answer['agreenum']}</span>
+                                                                        </button>
+                                                                    
+                                                                    
+
+
+                                                                    <button data-answerid="{$answer['answerid']}" data-quesid="{$question['quesid']}" class="btn-comment Button ContentItem-action Button--plain" type="button"> <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" class="Icon Icon--comment Icon--left" style="height:16px;width:12px;" width="12" height="16" aria-hidden="true">
+                                                                    <title> </title>
+                                                                    <g>
+                                                                        <path d="M7.24 16.313c-.272-.047-.553.026-.77.2-1.106.813-2.406 1.324-3.77 1.482-.16.017-.313-.06-.394-.197-.082-.136-.077-.308.012-.44.528-.656.906-1.42 1.11-2.237.04-.222-.046-.45-.226-.588C1.212 13.052.027 10.73 0 8.25 0 3.7 4.03 0 9 0s9 3.7 9 8.25-4.373 9.108-10.76 8.063z"/>
+                                                                    </g>
+                                                                    </svg>评论
+                                                                    </button>
+
+
+                                                                    <div class="Popover ShareMenu ContentItem-action">
+                                                                        <div class="" id="null-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="null-content">
+                                                                            <button class="Button Button--plain" type="button"> <svg viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg" class="Icon Icon--share Icon--left" style="height:16px;width:13px;" width="13" height="16" aria-hidden="true">
+                                                                            <title> </title>
+                                                                            <g>
+                                                                                <path d="M.93 3.89C-.135 4.13-.343 5.56.614 6.098L5.89 9.005l8.168-4.776c.25-.128.477.197.273.388L7.05 10.66l.926 5.953c.18 1.084 1.593 1.376 2.182.456l9.644-15.243c.584-.892-.212-2.03-1.234-1.796L.93 3.89z"/>
+                                                                            </g>
+                                                                            </svg>分享</button>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <button class="btn-report  Button ContentItem-action Button--plain" type="button"> <svg viewBox="0 0 20 20" class="Icon Icon--star Icon--left" style="height:16px;width:13px;" width="13" height="16" aria-hidden="true">
+                                                                    <title> </title>
+                                                                    <g>
+                                                                        <path d="M16.947 1.13c-.633.135-3.927.638-5.697.384-3.133-.45-4.776-2.54-9.95-.888C.305 1.04.025 1.664.025 2.646L0 18.807c0 .3.1.54.304.718.195.202.438.304.73.304.275 0 .52-.102.73-.304.202-.18.304-.418.304-.718v-6.58c4.533-1.235 8.047.668 8.562.864 2.343.893 5.542.008 6.774-.657.397-.178.596-.474.596-.887V1.964c0-.6-.42-.972-1.053-.835z"/>
+                                                                    </g>
+                                                                    </svg>举报
+                                                                    </button>
+
+                                                                    <button value="{$answer['answerid']}" isagree="{$answer['isagree']}" class="btn-thank Button ContentItem-action Button--plain"  type="button">
+                                                                     <svg width="14" height="16" viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg" class="Icon Icon--thank Icon--left" style="height:16px;width:14px;" aria-hidden="true">
+                                                                    <title> </title>
+                                                                    <span style="font-size: 20px;
+                                                                    {if $answer['isagree'] == 1}
+                                                                     color:red
+                                                                    {/if}
+                                                                     ">
+                                                                    &hearts;
+                                                                    </span>
+                                                                    </svg>感谢</button>
+                                                                    <div class="Popover ContentItem-action">
+                                                                        <button class="Button Button--plain" style="padding:0 1px;" type="button" id="null-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="null-content"> <svg viewBox="0 0 18 4" class="Icon Icon--dots" style="height:16px;width:14px;" width="14" height="16" aria-hidden="true">
+                                                                        <title> </title>
+                                                                        <g>
+                                                                            <g>
+                                                                                <circle cx="2" cy="2" r="2"/>
+                                                                                <circle cx="9" cy="2" r="2"/>
+                                                                                <circle cx="16" cy="2" r="2"/>
+                                                                            </g>
+                                                                        </g>
+                                                                        </svg> </button>
+                                                                    </div>
+                                                                    <button class="btn-hidden Button ContentItem-action ContentItem-rightButton Button--plain" data-zop-retract-question="true" type="button"> <span class="RichContent-collapsedText">收起</span> <svg viewBox="0 0 10 6" class="Icon ContentItem-arrowIcon is-active Icon--arrow" style="height:16px;width:10px;" width="10" height="16" aria-hidden="true">
+                                                                    <title> </title>
+                                                                    <g>
+                                                                        <path d="M8.716.217L5.002 4 1.285.218C.99-.072.514-.072.22.218c-.294.29-.294.76 0 1.052l4.25 4.512c.292.29.77.29 1.063 0L9.78 1.27c.293-.29.293-.76 0-1.052-.295-.29-.77-.29-1.063 0z"/>
+                                                                    </g>
+                                                                    </svg> </button>
+                                                                </div>
+<div class="div-report" style="display: none">
+            <textarea style="width: 100%;height: 100%" class="text-reason">
+                
+            </textarea>
+            <button class="btn-cancel Button">取消</button> <button data-answerid="{$answer['answerid']}"  class="btn-reason Button">举报</button>
+    </div>
+
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {/if}
+                                                    {/foreach}
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="Card" style="text-align: center;">
+                                            {$page}
+                                        </div>
+                                    </div>
+
+                                    <a name="oranges"></a>
+
+                                    <div class="Card QuestionAnswers-answerAdd"> <a name="draft"> </a>
+                                        <div class="AnswerAdd">
+                                            <div class="AnswerAdd-header">
+                                                <div class="AuthorInfo AnswerAdd-info" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+
+                                                    <span class="UserLink AuthorInfo-avatarWrapper">
+                                                    <img id="img-userphoto" class="Avatar AuthorInfo-avatar" width="38" height="38" src="{$userinfo['photo']}"/> </span>
+                                                    <div class="AuthorInfo-content">
+                                                        <div class="AuthorInfo-head"> <span id="username" class="UserLink AuthorInfo-name">{$user['nickname']}</span>
+                                                        </div>
+                                                        <div class="AuthorInfo-detail">
+                                                            <div id="autograph" class="AuthorInfo-badge"> <span class="RichText AnswerAdd-bio">{$userinfo['autograph']}</span>
+                                                                <button class="Button ModifyButton AnswerAdd-topicBiosButton Button--link" type="button">
+                                                                <svg viewBox="0 0 12 12" class="Icon ModifyButton-icon Icon--modify" style="height:16px;width:12px;" width="12" height="16" aria-hidden="true">
+                                                                <title> </title>
+                                                                <g>
+                                                                    <path d="M.423 10.32L0 12l1.667-.474 1.55-.44-2.4-2.33-.394 1.564zM10.153.233c-.327-.318-.85-.31-1.17.018l-.793.817 2.49 2.414.792-.814c.318-.328.312-.852-.017-1.17l-1.3-1.263zM3.84 10.536L1.35 8.122l6.265-6.46 2.49 2.414-6.265 6.46z" fill-rule="evenodd"/>
+                                                                </g>
+                                                                </svg>编辑话题经验</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button id="btn-nickperson" class="Button AnswerAdd-toggleAnonymous Button--plain" type="button">使用匿名身份回答</button>
+                                                <button id="btn-trueperson" style="display: none" class="Button AnswerAdd-toggleAnonymous Button--plain" type="button">使用真实身份回答</button>
+                                            </div>
+                                            <form id="form-editor" action="{:url('answer/addAnswer')}" method="post" >
+                                                
+                                                <input type="hidden" name="userid" value="{$Think.session.userid}">
+                                                <input type="hidden" name="quesid" value="{$question['quesid']}">
+                                                <input id="anonymity" type="hidden" name="anonymity" value="0">
+                                                <div style="margin:0 auto;">
+                                                    <script id="container2" name="content" type="text/plain" style="width:100%;height:400px;"></script>
+
+                                                    <script type="text/javascript">
+                                                        var editor2 = UE.getEditor('container2',{
+                                                        //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
+
+                                                        toolbars:
+                                                        [
+                                                            [	'fullscreen', 'source', 'undo', 'redo'],
+                                                            [	'bold', //加粗
+                                                                'italic', //斜体
+                                                                'underline', //下划线
+                                                                'strikethrough', //删除线
+                                                                'blockquote', //引用
+                                                                'pasteplain', //纯文本粘贴模式
+                                                                'selectall', //全选
+                                                                'horizontal', //分隔线
+                                                                'insertcode', //代码语言
+                                                                'fontfamily', //字体
+                                                                'fontsize', //字号
+                                                                'paragraph', //段落格式
+                                                            ],
+                                                            [
+                                                                'simpleupload', //单图上传
+                                                                'insertimage', //多图上传
+                                                                'link', //超链接
+                                                                'unlink', //取消链接
+                                                                'emotion', //表情
+                                                                'spechars', //特殊字符
+                                                                'justifyleft', //居左对齐
+                                                                'justifyright', //居右对齐
+                                                                'justifycenter', //居中对齐
+                                                                'justifyjustify', //两端对齐
+                                                                'forecolor', //字体颜色
+                                                                'backcolor', //背景色
+                                                                'insertorderedlist', //有序列表
+                                                                'insertunorderedlist', //无序列表
+                                                                'imagecenter', //居中
+                                                                'lineheight', //行间距
+                                                                'scrawl', //涂鸦
+                                                                'insertvideo',
+                                                            ]
+                                                        ],
+                                                        //focus时自动清空初始化时的内容
+                                                        autoClearinitialContent:true,
+                                                        //关闭字数统计
+                                                        wordCount:false,
+                                                        //关闭elementPath
+                                                        elementPathEnabled:false,
+                                                        //默认的编辑区域高度
+                                                        initialFrameHeight:300
+                                                        //更多其他参数，请参考ueditor.config.js中的配置项
+                                                    });
+                                                       /* editor.addListener("contentChange",function(){  
+                                                           var content=editor.getContent();
+
+                                                           console.log(content);
+
+                                              
+                                                       }) */ 
+
+                                                        
+                                                    </script>
+                                                </div>
+                                                <input type="submit" name="sub" value="发表">
+
+                                            </form>
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <script src="__JS__/vendor.1f389462803af519e7ae.js" data-reactid="21">
+        </script>
+        <script src="__JS__/main.raven.a54649401f29b21a550c.js" async data-reactid="22">
+        </script>
+        <script src="__JS__/main.app.6dde5c1e9645b9e74472.js" data-reactid="23">
+        </script>
+        <script data-reactid="24">
+        </script>
+
+        <script type="text/javascript">
+            var userphoto = $('#img-userphoto').attr('src');
+            $('#btn-nickperson').click(function(){
+                $('#img-userphoto').attr('src','');
+                $('#btn-nickperson').css('display','none');
+                $('#btn-trueperson').css('display','block');
+                $('#username').text('匿名身份');
+                $('#autograph').css('display','none');
+                $('#anonymity').val(1);
+
+            });
+            $('#btn-trueperson ').click(function(){
+                $('#img-userphoto').attr("src",userphoto);
+                $('#btn-nickperson').css('display','block');
+                $('#btn-trueperson').css('display','none');
+                $('#username').text('{$user['nickname']}');
+                $('#autograph').css('display','block');
+                $('#anonymity').val(0);
+            });
+
+            $(".btn-thank").click(function(){
+                var quesid = {$question['quesid']};
+                var answerid = $(this).val();
+                var userid = $(this).siblings('.btn-agree').val();
+                var isagree = $(this).attr('isagree');
+                var agreenum = $(this).siblings('.btn-agree').children('span').text();
+                //alert(agreenum);
+                //console.log(agreenum);
+                var agree = $(this);
+                // console.log(quesid);
+                // console.log(answerid);
+                // console.log(userid);
+                // console.log(isagree);
+                $.post("{:url('Answer/updateAgree')}",{quesid:quesid,answerid:answerid,userid:userid,isagree:isagree},function(data){
+                    if(data.code){
+                       //console.log(data.isagree);
+                       console.log(data.aggrenum);
+                       $(agree).siblings('.btn-agree').children('span').text(data.aggrenum);
+                       $(agree).attr('isagree',data.isagree);
+                       if(data.isagree){
+                            $(agree).children('span').css('color','red');
+                       }else{
+                            $(agree).children('span').css('color','');
+                       }
+                       
+                    }else{
+                        //alert(1111);
+                      
+                    }
+                },'json');
+            });
+            $(".btn-hidden").click(function(){
+                $('.div-comment').remove();
+            });
+            $(".btn-comment").click(function(){
+                var combtn = $(this);
+                var quesid = $(this).attr('data-quesid');
+                var answerid = $(this).attr('data-answerid');
+                $.post("{:url('Answer/getComment')}",{quesid:quesid,answerid:answerid},function(data){
+                    if(data.code){
+                        $('.div-comment').remove();
+                        $(combtn).parent().parent().append(data.commentinfo);
+                        
+                       
+                    }else{
+
+                      
+                    }
+                },'json');
+            });
+            $(".btn-attention").click(function(){
+                var attennum = parseInt($("#div-attennum").text());
+                var attenbtn = $(this);
+                var quesid = $(this).attr('data-quesid');
+                $.post("{:url('Question/attentionQues')}",{quesid:quesid},function(data){
+                    if(data){
+                        $("#div-attennum").text(attennum+1);
+                        $(attenbtn).text('取消关注').css('background-color','#c3ccd9');
+                    }else{
+                        $("#div-attennum").text(attennum-1);
+                        $(attenbtn).text('关注问题').css('background-color','#0d79d1');
+                    }
+
+
+               },'json');
+            });
+
+ 
+              function popupDiv(div_id) { 
+                // 获取传入的DIV 
+                var $div_obj = $("#" + div_id); 
+                // 计算机屏幕高度 
+                var windowWidth = $(window).width(); 
+                // 计算机屏幕长度 
+                var windowHeight = $(window).height(); 
+                // 取得传入DIV的高度 
+                var popupHeight = $div_obj.height(); 
+                // 取得传入DIV的长度 
+                var popupWidth = $div_obj.width(); 
+                 
+                // // 添加并显示遮罩层 
+                $("<div id='bg'></div>").width(windowWidth * 0.99) 
+                    .height(windowHeight * 0.99).click(function() { 
+                      //hideDiv(div_id); 
+                    }).appendTo("body").fadeIn(200); 
+                 
+                // 显示弹出的DIV 
+                $div_obj.css({ 
+                  "position" : "absloute" 
+                }).animate({ 
+                  left : windowWidth / 2 - popupWidth / 2, 
+                  top : windowHeight / 2 - popupHeight / 2, 
+                  opacity : "show" 
+                }, "slow"); 
+                 
+              } 
+              /*隐藏弹出DIV*/ 
+              function hideDiv(div_id) {
+                $("#bg").remove(); 
+                $("#" + div_id).animate({ 
+                  left : 0, 
+                  top : 0, 
+                  opacity : "hide" 
+                }, "slow"); 
+              } 
+
+            $( "#nickname" ).autocomplete({
+                source: "{:url('User/getNameListByStr')}"
+            });  
+
+            $(".btn-invite").click(function(){               
+                var quesid = $(this).attr('data-quesid');
+                var nickname = $("#nickname").val();
+                $.post("{:url('User/addInviter')}",{quesid:quesid,nickname:nickname},function(data){
+                    if(data.code == 1){
+                        Toast('已发送邀请通知',2000,'green');
+                    }else if(data.code == 0){
+                        Toast('该用户不存在',2000,'red');
+                    }else{
+                        Toast('邀请失败',2000,'red');
+                    }
+                },'json');
+                
+            });
+
+            function Toast(msg,duration,color){
+                duration=isNaN(duration)?3000:duration;
+                var m = document.createElement('div');
+                m.innerHTML = msg;
+                m.style.cssText="width: 30%;min-width: 60px;opacity: 0.7;height: 50px;color: rgb(255, 255, 255);line-height: 50px;text-align: center;border-radius: 5px;position: fixed;top: 40%;left: 35%;background: "+color+";font-size: 12px;z-index:10000000";
+                document.body.appendChild(m);
+                setTimeout(function() {
+                    var d = 0.5;
+                    m.style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';
+                    m.style.opacity = '0';
+                    setTimeout(function() { document.body.removeChild(m) }, d * 1000);
+                }, duration);
+            }
+
+        $('.btn-report').click(function(){
+            $(this).parent().siblings('.div-report').css('display','');
+        });
+        $('.btn-cancel').click(function(){
+            $(this).parent().css('display','none');
+        });
+        $('.btn-reason').click(function(){
+            var reason = $(this).siblings('.text-reason').val();
+            var answerid = $(this).attr('data-answerid');
+            var reasonbtn = $(this);
+            
+            $.post("{:url('Answer/addreport')}",{answerid:answerid,reason:reason},function(data){
+                if(data.code){
+                    $(reasonbtn).parent().css('display','none');
+                    Toast('举报成功,正在审核',2000,'green');
+                }else{
+                    $(reasonbtn).parent().css('display','none');
+                    Toast('该问题已被其他用户举报',2000,'red');
+                }
+            },'json');
+
+        });
+
+        $(".btn-more").click(function(){
+            $("#div-describe").removeClass();
+            $(this).css('display','none');
+            $(".btn-less").css('display','');
+        });
+        $(".btn-less").click(function(){
+            $("#div-describe").addClass("QuestionRichText QuestionRichText--expandable QuestionRichText--collapsed");
+            $(this).css('display','none');
+            $(".btn-more").css('display','');
+        });
+
+
+            
+        </script>
+    {/block}
+    </body>
+</html>

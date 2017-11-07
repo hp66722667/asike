@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {block name='title'}
+            <title>回答管理 - __WEB_NAME__</title>
+            <style>
+                ul{
+                    min-width: 200px;
+                    text-align: center;
+                }
+                li{
+                    display: inline-block;
+                }
+                span{
+                    display: inline-block;
+                    width: 26px;
+                    height: 26px;
+                    text-align: center;
+                    line-height: 26px;
+                }
+                td{
+                    width: 200px;
+                    height: 15px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+            </style>
+        {/block}
+    </head>
+    <body>
+        {extend name="public/base"/}
+        {block name='main'}
+            <section class="rt_wrap content mCustomScrollbar">
+                <div class="rt_content">
+                    <form action="{:url('Answer/answerList')}" method="post">
+                        <section class="mtb">
+                            <select class="select">
+                                <option>查询条件</option>
+                                <option>待付款</option>
+                                <option>待发货</option>
+                                <option>待评价</option>
+                            </select>
+
+                            <input type="text" class="textbox textbox_225" name="str" placeholder="输入关键字搜索"/>
+                            <input type="submit" value="查询" class="group_btn"/>
+                        </section>
+                    </form>
+                    <form action="{:url('Answer/deleteAnswer')}" method="post">
+                        <div class="page_title">
+                            <h2 class="fl">回答列表</h2>
+                        </div>
+                        <table class="table">
+                            <tr>
+                                <!--<th style="width: 100px">
+                                    <input id="all" type="checkbox" name="all[]" value="" />
+                                    全选
+                                    <a style="cursor: pointer" onclick="revsec();">反选</a>
+                                </th>-->
+                                <th style="width: 69px">回答ID</th>
+                                <th style="width: 100px; min-height: 100px">回答者</th>
+                                <th>回答的问题</th>
+                                <th>回答内容</th>
+                                <th>附带图片</th>
+                                <th>回答时间</th>
+                                <th>操作</th>
+                            </tr>
+                            {if !empty($answerInfo)}
+                                {foreach $answerInfo as $ansinfo}
+                                    <tr>
+                                        <!--<td style="width: 150px">
+                                            <input class="answerids" type="checkbox" name="answerid[]" value="{$ansinfo['answerid']}">
+                                        </td>-->
+                                        <td class="center">{$ansinfo['answerid']}</td>
+                                        <td>{$ansinfo['ansqueuser']['nickname']}</td>
+                                        <td title="{$ansinfo['ansqueuser']['quesname']}">{$ansinfo['ansqueuser']['quesname']}</td>
+                                        <td title="{$ansinfo['answercontent']}">
+                                            {$ansinfo['answercontent']}
+                                        <td class="center">
+                                            <img src="{$ansinfo['photo']}" width="50" height="50">
+                                            <!--<strong class="rmb_icon">59.00</strong>-->
+                                        </td>
+                                        <td class="center">{$ansinfo['create_time']}</td>
+                                        <td class="center">
+                                            <a href="#" title="查看订单" class="link_icon" target="_blank">&#118;</a>
+                                            <a id="adel" onclick="deleOne()" style="cursor: pointer" title="删除" class="link_icon">&#100;</a>
+                                        </td>
+                                    </tr>
+                                {/foreach}
+                            {/if}
+                        </table>
+                    </form>
+
+                    <div style=" min-width: 200px; margin: 10px auto">
+                        <aside class="paging" style="min-width: 200px">
+                            {$page}
+                        </aside>
+                    </div>
+                </div>
+            </section>
+        {/block}
+    </body>
+</html>

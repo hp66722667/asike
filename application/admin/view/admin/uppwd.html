@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {block name='title'}
+            <title>个人信息 - __WEB_NAME__</title>
+            <style>
+                .errorTips{
+                    display: none;
+                }
+            </style>
+        {/block}
+    </head>
+    <body>
+        {extend name="public/base" /}
+        {block name='main'}
+            <section class="rt_wrap content mCustomScrollbar">
+                <div class="rt_content">
+                    <div class="page_title">
+                        <h2 class="fl">我的信息</h2>
+                        <!--<a href="adjust_funding.html" class="fr top_rt_btn money_icon">资金管理</a>-->
+                    </div>
+                    <form id="fadmin" action="{:url('Admin/upadpwd')}" method="post" enctype="multipart/form-data">
+                        <ul class="ulColumn2">
+                            <li>
+                                <span class="item_name" style="width:120px;">
+                                    当前密码：
+                                </span>
+                                <input type="password" name="oldpwd" class="textbox textbox_225" placeholder="填写原密码"/>
+                                <span class="errorTips"></span>
+                            </li>
+                            <li>
+                                <span class="item_name" style="width:120px;">
+                                    新的密码：
+                                </span>
+                                <input type="password" name="newpwd" class="textbox textbox_225" placeholder="填写新的密码"/>
+                                <span class="errorTips"></span>
+                            </li>
+
+                            <li>
+                                <span class="item_name" style="width:120px;">
+                                    确认密码：
+                                </span>
+                                <input type="password" name="renewpwd" class="textbox textbox_225" placeholder="填写新的密码"/>
+                                <span class="errorTips"></span>
+                            </li>
+                            <li>
+                                <span class="item_name" style="width:120px;"></span>
+                                <input id="insertad" type="button" class="link_btn" value="确认更改"/>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </section>
+            <script>
+                var isoldpwd = false;
+                var isnewpwd = false;
+                var isrenewpwd = false;
+                $('input[name=oldpwd]').blur(function () {
+                    if($(this).val() == ''){
+                        Toast('原密码不能为空', 1000);
+                        return false;
+                    }else {
+                        $.post("{:url('Admin/isRightPwd')}", {oldpwd:$('input[name=oldpwd]').val()},function (data) {
+                            if (data.code){
+                                $('.errorTips:eq(0)').text(data.info).css({'display':'inline-block','color':'green'});
+                                isoldpwd = true;
+                            }else {
+                                $('.errorTips:eq(0)').text(data.info).css({'display':'inline-block','color':'red'});
+                                isoldpwd = false;
+                                return false;
+                            }
+                        },'json')
+                    }
+                });
+
+                $('input[name=newpwd]').blur(function () {
+                    if ($(this).val() == ''){
+                        Toast('新密码不能为空', 1000);
+                        isnewpwd = false;
+                        return false;
+                    }
+                    if($('input[name=newpwd]').val().length<6){
+                        $('.errorTips:eq(1)').text('密码不能少于6位！').css({'display':'inline-block','color':'red'});
+                    }else {
+                        $('.errorTips:eq(1)').text('密码可以用').css({'display':'inline-block','color':'green'});
+                        isnewpwd = true;
+                    }
+
+                });
+
+                $('input[name=renewpwd]').blur(function () {
+                    if($('input[name=renewpwd]').val() != $('input[name=newpwd]').val()){
+                        $('.errorTips:eq(2)').text('两次密码输入不一致！').css({'display':'inline-block','color':'red'});
+                    }else {
+                        $('.errorTips:eq(1)').css({'display':'none'});
+                        isrenewpwd = true;
+                    }
+                });
+
+                $('#insertad').click(function () {
+                    if (isoldpwd && isnewpwd && isrenewpwd){
+                        $('#fadmin').submit();
+                    }else {
+                        Toast('你输入的信息不符合要求',1000);
+                        return false;
+                    }
+                });
+
+                function Toast(msg, duration) {
+                    duration = isNaN(duration) ? 3000 : duration;
+                    var m = document.createElement('div');
+                    m.innerHTML = msg;
+                    m.style.cssText = "width: 50%;min-width: 150px;opacity: 0.7;height: 50px;" +
+                        "color: rgb(255, 255, 255);line-height: 50px;text-align: center;border-radius: 5px;" +
+                        "position: fixed;top: 40%;left: 20%;z-index: 999999;background: red;" +
+                        "font-size: 22px;";
+                    document.body.appendChild(m);
+                    setTimeout(function () {
+                        var d = 0.5;
+                        m.style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';
+                        m.style.opacity = '0';
+                        setTimeout(function () {
+                            document.body.removeChild(m)
+                        }, d * 1000);
+                    }, duration);
+                }
+            </script>
+        {/block}
+    </body>
+</html>

@@ -1,0 +1,423 @@
+﻿<!doctype html>
+<html lang="zh" data-hairline="true" data-reactroot="" data-reactid="1" data-react-checksum="2020543679">
+{block name='title'}
+        <title data-react-helmet="true" data-reactid="4">{$person['nickname']}主页 - 阿思客</title>
+    {/block}
+   
+    <body class="Entry-body" data-reactid="18">
+        {extend name="public/header"/}
+            
+{block name='main'}
+            <main role="main" class="App-main">
+                <div>
+                    <div itemprop="people" itemtype="http://schema.org/Person" itemscope="">
+                        <meta itemprop="url" content="https://www.zhihu.com/people/hua-yu-phy"/>
+                        <meta itemprop="gender" content="Male"/>
+                        <meta itemprop="image" content="https://pic3.zhimg.com/v2-4b4745998d9e95e677870aa5fc63f7e2_is.jpg"/>
+                        <meta itemprop="zhihu:voteupCount" content="0"/>
+                        <meta itemprop="zhihu:thankedCount" content="0"/>
+                        <meta itemprop="zhihu:followerCount" content="0"/>
+                        <meta itemprop="zhihu:answerCount" content="1"/>
+                        <meta itemprop="zhihu:articlesCount" content="0"/>
+                        <div id="ProfileHeader" class="ProfileHeader">
+                            <div class="Card">
+                                <div class="ProfileHeader-userCover">
+                                    <div class="UserCoverEditor">
+                                        <div class="UserCoverGuide">
+                                            <div class="UserCoverGuide-inner">
+                                                {if $user['userid'] == $personid}
+                                                    <div class="UserCoverGuide-buttonContainer">
+                                                        <button class="Button DynamicColorButton" type="button"> <svg viewBox="0 0 20 16" class="Icon Icon--camera Icon--left" style="height:16px;width:14px;" width="14" height="16" aria-hidden="true">
+                                                        <title> </title>
+                                                        <g>
+                                                            <path d="M18.094 2H15s-1-2-2-2H7C6 0 5 2 5 2H2C0 2 0 3.967 0 3.967V14c0 2 2.036 2 2.036 2H17c3 0 3-1.983 3-1.983V4c0-2-1.906-2-1.906-2zM10 12c-1.933 0-3.5-1.567-3.5-3.5S8.067 5 10 5s3.5 1.567 3.5 3.5S11.933 12 10 12zm0 1.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm7.5-8c-.552 0-1-.448-1-1s.448-1 1-1 1 .448 1 1-.448 1-1 1z" fill-rule="evenodd" />
+                                                        </g>
+                                                        </svg>上传封面图片</button>
+                                                    </div>
+                                                {/if}
+                                                <div class="UserCoverGuide-dialog">
+                                                    <h4 class="UserCoverGuide-dialogHead">上传一张图片，展示在这里</h4>
+                                                    <div class="UserCoverGuide-dialogContent">
+                                                        <p class="UserCoverGuide-dialogDescription">你可以使用自己的摄影作品、你喜欢的照片，或是任何能展现你特质的图片。</p>
+                                                        <a href="https://www.zhihu.com/question/21757507" target="_blank">哪里能找到可免费使用的优质图片？</a> </div>
+                                                </div>
+                                            </div>
+                                            <ul class="UserCoverGuide-items">
+                                                <li class="UserCoverGuide-item" style="background-image:url(__IMG__/guide-cover-1.4423ce0fcec2132f058c.jpg);"> </li>
+                                                <li class="UserCoverGuide-item" style="background-image:url(__IMG__/guide-cover-2.4c5018526e42872a056b_1.jpg);"> </li>
+                                                <li class="UserCoverGuide-item" style="background-image:url(__IMG__/guide-cover-3.d59ac68c89726deb3a26.jpg);"> </li>
+                                                <li class="UserCoverGuide-item" style="background-image:url(__IMG__/guide-cover-4.5518ba1a1aeb013b4c5c_1.jpg);"> </li>
+                                                <li class="UserCoverGuide-item" style="background-image:url(__IMG__/guide-cover-5.2b2adaebc37bf48bacae.jpg);"> </li>
+                                            </ul>
+                                        </div>
+                                        <div class="UserCover UserCover--colorBlock"> </div>
+                                        <input type="file" accept="image/png,image/jpeg" style="display:none;"/>
+                                    </div>
+                                </div>
+                                <div class="ProfileHeader-wrapper">
+                                    <div class="ProfileHeader-main">
+                                        <div class="UserAvatarEditor ProfileHeader-avatar" style="top:-25px;">
+                                            <div class="UserAvatar">
+                                                <img id="img" class="Avatar Avatar--large UserAvatar-inner" width="160" height="160"
+                                                     src="{$personinfo['photo']}"
+                                                     srcset="https://pic3.zhimg.com/v2-4b4745998d9e95e677870aa5fc63f7e2_xll.jpg 2x"/>
+                                            </div>
+                                            {if $user['userid'] == $personid}
+                                            <div  id="pic"  class="Mask UserAvatarEditor-mask Mask-hidden">
+                                                <div  class="Mask-mask Mask-mask--black UserAvatarEditor-maskInner"> </div>
+                                                <div  class="Mask-content"> <svg  viewBox="0 0 20 16" class="Icon UserAvatarEditor-cameraIcon Icon--camera" style="height:27px;width:30px;" width="30" height="27" aria-hidden="true">
+                                                    <title> </title>
+                                                    <g>
+                                                        <path d="M18.094 2H15s-1-2-2-2H7C6 0 5 2 5 2H2C0 2 0 3.967 0 3.967V14c0 2 2.036 2 2.036 2H17c3 0 3-1.983 3-1.983V4c0-2-1.906-2-1.906-2zM10 12c-1.933 0-3.5-1.567-3.5-3.5S8.067 5 10 5s3.5 1.567 3.5 3.5S11.933 12 10 12zm0 1.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm7.5-8c-.552 0-1-.448-1-1s.448-1 1-1 1 .448 1 1-.448 1-1 1z" fill-rule="evenodd" />
+                                                    </g>
+                                                </svg>
+                                                    <div onclick="upPhoto();" class="UserAvatarEditor-maskInnerText">修改我的头像</div>
+                                                </div>
+                                            </div>
+                                            {/if}
+                                            <form id="form-setpicture" action="{:url('setPicture')}" method="post" enctype="multipart/form-data">
+                                                <input id="btn-photo" type="file" name="image" accept="image/png,image/jpeg" onchange="subPhoto();" style="display:none" />
+                                            </form>
+                                        </div>
+
+                                        <div class="ProfileHeader-content">
+                                            <div class="ProfileHeader-contentHead">
+                                                <h1 class="ProfileHeader-title"> <span class="ProfileHeader-name">{$person['nickname']}</span> <span class="RichText ProfileHeader-headline"> </span> </h1>
+                                            </div>
+                                            <div class="ProfileHeader-contentBody" style="height:52px;"> <span>
+                                                <div class="ProfileHeader-info">
+                                                    <div class="ProfileHeader-infoItem">
+                                                        <div class="ProfileHeader-iconWrapper">
+                                                            <svg viewBox="0 0 20 18" class="Icon Icon--company" style="height:16px;width:13px;" width="13" height="16" aria-hidden="true">
+                                                            <title> </title>
+                                                            <g>
+                                                                <path d="M15 3.998v-2C14.86.89 13.98 0 13 0H7C5.822 0 5.016.89 5 2v2l-3.02-.002c-1.098 0-1.97.89-1.97 2L0 16c0 1.11.882 2 1.98 2h16.033c1.1 0 1.98-.89 1.987-2V6c-.007-1.113-.884-2.002-1.982-2.002H15zM7 4V2.5s-.004-.5.5-.5h5c.5 0 .5.5.5.5V4H7z"/>
+                                                            </g>
+                                                            </svg> </div>
+                                                        {$personinfo['autograph']}</div>
+                                                    <div class="ProfileHeader-infoItem">
+                                                        <div class="ProfileHeader-iconWrapper"> <svg width="14" height="16" viewBox="0 0 14 14" class="Icon Icon--male" style="height:16px;width:14px;" aria-hidden="true">
+                                                            <title> </title>
+                                                            <g>
+                                                                <path d="M3.025 10.64c-1.367-1.366-1.367-3.582 0-4.95 1.367-1.366 3.583-1.366 4.95 0 1.367 1.368 1.367 3.584 0 4.95-1.367 1.368-3.583 1.368-4.95 0zm10.122-9.368c-.002-.414-.34-.75-.753-.753L8.322 0c-.413-.002-.746.33-.744.744.002.413.338.75.75.752l2.128.313c-.95.953-1.832 1.828-1.832 1.828-2.14-1.482-5.104-1.27-7.013.64-2.147 2.147-2.147 5.63 0 7.777 2.15 2.148 5.63 2.148 7.78 0 1.908-1.91 2.12-4.873.636-7.016l1.842-1.82.303 2.116c.003.414.34.75.753.753.413.002.746-.332.744-.745l-.52-4.073z" fill-rule="evenodd"/>
+                                                            </g>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </span> </div>
+                                            <div class="ProfileHeader-contentFooter">
+                                                <button class="Button ProfileHeader-expandButton Button--plain" type="button"> <svg viewBox="0 0 10 6" class="Icon ProfileHeader-arrowIcon Icon--arrow" style="height:16px;width:10px;" width="10" height="16" aria-hidden="true">
+                                                <title> </title>
+                                                <g>
+                                                    <path d="M8.716.217L5.002 4 1.285.218C.99-.072.514-.072.22.218c-.294.29-.294.76 0 1.052l4.25 4.512c.292.29.77.29 1.063 0L9.78 1.27c.293-.29.293-.76 0-1.052-.295-.29-.77-.29-1.063 0z"/>
+                                                </g>
+                                                </svg>查看详细资料</button>
+                                                {if $user['userid'] == $personid}
+                                                    <div class="ProfileButtonGroup ProfileHeader-buttons">
+                                                        <button id="btn-edituserinfo" class="Button Button--blue" type="button">编辑个人资料</button>
+                                                    </div>
+                                                {else}
+                                                    <div class="ProfileButtonGroup ProfileHeader-buttons">
+                                                    {if $isatten == 1}
+                                                     <button data-personid="{$personid}"  class="btn-attention Button Button--blue" type="button">
+                                                        取消关注</button>
+                                                    {else}
+                                                        <button data-personid="{$personid}"  class="btn-attention Button Button--blue" type="button">
+                                                        关注TA</button>
+                                                    {/if}
+                                                        <a href="{:url('Index/messageInfo',array('senduserid'=>$personid))}"><button  class="Button Button--blue" type="button">
+                                                        发私信</button></a>
+                                                    </div>
+
+                                                {/if}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="Profile-main">
+                            <div class="Profile-mainColumn">
+                                <div class="Card ProfileMain" id="ProfileMain">
+                                    <div class="ProfileMain-header">
+                                        <ul role="tablist" class="Tabs ProfileMain-tabs">
+                                            <!-- <li role="tab" class="Tabs-item Tabs-item--noMeta" aria-controls="Profile-activities"> <a id="a-activities" class="Tabs-link" >动态</a> </li> -->
+                                            <li role="tab" class="Tabs-item" aria-controls="Profile-answers"> <a id="a-answers" class="Tabs-link is-active" >回答<span class="Tabs-meta"></span> </a> </li>
+                                            <li role="tab" class="Tabs-item" aria-controls="Profile-asks"> <a id="a-asks" class="Tabs-link " >提问<span class="Tabs-meta"></span> </a> </li>
+                                            <li role="tab" class="Tabs-item" aria-controls="Profile-posts"> <a id="a-posts" class="Tabs-link" >关注的问题<span class="Tabs-meta"></span> </a> </li>
+                                            <!-- <li role="tab" class="Tabs-item" aria-controls="Profile-columns"> <a id="a-columns" class="Tabs-link" >专栏<span class="Tabs-meta">0</span> </a> </li> -->
+                                            <!-- <li role="tab" class="Tabs-item" aria-controls="Profile-pins"> <a id="a-topic" class="Tabs-link" >关注话题<span class="Tabs-meta"></span> </a> </li> -->
+                                            <!-- <li role="tab" class="Tabs-item" aria-controls="Profile-pins"> <a id="a-collections" class="Tabs-link" >收藏5<span class="Tabs-meta">0</span> </a> </li> -->
+                                            <li role="tab" class="Tabs-item" aria-controls="Profile-pins"> <a id="a-following" class="Tabs-link" >关注的人<span class="Tabs-meta"></span> </a> </li>
+                                            <li role="tab" class="Tabs-item" aria-controls="Profile-pins"> <a id="a-fans" class="Tabs-link" >粉丝<span class="Tabs-meta"></span> </a> </li>
+
+                                            
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <div class="Sticky"> </div>
+                                        </div>
+                                    </div>
+                                        <div id="changeCenter">
+                                        </div>
+                                </div>
+                                 <div style="text-align: center">
+                                        <span id="more">更多</span>
+                                    </div>
+
+                            </div>
+                            <div class="Profile-sideColumn" data-za-module="RightSideBar">
+                                <div class="Card FollowshipCard">
+                                    <div class="NumberBoard FollowshipCard-counts"> <a class="Button NumberBoard-item Button--plain" type="button" href="/people/hua-yu-phy/following">
+                                        <div class="NumberBoard-name">关注了</div>
+                                        <div class="NumberBoard-value">{$attentionnum}</div>
+                                        </a>
+                                        <div class="NumberBoard-divider"> </div>
+                                        <a class="Button NumberBoard-item Button--plain" type="button" href="/people/hua-yu-phy/followers">
+                                        <div class="NumberBoard-name">关注者</div>
+                                        <div class="NumberBoard-value">{$fansnum}</div>
+                                        </a> </div>
+                                </div>
+                                <div class="Profile-lightList"> <a class="Profile-lightItem" href=""> <span class="Profile-lightItemName">关注的问题</span> <span class="Profile-lightItemValue">{$attentionquesnum}</span> </a> <a class="Profile-lightItem" href=""> <span class="Profile-lightItemName">关注的人</span> <span class="Profile-lightItemValue">{$attentionnum}</span> </a> <a class="Profile-lightItem" href=""> <span class="Profile-lightItemName">关注我的人</span> <span class="Profile-lightItemValue">{$fansnum}</span> </a> <a class="Profile-lightItem" href=""> <span class="Profile-lightItemName">我的提问</span> <span class="Profile-lightItemValue">{$myquesnum}</span> </a> </div>
+                                <div class="Profile-footerOperations">个人主页被浏览 55 次</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!--<script src="__JS__/vendor.1f389462803af519e7ae_1.js" data-reactid="21">
+    </script>-->
+    <script src="__JS__/main.raven.32d56725cb03b403b366_1.js" async data-reactid="22">
+    </script>
+    <script src="__JS__/main.app.1d5ce2f79923e42206fc_1.js" data-reactid="23">
+    </script>
+    <script data-reactid="24">
+    </script>
+    </body>
+</html>
+
+    <script type="text/javascript" src="__JS__/jquery.form.js"></script>
+    <script type="text/javascript">
+        //var isremove = false;
+        var personid = {$personid};
+
+        function upPhoto()
+        {
+            return $('#btn-photo').click();
+        }
+        $(document).ready(function(){
+            getUserCenterList('getAnswers');
+        });
+            
+        
+
+        $('#btn-edituserinfo').click(function(){
+            window.location.href="{:url('User/userInfoEdit')}";
+        });
+        var num = 1;
+        var isfirst = 0;
+        $('#a-fans').click(function(){
+            num = 1;
+            isfirst = 0;
+            $(this).parent().siblings().children().removeClass('is-active');
+            $(this).addClass('is-active');
+            $('#changeCenter').children().remove();
+            getUserCenterList('getFans');
+            pbl('getFans');
+        });
+        $('#a-topic').click(function(){
+            num = 1;
+            isfirst = 0;
+            $(this).parent().siblings().children().removeClass('is-active');
+            $(this).addClass('is-active');
+            $('#changeCenter').children().remove();
+            getUserCenterList('getTopic');
+            pbl('getTopic');
+        });
+        $('#a-posts').click(function(){
+            num = 1;
+            isfirst = 0;
+            $(this).parent().siblings().children().removeClass('is-active');
+            $(this).addClass('is-active');
+            $('#changeCenter').children().remove();
+            getUserCenterList('getPosts');
+            pbl('getPosts');
+        });
+        $('#a-asks').click(function(){
+
+            num = 1;
+            isfirst = 0;
+
+            $(this).parent().siblings().children().removeClass('is-active');
+            $(this).addClass('is-active');
+            $('#changeCenter').children().remove();
+            getUserCenterList('getAsks');
+            pbl('getAsks');
+
+        });
+        $('#a-activities').click(function(){
+            num = 1;
+            isfirst = 0;
+            $(this).parent().siblings().children().removeClass('is-active');
+            $(this).addClass('is-active');
+            $('#changeCenter').children().remove();
+            getUserCenterList('getActivities');
+            pbl('getActivities');
+        });
+        $('#a-answers').click(function(){
+            num = 1;
+            isfirst = 0;
+            $(this).parent().siblings().children().removeClass('is-active');
+            $(this).addClass('is-active');
+            $('#changeCenter').children().remove();
+            //getAnswers();
+            getUserCenterList('getAnswers');
+            pbl('getAnswers');
+        });
+        $('#a-collections').click(function(){
+            num = 1;
+            isfirst = 0;
+            $(this).parent().siblings().children().removeClass('is-active');
+            $(this).addClass('is-active');
+            $('#changeCenter').children().remove();
+            //getAnswers();
+            getUserCenterList('getCollections');
+            pbl('getCollections');
+        });
+        $('#a-following').click(function(){
+            num = 1;
+            isfirst = 0;
+            $(this).parent().siblings().children().removeClass('is-active');
+            $(this).addClass('is-active');
+            $('#changeCenter').children().remove();
+            //getAnswers();
+            getUserCenterList('getFollowing');
+            pbl('getFollowing');
+        });
+
+        function getUserCenterList(url)
+        {
+            //alert(url);
+             //console.log("mum:"+num);
+            $.post("{:url('User/"+url+"')}",{num:num,isfirst:isfirst,personid:personid},function(data){
+                    //console.log(data);
+                    if(data){
+                        $('#changeCenter').append(data);
+                        $('#more').text('更多');
+                        pbl(url);
+                    }else{
+                        //alert(1111);
+                       window.onscroll = null;
+                       $('#more').text('没有更多了');
+                       Toast('没有更多了',1000);
+                    }
+
+            },'json');
+            num++;
+            isfirst = 1;
+        }
+
+        function pbl(url){
+            window.onscroll = function(){
+                var centerInfo = document.getElementById('changeCenter');
+                var scrollTop = document.body.scrollTop;
+                // console.log("中心和:"+scrollTop+'++++'+window.innerHeight+'++++'+centerInfo.offsetTop);
+                // console.log(scrollTop+window.innerHeight);
+
+                // console.log(centerInfo.offsetHeight+centerInfo.offsetTop);
+                // console.log('----------');
+                if (scrollTop + window.innerHeight >= centerInfo.offsetHeight+centerInfo.offsetTop) {
+                   // alert(num);
+                    window.onscroll = null;
+
+                    setTimeout(function(){
+                        $('#more').text('正在加载...');
+                        getUserCenterList(url);
+                    },500);
+
+                }
+            }
+
+        }
+        
+        $('#img').mouseover(function () {
+            $('#pic').removeClass('Mask-hidden');
+        });
+        setTimeout($('#img').mouseout(function () {
+            $('#pic').addClass('Mask-hidden','slow');
+        }),500);
+
+        $('#up').click(function () {
+            $.post("{:url('setPicture')}",{image:$('input[name=image]').val()},function (data) {
+                if (data.code == 0){
+                    console.log(data.info);
+                    Toast(data.info, 2000);
+                }
+            },'json')
+        });
+        function subPhoto(){
+            $("#form-setpicture").ajaxSubmit({
+                url: $("#form-setpicture").attr('action'), /*设置post提交到的页面*/
+                type: "post", /*设置表单以post方法提交*/
+                dataType: "json", /*设置返回值类型为文本*/
+                success: function (data) {
+                    $('#img').attr('src',data);
+                    Toast('修改头像成功',2000);
+                },
+                error: function (error) { 
+                    Toast(error,2000);
+                     },
+                
+            });
+        }
+        $(".btn-attention").click(function(){
+                
+                var attenbtn = $(this);
+                var attentionuserid = $(this).attr('data-personid');
+                $.post("{:url('User/attentionPerson')}",{attentionuserid:attentionuserid},function(data){
+                    if(data){
+                        $(attenbtn).text('取消关注');
+                    }else{
+                        $(attenbtn).text('关注TA');
+                    }
+
+
+               },'json');
+            });
+
+        function Toast(msg,duration){
+            duration=isNaN(duration)?3000:duration;
+            var m = document.createElement('div');
+            m.innerHTML = msg;
+            m.style.cssText="width: 40%;min-width: 100px;opacity: 0.7;height: 30px;color: rgb(255, 255, 255);line-height: 30px;text-align: center;border-radius: 5px;position: fixed;top: 40%;left: 20%;z-index: 999999;background: rgb(0, 0, 0);font-size: 12px;";
+            document.body.appendChild(m);
+            setTimeout(function() {
+                var d = 0.5;
+                m.style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';
+                m.style.opacity = '0';
+                setTimeout(function() { document.body.removeChild(m) }, d * 1000);
+            }, duration);
+        }
+
+
+        /*$('#img').click(function () {
+
+            $('#form-setpicture').submit();
+        })*/
+        
+        /*function getAnswers()
+        {
+            $.post("{:url('user/getAnswers')}",{},function(data){
+                $('#changeCenter').children().remove();
+                $('#changeCenter').append(data);
+            },'json');
+        }*/
+
+    </script>
+    {/block}

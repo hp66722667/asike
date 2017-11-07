@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {block name='title'}
+
+    {/block}
+    {block name='head'}
+        <meta charset="utf-8"/>
+        <meta name="author" content="DeathGhost"/>
+        <link rel="stylesheet" type="text/css" href="__CSS__/style.css">
+        <style>
+            ul dd{
+                display: none;
+                text-align: center;
+            }
+            dt{
+                font-size: 16px;
+                margin-right: 50px;
+                text-align: center;
+            }
+        </style>
+        <!--[if lt IE 9]>
+        <script src="__JS__/html5.js"></script>
+        <![endif]-->
+        <script src="__JS__/jquery.js"></script>
+        <script src="__JS__/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('.st').click(function () {
+                    $(this).children('dd').slideToggle(500).end().
+                    siblings().children('dd').slideUp();
+                });
+            });
+        </script>
+        <script>
+            (function ($) {
+                $(window).load(function () {
+
+                    $("a[rel='load-content']").click(function (e) {
+                        e.preventDefault();
+                        var url = $(this).attr("href");
+                        $.get(url, function (data) {
+                            $(".content .mCSB_container").append(data); //load new content inside .mCSB_container
+                            //scroll-to appended content
+                            $(".content").mCustomScrollbar("scrollTo", "h2:last");
+                        });
+                    });
+
+                    $(".content").delegate("a[href='top']", "click", function (e) {
+                        e.preventDefault();
+                        $(".content").mCustomScrollbar("scrollTo", $(this).attr("href"));
+                    });
+                });
+            })(jQuery);
+        </script>
+    {/block}
+</head>
+<body>
+    {block name='header'}
+        <header>
+            <h1><img src="__IMG__/admin_logo.png"/></h1>
+            <ul class="rt_nav">
+                <li><a href="{:url('index/Index/index')}" target="_blank" class="website_icon">站点首页</a></li>
+                <li><a href="{:url('Auth/logout')}" class=" clearse clear_icon">清除缓存</a></li>
+                <li><a href="{:url('Admin/admininfo')}" class="admin_icon" style="height: 45px">{$Think.session.adname}</a></li>
+               <!-- <li><a href="#" class="set_icon">账号设置</a></li>-->
+                <li><a href="{:url('Auth/logout')}" class=" clearse quit_icon">安全退出</a></li>
+            </ul>
+        </header>
+    {/block}
+    {block name='left'}
+        <aside class="lt_aside_nav content mCustomScrollbar">
+            <h2><a href="index.html">起始页</a></h2>
+            <ul class="leftinfo">
+                <dl class="st">
+                    <dt>用户管理</dt>
+                    <!--当前链接则添加class:active-->
+                    <dd><a href="{:url('User/userList')}" class="active">用户列表</a></dd>
+                    <dd><a href="#">锁定用户</a></dd>
+                </dl>
+
+
+                <dl class="st">
+                    <dt>问题管理</dt>
+                    <dd><a href="{:url('Question/questionList')}">问题列表</a></dd>
+                    <dd><a href="order_detail.html">屏蔽提问</a></dd>
+                </dl>
+
+                <dl class="st">
+                    <dt>话题管理</dt>
+                    <dd><a href="{:url('Topic/topicList')}">话题列表</a></dd>
+                    <dd><a href="{:url('Topic/addTopic')}">添加话题</a></dd>
+                </dl>
+
+                <dl class="st">
+                    <dt>回答管理</dt>
+                    <dd><a href="{:url('Answer/answerList')}">回答列表</a></dd>
+                    <dd><a href="order_detail.html">屏蔽回答</a></dd>
+                </dl>
+
+                <dl class="st">
+                    <dt>评论管理</dt>
+                    <dd><a href="{:url('Comment/commentList')}">评论列表</a></dd>
+                    <dd><a href="order_detail.html">屏蔽评论</a></dd>
+                </dl>
+
+                <dl class="st">
+                    <dt>个人信息</dt>
+                    <dd><a href="{:url('Admin/adminInfo')}">编辑信息</a></dd>
+                    <dd><a href="{:url('Admin/upPwd')}">密码修改</a></dd>
+                </dl>
+
+                <dl class="st">
+                    <dt>管理中心</dt>
+                    <dd><a href="{:url('Admin/adminList')}">管理员列表</a></dd>
+                    <dd><a href="{:url('Admin/addAdmin')}">添加管理员</a></dd>
+                    <dd><a href="{:url('Admin/roleList')}">角色列表</a></dd>
+                    <dd><a href="{:url('Admin/permList')}">权限列表</a></dd>
+                </dl>
+
+                <dl class="st">
+                    <dt>网站管理</dt>
+                    <dd><a href="{:url('Website/webSite')}">站点信息</a></dd>
+                </dl>
+
+                <dl class="st">
+                    <dt>举报管理</dt>
+                    <dd><a href="{:url('Report/report')}">被举报的回答</a></dd>
+                    <dd><a href="{:url('Report/disposed')}">已经处理</a></dd>
+                    <dd><a href="{:url('Report/mgc')}">更新敏感词</a></dd>
+                </dl>
+
+                <dl class="st">
+                    <dt>配送与支付设置</dt>
+                    <dd><a href="express_list.html">配送方式</a></dd>
+                    <dd><a href="pay_list.html">支付方式</a></dd>
+                </dl>
+
+                <dl class="st">
+                    <dt>在线统计</dt>
+                    <dd><a href="discharge_statistic.html">流量统计</a></dd>
+                    <dd><a href="sales_volume.html">销售额统计</a></dd>
+                </dl>
+                <li style="width: 210px">
+                    <p class="btm_infor">© ask 版权所有</p>
+                </li>
+            </ul>
+        </aside>
+        <!--<script>
+            $('.clearse').click(function () {
+
+            })
+        </script>-->
+    {/block}
+    {block name='main'}
+    {/block}
+</body>
+</html>

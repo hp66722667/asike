@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {extend name="public/base" /}
+    {block name='main'}
+        <section class="rt_wrap content mCustomScrollbar">
+            <div class="rt_content">
+                <div class="page_title">
+                    <h2 class="fl">权限列表</h2>
+                    <!--<a href="adjust_funding.html" class="fr top_rt_btn money_icon">资金管理</a>-->
+                    <a id="addNewrole" type="button" class="top_rt_btn link_icon add_icon"
+                       style="margin-left: 20px;cursor: pointer;float: right">添加新权限</a>
+                </div>
+                <form id="ftopic" action="{:url('Admin/upRoleInfo')}" method="post" enctype="multipart/form-data">
+                    <ul class="ulColumn2">
+                        <li>
+                            <span class="item_name" style="width:120px;">
+                                权限列表：
+                            </span>
+
+                            {if !empty($permInfo)}
+                            {foreach $permInfo as $perinfo}
+                            <dl style="width: 500px; display: block">
+                                {if $perinfo['title_prefix'] == ''}
+                                <dt class="per" style="display: block;width: 200px;
+                                                            margin-left: 150px;margin-bottom: 10px;text-align: left">
+                                    {$perinfo['title_display']}
+
+                                </dt>
+                                {else}
+                                <dd style="display:block;width: 200px;margin-left: 150px;margin-bottom: 10px;text-align: left">
+                                    {$perinfo['title_display']}
+                                    <span class="edit" style="display: none">
+                                        <a style="cursor: pointer;"
+                                           href="{:url('Admin/editPerm')}?permid={$perinfo['permissionid']}&permname={$perinfo['permname']}">
+                                            编辑
+                                        </a>
+                                    </span>
+                                </dd>
+                                {/if}
+                            </dl>
+                            {/foreach}
+                            {/if}
+                        </li>
+                        <li>
+                            <span class="item_name" style="width:120px;"></span>
+                            <input id="topadd" type="submit" class="link_btn" value="完成"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </section>
+        <section class="pop_bg">
+            <div class="pop_cont" style="width: 500px;">
+                <!--title-->
+                <h3>添加新的权限</h3>
+                <!--content-->
+                <form id="formtc" action="{:url('Admin/addPermission')}" method="post" enctype="multipart/form-data">
+                    <div class="pop_cont_input" style="padding-left: 45px">
+                        <ul>
+                            <li>
+                                <span>父级权限：</span>
+                                <select class="permSelect" name="perFmname" style="width: 120px;">
+                                    <option value="">权限名称</option>
+                                    {if !empty($permission)}
+                                        {foreach $permission as $perm}
+                                            <option value="{$perm['permissionid']}">{$perm['permname']}</option>
+                                        {/foreach}
+                                    {/if}
+                                </select>
+                                <span style="display: inline-block">如果不选则添加的权限在最外层</span>
+                            </li>
+                            <li>
+                                <span>权限名称：</span>
+                                <input type="text" name="permSname" placeholder="填写权限名称" class="textbox"/>
+                                <span id="tips"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+
+                <!--以pop_cont_text分界-->
+                <div class="pop_cont_text">
+
+                </div>
+                <!--bottom:operate->button-->
+                <div class="btm_btn">
+                    <input type="button" value="添加" class="input_btn trueBtn"/>
+                    <input type="button" value="取消" class="input_btn falseBtn"/>
+                </div>
+            </div>
+        </section>
+        <script>
+            $(function () {
+                $('.per').click(function () {
+                    //alert(1);
+                    /*$(this).children('dd').slideToggle(500).
+                    siblings().children('dd').slideUp();*/
+                    $(this).parent().siblings('dl').children('dd').slideToggle(500);
+                    //siblings().children('dd').slideUp();
+                    //console.log($(this).siblings('dl').children('dd'));
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('#addNewrole').click(function () {
+                    /*$('input[name=adminid]').attr('value',adName);*/
+                    $(".pop_bg").slideDown();
+
+                    $(".trueBtn").click(function () {
+                        if ($('input[name=permSname]').val() == '') {
+                            Toast('您还填写权限名称!', 1000);
+                            return false;
+                        } else {
+
+                            $('#formtc').submit();
+                            $(".pop_bg").fadeOut();
+                        }
+                    });
+                    //弹出：取消或关闭按钮
+                    $(".falseBtn").click(function () {
+                        $(".pop_bg").slideUp();
+                    });
+                });
+            });
+            function Toast(msg, duration) {
+                duration = isNaN(duration) ? 3000 : duration;
+                var m = document.createElement('div');
+                m.innerHTML = msg;
+                m.style.cssText = "width: 50%;min-width: 150px;opacity: 0.7;height: 50px;" +
+                    "color: rgb(255, 255, 255);line-height: 50px;text-align: center;" +
+                    "border-radius: 5px;position: fixed;top: 40%;left: 20%;z-index: 999999;" +
+                    "background: red;font-size: 22px;";
+                document.body.appendChild(m);
+                setTimeout(function () {
+                    var d = 0.5;
+                    m.style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';
+                    m.style.opacity = '0';
+                    setTimeout(function () {
+                        document.body.removeChild(m)
+                    }, d * 1000);
+                }, duration);
+            }
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('dd').mouseover(function () {
+                    $(this).children('span').css('display','inline-block');
+                });
+                $('dd').mouseout(function () {
+                    $(this).children('span').css('display','none');
+                })
+            })
+        </script>
+    {/block}
+</body>
+</html>

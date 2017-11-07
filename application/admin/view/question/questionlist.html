@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {block name='title'}
+    <title>后台管理系统</title>
+    <style>
+        td{
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        ul{
+            min-width: 200px;
+            text-align: center;
+        }
+        li{
+            display: inline-block;
+        }
+        span{
+            display: inline-block;
+            width: 26px;
+            height: 26px;
+            text-align: center;
+            line-height: 26px;
+        }
+        td{
+            text-align: center;
+        }
+    </style>
+    {/block}
+</head>
+<body>
+{extend name="public/base"/}
+
+{block name='main'}
+    <section class="rt_wrap content mCustomScrollbar">
+        <div class="rt_content">
+            <form action="{:url('Question/questionList')}" method="post">
+                <section class="mtb">
+                    <input type="text" class="textbox textbox_225" name="str" placeholder="输入关键字搜索"/>
+                    <input type="submit" value="查询" class="group_btn"/>
+                </section>
+            </form>
+            <form id="formdel" action="{:url('Question/deleteQuestion')}" method="post">
+                <div class="page_title">
+                    <h2 class="fl">问题列表</h2>
+                    <input id="manydel" type="button" class="top_rt_btn link_icon"
+                           style="color: red; margin-left: 20px" value="批量删除">
+                </div>
+
+                <table class="table">
+                    <tr>
+                        <th style="width: 100px">
+                            <input id="all" type="checkbox" name="all[]" value="" />
+                            全选
+                            <a style="cursor: pointer" onclick="revsec();">反选</a>
+                        </th>
+                        <th style="width: 69px">问题ID</th>
+                        <th style="width: 100px; min-height: 100px">提问人</th>
+                        <th>问题标题</th>
+                        <th>所属话题</th>
+                        <th>问题描述</th>
+                        <th>提问时间</th>
+                        <th>删除操作</th>
+                    </tr>
+
+                    {foreach $questInfo as $queinfo}
+                        <tr>
+                            <td style="width: 150px">
+                                <input class="quesids" type="checkbox" name="quesid[]" value="{$queinfo['quesid']}">
+                            </td>
+                            <td class="center">{$queinfo['quesid']}</td>
+                            <td>{$queinfo['userTopic']['nickname']}</td>
+                            <td title="{$queinfo['quesdescribe']}">{$queinfo['quesname']}</td>
+                            <td>
+                                {$queinfo['userTopic']['topicname']}
+                            </td>
+                            <td class="center" title="{$queinfo['quesdescribe']}">
+                                {$queinfo['quesdescribe']}
+                                <!--<strong class="rmb_icon">59.00</strong>-->
+                            </td>
+                            <td class="center">{$queinfo['create_time']}</td>
+                            <td class="center">
+                                <a id="adel" onclick="deleOne({$queinfo['quesid']})" style="cursor: pointer" title="删除" class="link_icon">&#100;</a>
+                            </td>
+                        </tr>
+                    {/foreach}
+                </table>
+            </form>
+
+            <div style=" min-width: 200px; margin: 10px auto">
+                <aside class="paging" style="min-width: 200px">
+                    {$page}
+                </aside>
+            </div>
+        </div>
+    </section>
+    <script>
+        var oId = document.getElementsByName('quesid[]');
+        var oAll = document.getElementsByName('all[]')[0];
+        oAll.onclick = function () {
+            stu = oAll.checked;
+            selStu(stu);
+        };
+        function revsec() {
+            var stu = true;
+            for (var i = 0; i < oId.length; i++){
+                oId[i].checked = !oId[i].checked;
+                if (!oId[i].checked){
+                    stu = false;
+                }
+            }
+            oAll.checked = stu;
+        }
+        function selStu(stu)
+        {
+            for (var i in oId){
+                oId[i].checked = stu;
+            }
+        }
+    </script>
+    <!--弹出框效果-->
+    <script>
+        $(document).ready(function () {
+            $('#manydel').click(function () {
+                $(".pop_bg").fadeIn();
+                //弹出：确认按钮
+                $(".trueBtn").click(function () {
+                    $('#formdel').submit();
+                    $(".pop_bg").fadeOut();
+                });
+                //弹出：取消或关闭按钮
+                $(".falseBtn").click(function () {
+                    //alert("你点击了取消/关闭！");//测试
+                    $(".pop_bg").fadeOut();
+                });
+            })
+        });
+    </script>
+    <section class="pop_bg">
+        <div class="pop_cont" style="width: 300px;margin-top: 120px">
+            <!--title-->
+            <h3 id="tipstitle">出于礼貌地问一下</h3>
+            <!--content-->
+            <div id="tipscont" class="pop_cont_input" style="margin-top: 30px; color: red;">
+                你确认删除此问题吗？
+                <!--<ul>
+                    <li>
+                        <span>标题</span>
+                        <input type="text" placeholder="定义提示语..." class="textbox"/>
+                    </li>
+                    <li>
+                        <span class="ttl">城市</span>
+                        <select class="select">
+                            <option>选择省份</option>
+                        </select>
+                        <select class="select">
+                            <option>选择城市</option>
+                        </select>
+                        <select class="select">
+                            <option>选择区/县</option>
+                        </select>
+                    </li>
+                    <li>
+                        <span class="ttl">地址</span>
+                        <input type="text" placeholder="定义提示语..." class="textbox"/>
+                    </li>
+                    <li>
+                        <span class="ttl">地址</span>
+                        <textarea class="textarea" style="height:50px;width:80%;"></textarea>
+                    </li>
+                </ul>-->
+            </div>
+            <!--以pop_cont_text分界-->
+            <div class="pop_cont_text">
+
+            </div>
+            <!--bottom:operate->button-->
+            <div class="btm_btn">
+                <input type="button" value="确认" class="input_btn trueBtn"/>
+                <input type="button" value="关闭" class="input_btn falseBtn"/>
+            </div>
+        </div>
+    </section>
+    <!--结束：弹出框效果-->
+    <script>
+        function deleOne(quid) {
+            $(document).ready(function () {
+                $(".pop_bg").fadeIn();
+
+                $(".trueBtn").click(function () {
+                    $(".pop_bg").fadeOut();
+                    $.post("{:url('Question/deleteOne')}",{quesid:quid},function (data) {
+                        if (data.code){
+                            $(".pop_bg").fadeIn();
+                            $('.trueBtn').css('display','none');
+                            $('#tipstitle').text('来自阿思客的提示');
+                            $('#tipscont').text(data.info).css('color','green');
+                            $('.falseBtn').click(function () {
+                                setTimeout(window.location.reload(),500);
+                            });
+
+                        }else {
+                            $(".pop_bg").fadeIn();
+                            $('#tipscont').text(data.info).css('color','red');
+                        }
+                    },'json');
+                });
+                //弹出：取消或关闭按钮
+                $(".falseBtn").click(function () {
+                    $(".pop_bg").fadeOut();
+                });
+            })
+        }
+
+    </script>
+{/block}
+</body>
+</html>

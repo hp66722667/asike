@@ -1,0 +1,537 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" dropEffect="none" class="no-js ">
+{block name='title'}
+        <title data-react-helmet="true" data-reactid="4">发现 - 阿思客</title>
+    {/block}
+
+<body class="zhi page-explore">
+{extend name="public/blueheader"/}
+
+
+
+
+{block name='main'}
+<div class="zg-wrap zu-main clearfix " role="main">
+    <div class="zu-main-content">
+        <div class="zu-main-content-inner">
+
+
+            <div id="zh-recommend">
+                <div id="zh-recommend-title" class="page-title">
+                    <i class="zg-icon zg-icon-feedlist"></i>
+                    <span>编辑推荐</span>
+                    <a href="/explore/recommendations" class="zg-link-gray zg-right" data-za-c="explore"
+                       data-za-a="visit_explore_recommendations" data-za-l="editor_recommendations_more"><span>更多推荐 &raquo;</span></a>
+                </div>
+                <div id="zh-recommend-list">
+
+                    <div class="top-recommend-feed feed-item">
+                        <h2>
+                            <a class="question_link" href="{:url('Question/quesDetailByQid',array('quesid'=>$firstid))}" target="_blank"
+                               data-id="6046689" data-za-element-name="Title">
+                                {$firstquName}
+                            </a>
+                        </h2>
+                        <div class="avatar">
+                            <a title="{$answerName} "
+                               data-hovercard="p$t$yang-lao-tian"
+                               class="zm-item-link-avatar"
+                               target="_blank"
+                               href="{:url('User/userCenter',array('personid'=>$firstUserid))}">
+                                <img src="{$photo}" class="zm-item-img-avatar">
+                            </a>
+                        </div>
+
+                        <div class="feed-main">
+                            <div class="zm-item-answer-author-info">
+
+                <span class="summary-wrapper">
+                <span class="author-link-line">
+
+                <a class="author-link"
+                   data-hovercard="p$t$yang-lao-tian"
+                   target="_blank" href="{:url('Question/quesDetailByQid',array('quesid'=>$firstid))}">
+                    {$answerName}</a></span><span title=class="bio">
+                {$authgrapg}
+                </span>
+                </span>
+                            </div>
+                            <div class="zm-item-rich-text" data-resourceid="6046689"                                                data-action="/answer/content">
+                                <div class="zh-summary summary clearfix">
+                                    
+                                    {$firstAnswer}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {if !empty($pushQuestion)}
+                        {foreach $pushQuestion as $key=>$pushqu}
+                        {if $key != 0}
+                        <div class="recommend-feed feed-item">
+                            <span class="zg-right zg-gray-normal feed-meta">问答</span>
+                            <h2>
+                                <a  class="question_link"
+                                    href="/question/49994460/answer/249192622"
+                                    target="_blank"
+                                    data-id="12214577" data-za-element-name="Title">
+                                    {$pushqu['quesname']}
+                                </a>
+                            </h2>
+                        </div>
+                        {/if}
+                        {/foreach}
+                    {/if}
+                </div>
+            </div>
+            <div class="explore-tab" id="js-explore-tab">
+                <a class="zg-anchor-hidden" name="daily-hot"></a>
+                <a class="zg-anchor-hidden" name="monthly-hot"></a>
+
+                <ul class="tab-navs clearfix">
+                    
+                    <li class="tab-nav"><a class="anchor" href="#monthly-hot" data-za-c="explore"
+                                           data-za-a="visit_explore_monthly_trendings"
+                                           data-za-l="explore_monthly_trendings">本月最热</a></li>
+                </ul>
+                <div class="tab-panel">
+                    <div data-type="daily" data-zop-feedlist>
+
+
+                        {foreach $hotQuestion as $hotQus}
+                        <div class="explore-feed feed-item" data-offset="3">
+                            <h2>
+                                <a class="question_link" href="{:url('Question/quesDetailByQid',array('quesid'=>$hotQus['quesid']))}" target="_blank"
+                                   data-id="18788494" data-za-element-name="Title">
+                                    {$hotQus['quesname']}
+                                </a>
+                            </h2>
+                            <div tabindex="-1" class="zm-item-answer "
+                                 itemscope itemtype="http://schema.org/Answer"
+                                 data-aid="75145897"
+                                 data-atoken="247915043"
+                                 data-collapsed="0"
+                                 data-created="1508584024"
+                                 data-deleted="0"
+                                 data-isowner="0"
+                                 data-helpful="1"
+                                 data-copyable="1"
+                                 data-zop
+                            >
+                                <link itemprop="url" href="/question/66403830/answer/247915043">
+                                <meta itemprop="answer-id" content="75145897">
+                                <meta itemprop="answer-url-token" content="247915043">
+                                <a class="zg-anchor-hidden" name="answer-75145897"></a>
+
+                                <div class="zm-item-vote">
+                                    <a class="zm-item-vote-count js-expand js-vote-count" href="javascript:;"
+                                       data-bind-votecount>239
+                                    </a>
+                                </div>
+
+                                <div class="zm-votebar">
+                                    <button class="up ">
+                                        <i class="icon vote-arrow"></i>
+                                        <span class="count">239</span>
+                                        <span class="label sr-only">赞同</span>
+                                    </button>
+                                    <button class="down ">
+                                        <i class="icon vote-arrow"></i>
+                                        <span class="label sr-only">反对</span>
+                                    </button>
+                                </div>
+
+
+                                <div class="answer-head">
+
+                                    <div class="zm-item-answer-author-info">
+
+                                        <span class="summary-wrapper">
+                                            <span class="author-link-line">
+
+                                                <a class="author-link"
+                                                   data-hovercard="p$t$wein-eld"
+                                                   target="_blank" href="/people/wein-eld"
+                                                    >
+                                                    {$hotQus['resultQ']['answerName']}
+                                                </a>
+                                            </span>
+                                        </span>
+                                    </div>
+
+                                    <div class="zm-item-vote-info" data-votecount="239">
+                                        <span class="voters text">
+                                            <a href="#" class="more text">
+                                                <span class="js-voteCount">
+                                                    239
+                                                </span>&nbsp;人赞同
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="zm-item-rich-text expandable js-collapse-body" data-resourceid="18788494"
+                                     data-action="/answer/content" data-author-name="Wein Eld"
+                                     data-entry-url="/question/66403830/answer/247915043">
+
+                                    <textarea hidden class="content"></textarea>
+
+
+                                    <div class="zh-summary summary clearfix">
+                                        
+                                        {$hotQus['resultQ']['firstAnswer']}
+
+
+                                    </div>
+
+
+                                    <p class="visible-expanded"><a itemprop="url" class="answer-date-link meta-item"
+                                                                   data-tooltip="s$t$发布于 2017-10-21" target="_blank"
+                                                                   href="/question/66403830/answer/247915043">编辑于
+                                        01:45</a></p>
+
+                                </div>
+                                <!-- <div class="zm-item-meta answer-actions clearfix js-contentActions">
+                                    <div class="zm-meta-panel">
+
+                                        <a data-follow="q:link" class="follow-link zg-follow meta-item"
+                                           href="javascript:;" id="sfb-18788494"><i class="z-icon-follow"></i>关注问题</a>
+
+                                        <a href="#" name="addcomment"
+                                           class="meta-item toggle-comment js-toggleCommentBox">
+                                            <i class="z-icon-comment"></i>{$hotQus['answernum']} 条回答</a>
+
+
+                                        
+
+                                        <span class="zg-bull zu-autohide">&bull;</span>
+                                        <a href="#" class="meta-item zu-autohide js-report">举报</a>
+
+
+                                        <meta name="copyrightStatus" content="1">
+                                        <meta name="disableCopyAvatar" content="">
+
+                                        <span class="zg-bull">&bull;</span>
+
+                                        <a href="/terms#sec-licence-1" target="_blank" class="meta-item copyright">
+                                            作者保留权利
+                                        </a>
+
+
+                                        <button class="meta-item item-collapse js-collapse">
+                                            <i class="z-icon-fold"></i>收起
+                                        </button>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                        {/foreach}
+
+
+                        <div class="explore-feed feed-item" data-offset="4">
+                            <h2><a class="question_link" href="/question/66914334/answer/247871200" target="_blank"
+                                   data-id="18993344" data-za-element-name="Title">
+                                D. E. Shaw 是一家什么样的公司？
+                            </a></h2>
+                            <div tabindex="-1" class="zm-item-answer "
+                                 itemscope itemtype="http://schema.org/Answer"
+                                 data-aid="75137882"
+                                 data-atoken="247871200"
+                                 data-collapsed="0"
+                                 data-created="1508577004"
+                                 data-deleted="0"
+                                 data-isowner="0"
+                                 data-helpful="1"
+                                 data-copyable="1"
+                                 data-zop
+                            >
+                                <link itemprop="url" href="/question/66914334/answer/247871200">
+                                <meta itemprop="answer-id" content="75137882">
+                                <meta itemprop="answer-url-token" content="247871200">
+                                <a class="zg-anchor-hidden" name="answer-75137882"></a>
+
+                                <div class="zm-item-vote">
+                                    <a class="zm-item-vote-count js-expand js-vote-count" href="javascript:;"
+                                       data-bind-votecount>124</a>
+                                </div>
+
+                                <div class="zm-votebar">
+                                    <button class="up ">
+                                        <i class="icon vote-arrow"></i>
+                                        <span class="count">124</span>
+                                        <span class="label sr-only">赞同</span>
+                                    </button>
+                                    <button class="down ">
+                                        <i class="icon vote-arrow"></i>
+                                        <span class="label sr-only">反对</span>
+                                    </button>
+                                </div>
+
+
+                                <div class="answer-head">
+
+                                    <div class="zm-item-answer-author-info">
+
+                                    <span class="summary-wrapper">
+                                    <span class="author-link-line">
+<a class="author-link"                                                                                        data-hovercard="p$t$bruceashbey"target="_blank"href="/people/bruceashbey">starseeker
+</a>
+                                        <span class="icon icon-badge-best_answerer icon-badge" data-tooltip="s$b$优秀回答者"></span></span>
+                                        <span class="badge-summary">
+                                        <a href="/people/bruceashbey#hilightbadge" target="_blank">量化交易话题优秀回答者</a></span>
+
+
+
+                                    <span title="一句话" class="bio">
+                                    一句话
+                                    </span>
+                                    </span>
+                                    </div>
+
+                                    <div class="zm-item-vote-info" data-votecount="124">
+                                        <span class="voters text">
+                                            <a href="#" class="more text">
+                                                <span class="js-voteCount">
+                                                    124
+                                                </span>&nbsp;人赞同
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div
+                                    class="zm-item-rich-text expandable js-collapse-body"
+                                    data-resourceid="18993344" data-action="/answer/content"
+                                    data-author-name="starseeker"
+                                    data-entry-url="/question/66914334/answer/247871200">
+                                    <textarea hidden class="content">
+                                        @sixiecapital.com
+                                    </textarea>
+                                    <div class="zh-summary summary clearfix">
+
+                                        有几个回答提到我司，我就出来说两句吧。
+                                        我自己没有在deshaw工作过，但是两个高中同学都在deshaw工作过，现在一个人在美国自己创业对冲基金，另外一个人就是我现在的公司的合伙人，我谈谈我通过他们对deshaw的理解。
+                                        首先感触最大的就是在deshaw和在其他平…
+
+                                        <a href="/question/66914334/answer/247871200" class="toggle-expand">显示全部</a>
+
+                                    </div>
+
+
+                                    <p class="visible-expanded"><a itemprop="url" class="answer-date-link meta-item"
+                                                                   target="_blank"
+                                                                   href="/question/66914334/answer/247871200">发布于
+                                        2017-10-21</a></p>
+
+                                </div>
+                                <div class="zm-item-meta answer-actions clearfix js-contentActions">
+                                    <div class="zm-meta-panel">
+
+                                        <a data-follow="q:link" class="follow-link zg-follow meta-item"
+                                           href="javascript:;" id="sfb-18993344"><i class="z-icon-follow"></i>关注问题</a>
+
+                                        <a href="#" name="addcomment"
+                                           class="meta-item toggle-comment js-toggleCommentBox">
+                                            <i class="z-icon-comment"></i>24 条评论</a>
+
+
+                                        <a href="#" class="meta-item zu-autohide js-thank" data-thanked="false"><i
+                                                class="z-icon-thank"></i>感谢</a>
+
+
+                                        <a href="#" class="meta-item zu-autohide js-share"><i class="z-icon-share"></i>分享</a>
+
+                                        <a href="#" class="meta-item zu-autohide js-collect"><i
+                                                class="z-icon-collect"></i>收藏</a>
+
+
+                                        <span class="zg-bull zu-autohide">&bull;</span>
+
+                                        <a href="#" class="meta-item zu-autohide js-noHelp">没有帮助</a>
+
+                                        <span class="zg-bull zu-autohide">&bull;</span>
+                                        <a href="#" class="meta-item zu-autohide js-report">举报</a>
+
+
+                                        <meta name="copyrightStatus" content="1">
+                                        <meta name="disableCopyAvatar" content="">
+
+                                        <span class="zg-bull">&bull;</span>
+
+                                        <a href="/terms#sec-licence-1" target="_blank" class="meta-item copyright">
+                                            作者保留权利
+                                        </a>
+
+
+                                        <button class="meta-item item-collapse js-collapse">
+                                            <i class="z-icon-fold"></i>收起
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="zu-main-sidebar" data-za-module="RightSideBar">
+
+        <div class="shameimaru-placeholder" data-loc="explore_up" data-params='{}'></div>
+
+        <div class="zm-side-section explore-side-section explore-side-section-roundtable">
+            <div class="zm-side-section-inner">
+                <div class="section-title">
+                    <a href="/roundtable" class="zg-link-gray zg-right" data-za-c="view_roundtable"
+                       data-za-a="visit_roundtable_home" data-za-l="explore_sidebar_trending_roundtable_more">更多圆桌
+                        &raquo;</a>
+                    <h3>热门圆桌</h3>
+                </div>
+                <ul class="list hot-roundtables">
+
+                    <li class="clearfix">
+                        <a target="_blank" class="avatar-link" href="/roundtable/wangluowenxue"><img
+                                src="__PIC__/v2-ff916989d92258880158780879b3e440_m.png" alt="Path"
+                                class="avatar 40"/></a>
+                        <div class="content">
+
+                            <a href="/roundtable/wangluowenxue" target="_blank" data-hovercard="r$t$wangluowenxue">网络文学风云录</a>
+                            <div class="meta">
+                                <span>3242 人关注</span>
+                                <span class="zg-bull">&bull;</span>
+                                <span>40 个问题</span>
+                            </div>
+                        </div>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+        <div class="zm-side-section explore-side-section">
+            <div class="zm-side-section-inner">
+                <div class="section-title">
+
+                    <a href="/topics" class="zg-link-gray zg-right">更多话题 &raquo;</a>
+
+                    <h3>热门话题</h3>
+                </div>
+                <ul class="list hot-topics">
+
+                    <li class="clearfix">
+                        <a target="_blank" class="avatar-link" href="/topic/19559450" data-hovercard="t$b$19559450"><img
+                                src="__PIC__/d3dd87a0feae0a3db82973157eee89c0_m.png" alt="机器学习" class="avatar 40"/></a>
+                        <div class="content">
+                            <a href="/topic/19559450" target="_blank" data-hovercard="t$b$19559450">机器学习</a>
+                            <div class="meta">
+                                <span>699500 人关注</span>
+
+                            </div>
+                        </div>
+                        <div class="bottom">
+
+                            <a class="question_link" href="/question/49385441" target="_blank" data-id="11970576"
+                               data-za-element-name="Title">
+                                卷积神经网络中的白化要怎么理解？
+                            </a>
+
+                        </div>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+        <div class="zm-side-section explore-side-section">
+            <div class="zm-side-section-inner">
+                <div class="section-title">
+                    <a href="javascript:;" id="js-hot-fav-switch" class="zg-link-gray zg-right" data-za-c="collection"
+                       data-za-a="click_trending_collections_change"
+                       data-za-l="explore_sidebar_trending_collections_collection_name">换一换</a>
+                    <h3>热门收藏</h3>
+                </div>
+                <ul class="list hot-favlists">
+                    <li>
+                        <div class="content">
+                            <a href="/collection/19553038" target="_blank">新知</a>
+                            <div class="meta">
+                                <span>13873 人关注</span>
+                                <span class="zg-bull">&bull;</span>
+                                <span>3136 条内容</span>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="shameimaru-placeholder" data-loc="explore_down" data-params='{}'></div>
+        <div id="zh-footer" class="zh-footer">
+            <div class="content zg-wrap clearfix">
+                <ul>
+
+                    <li><a href="https://liukanshan.zhihu.com" target="_blank">刘看山</a></li>
+
+                    <li><a href="/question/19581624" target="_blank">知乎指南</a></li>
+                    <li><a href="javascript:;" id="js-feedback-button">建议反馈</a></li>
+
+                    <li><a href="/app" target="_blank">移动应用</a></li>
+                    <li><a href="/careers">加入知乎</a></li>
+                    <li><a href="/terms" target="_blank">知乎协议</a></li>
+                    <li><a href="/jubao" target="_blank">举报投诉</a></li>
+                    <li><a href="/contact">联系我们</a></li>
+
+                </ul>
+
+                <span class="copy">&copy; 2017 知乎</span>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+<script type="text/json" class="json-inline" data-name="current_user">
+    ["ningsi","ningsi-21","https:\/\/pic2.zhimg.com\/v2-16c3315bdbcf8bd98dd93a0a9c882001_s.jpg","7fa0afdc822cad92582743c99a5a3c16","IT",0,0,true,null,"",0,false,false,false,"899330400416063488",false,false,false,true,null,null,true]
+</script>
+
+
+
+
+<!-- <script src="__JS__/vendor.cb14a042.js"></script> -->
+<script type="text/json" class="json-inline" data-name="user_status">[null,null,false]</script>
+<script type="text/json" class="json-inline" data-name="env">["zhihu.com","comet.zhihu.com",false,null,false,false]
+</script>
+<script type="text/json" class="json-inline" data-name="permissions">[]</script>
+
+
+<script type="text/json" class="json-inline" data-name="ga_vars">
+    {"user_created":1507197076000,"now":1508826037000,"abtest_mask":"---------1--------------------","user_attr":[1,0,0,"-","-"],"user_hash":"7fa0afdc822cad92582743c99a5a3c16"}
+</script>
+<script src="__JS__/base.41bb3b24.js"></script>
+
+<script src="__JS__/common.ab6dbf11.js"></script>
+
+
+<script src="__JS__/richtexteditor.85e8c990.js" async></script>
+<script src="__JS__/page-main.b519c3ea.js"></script>
+<meta name="entry" content="ZH.entryExplore" data-module-id="page-main">
+
+<script type="text/zscript" znonce="72cc8f14e1f04514b9b9d49f9df2a6ff"></script>
+
+<input type="hidden" name="_xsrf" value="01b97d562b852981fa0d804ae1b145fc"/>
+</body>
+</html>
+<script>
+
+</script>
+{/block}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>阿思客-后台登录</title>
+    <meta name="author" content="DeathGhost"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/style.css"/>
+    <style>
+        body {
+            height: 100%;
+            background: #16a085;
+            overflow: hidden;
+        }
+
+        canvas {
+            z-index: -1;
+            position: absolute;
+        }
+    </style>
+    <script src="__JS__/jquery.js"></script>
+    <script src="__JS__/verificationNumbers.js"></script>
+    <script src="__JS__/Particleground.js"></script>
+    <script>
+        $(document).ready(function () {
+            //粒子背景特效
+            $('body').particleground({
+                dotColor: '#5cbdaa',
+                lineColor: '#5cbdaa'
+            });
+            //验证码
+            createCode();
+            //测试提交，对接程序删除即可
+            $(".submit_btn").click(function () {
+                location.href = "#";
+            });
+        });
+    </script>
+</head>
+<body>
+<dl class="admin_login">
+    <dt>
+        <strong>阿思客后台管理系统</strong>
+        <em>知之为知之,不知阿思客</em>
+    </dt>
+    <form action="checkinfo" method="post">
+        <dd class="user_icon">
+            <input type="text" placeholder="用户名" name="adname" class="login_txtbx"/>
+        </dd>
+        <dd class="pwd_icon">
+            <input type="password" placeholder="密码" name="password" class="login_txtbx"/>
+        </dd>
+        <dd class="val_icon">
+            <div class="checkcode" style="width: 300px">
+                <input type="text" id="J_codetext" placeholder="验证码"
+                       name="cap" maxlength="4" class="login_txtbx" style="width: 135px"><span></span>
+                <img src="{:captcha_src()}" alt="captcha" onclick="this.src = this.src"/>
+
+            </div>
+        </dd>
+        <dd>
+            <input type="submit" id="tj" name="adlogin" value="立即登录" class="submit_btn"/>
+        </dd>
+
+    </form>
+
+    <dd>
+        <p>&copy; 2017 - 阿思客 版权所有</p>
+        <p>京ICP备17050029号</p>
+    </dd>
+</dl>
+</body>
+</html>
+<script>
+    var cap = false;
+    var adname = false;
+    var password = false;
+
+    $('input[name=adname]').blur(function () {
+        if ($(this).val() == '') {
+            Toast('用户名不能为空！', 1000);
+            return false;
+        } else {
+            adname = true;
+        }
+    });
+
+    $('input[name=password]').blur(function () {
+        if ($(this).val() == '') {
+            Toast('密码不能为空！', 1000);
+            return false;
+        } else {
+            password = true;
+        }
+    });
+
+    $('#J_codetext').click(function () {
+        $('span').text('');
+    });
+
+    $('span').click(function () {
+        $('span').hide();
+    });
+
+    $('#J_codetext').blur(function () {
+        $.post("{:url('Auth/adinfo')}", {cap: $('input[name = cap]').val()}, function (data) {
+            //判断验证
+            if (data.code == 1) {
+                $('span').show().text(data.info).css('color', 'green');
+                cap = true;
+            } else {
+                $('span').show().text(data.info).css('color', 'red')
+            }
+        }, 'json');
+    });
+
+
+    $('#tj').click(function () {
+        if (adname && password && cap ) {
+            $('form').submit();
+        } else {
+            return false;
+        }
+    });
+
+    function Toast(msg, duration) {
+        duration = isNaN(duration) ? 3000 : duration;
+        var m = document.createElement('div');
+        m.innerHTML = msg;
+        m.style.cssText = "width: 50%;min-width: 150px;opacity: 0.7;height: 50px;color: rgb(255, 255, 255);line-height: 50px;text-align: center;border-radius: 5px;position: fixed;top: 40%;left: 20%;z-index: 999999;background: rgb(100, 100, 100);font-size: 22px;";
+        document.body.appendChild(m);
+        setTimeout(function () {
+            var d = 0.5;
+            m.style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';
+            m.style.opacity = '0';
+            setTimeout(function () {
+                document.body.removeChild(m)
+            }, d * 1000);
+        }, duration);
+    }
+</script>
